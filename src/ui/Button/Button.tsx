@@ -12,7 +12,7 @@ const button = cva('button', {
         'font-normal',
         'rounded',
       ],
-      tartiary: [
+      tertiary: [
         'bg-transparent',
         'pl-0',
         'text-black font-raleway',

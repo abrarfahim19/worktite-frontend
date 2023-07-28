@@ -1,38 +1,67 @@
-import { VariantProps, cva } from 'class-variance-authority';
+import { cva, VariantProps } from 'class-variance-authority';
 
-const input = cva('rounded-full p-1', {
+const VInput = cva('', {
   variants: {
-    length: {
-      small: ['p-2'],
-      medium: ['p-2'],
-      large: ['p-2'],
+    intent: {
+      primary: [
+        'flex items-center  gap-x-4 p-4 rounded-md hover:opacity-80 border border-[#504845]  text-2xl',
+      ],
     },
-    decoration: {
-      leftIcon: ['ring-2'],
-    },
+  },
+  defaultVariants: {
+    intent: 'primary',
   },
 });
 
+const VLabel = cva('', {
+  variants: {
+    lClass: {
+      primary: [' text-black'],
+    },
+  },
+  defaultVariants: {
+    lClass: 'primary',
+  },
+});
 export interface CustomInput {
-  placeholder: string;
-  tag: string;
-  multiline: boolean;
+  /**label for input field */
+  label?: string;
+  /**textarea or input */
+  multiline?: boolean;
+  /**icon for input */
+  icon?: JSX.Element;
 }
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement>,
-    VariantProps<typeof input> {}
+    CustomInput,
+    VariantProps<typeof VInput>,
+    VariantProps<typeof VLabel> {}
 
 export const Input: React.FC<InputProps> = ({
   className,
-  size,
-  decoration,
+  intent,
+  label,
+  lClass,
+  icon,
+  multiline,
+  id,
   ...props
 }) => {
   return (
     <div>
-      <p></p>
-      <input placeholder='' />
+      {label && (
+        <label htmlFor={id} className={VLabel({ lClass })}>
+          {label}
+        </label>
+      )}
+      <div className={VInput({ intent })}>
+        {icon}
+        <input
+          className='border-none bg-transparent outline-none focus:border-none focus:outline-none focus:ring-0'
+          {...props}
+        />
+      </div>
     </div>
   );
 };

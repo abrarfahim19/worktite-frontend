@@ -2,6 +2,8 @@ import { Button } from '@/ui/Button';
 import { IoArrowForwardCircleOutline } from 'react-icons/io5';
 import { cx } from 'class-variance-authority';
 import { Avatar } from '@/ui/Avatar';
+import { Input } from '@/ui/Input';
+import { BsCalendarDay } from 'react-icons/bs';
 
 const intents = [undefined, 'primary', 'secondary', 'tartiary'] as const;
 const sizes = [undefined, 'medium', 'small', 'large'] as const;
@@ -17,17 +19,19 @@ export default function Home() {
         <thead>
           <tr>
             <th></th>
-            {intents.map((intent) => (
-              <th scope='col'>{intent || 'default'}</th>
+            {intents.map((intent: any, index: number) => (
+              <th key={index} scope='col'>
+                {intent || 'default'}
+              </th>
             ))}
           </tr>
         </thead>
         <tbody>
-          {sizes.map((size) => (
-            <tr>
+          {sizes.map((size, index) => (
+            <tr key={index}>
               <th scope='row'>{size || 'default'}</th>
-              {intents.map((intent) => (
-                <td scope='col'>
+              {intents.map((intent: any, index: number) => (
+                <td key={index} scope='col'>
                   <Button {...(intent && { intent })} {...(size && { size })}>
                     {intent || 'default'} button
                   </Button>
@@ -38,7 +42,7 @@ export default function Home() {
         </tbody>
       </table>
       <Button
-        intent={'tartiary'}
+        intent={'tertiary'}
         className='flex flex-row items-center gap-3 text-xl text-brand'
       >
         <IoArrowForwardCircleOutline className='text-4xl' />
@@ -49,6 +53,14 @@ export default function Home() {
         size={'medium'}
         decoration={'ring'}
       />
+      <div className='m-4'>
+        <Input
+          icon={<BsCalendarDay />}
+          lClass='primary'
+          label='Phone Number'
+          placeholder='phone number 0122'
+        />
+      </div>
     </div>
   );
 }
