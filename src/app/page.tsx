@@ -1,13 +1,14 @@
 import { Button } from '@/ui/Button';
+import { IoArrowForwardCircleOutline } from 'react-icons/io5';
 import { cx } from 'class-variance-authority';
-import Image from 'next/image';
+import { Avatar } from '@/ui/Avatar';
 
 const intents = [undefined, 'primary', 'secondary', 'tartiary'] as const;
 const sizes = [undefined, 'medium', 'small', 'large'] as const;
 
 export default function Home() {
   return (
-    <div className='bg-gray-600'>
+    <div className=''>
       <table
         className={cx(
           'relative h-max w-max self-center justify-self-center [&_:where(th,td)]:p-2'
@@ -36,7 +37,18 @@ export default function Home() {
           ))}
         </tbody>
       </table>
-      <Button className='w-full'>This is a button</Button>
+      <Button
+        intent={'tartiary'}
+        className='flex flex-row items-center gap-3 text-xl text-brand'
+      >
+        <IoArrowForwardCircleOutline className='text-4xl' />
+        Complex Project
+      </Button>
+      <Avatar
+        imageUrl={'https://randomuser.me/api/portraits/men/9.jpg'}
+        size={'medium'}
+        decoration={'ring'}
+      />
     </div>
   );
 }

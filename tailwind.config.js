@@ -16,6 +16,14 @@ module.exports = {
       colors: {
         brand: '#E55E2C',
       },
+      fontSize: {
+        h1: ['80px', { lineHeight: '80px', letterSpacing: '-0.032em' }],
+      },
+      fontFamily: {
+        kaushan: ['Kaushan Script', 'cursive'],
+        raleway: ['Raleway', 'sans-serif'],
+        inter: ['Inter', 'sans-serif'],
+      },
     },
   },
   plugins: [],

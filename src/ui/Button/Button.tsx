@@ -15,7 +15,7 @@ const button = cva('button', {
       tartiary: [
         'bg-transparent',
         'pl-0',
-        'text-black',
+        'text-black font-raleway',
         'active:text-brand',
         'before:block before:absolute before:-inset-1 before:border-b-2 before:border-transparent active:before:border-brand before:w-1/2 relative inline-block',
       ],
