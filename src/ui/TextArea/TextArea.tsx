@@ -1,6 +1,6 @@
 import { cva, VariantProps } from 'class-variance-authority';
 
-const VInput = cva('', {
+const VTextArea = cva('', {
   variants: {
     intent: {
       primary: [
@@ -26,25 +26,19 @@ const VLabel = cva('', {
 export interface CustomInput {
   /**label for input field */
   label?: string;
-  /**textarea or input */
-  multiline?: boolean;
-  /**icon for input */
-  icon?: JSX.Element;
 }
 
 export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement>,
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement>,
     CustomInput,
-    VariantProps<typeof VInput>,
+    VariantProps<typeof VTextArea>,
     VariantProps<typeof VLabel> {}
 
-export const Input: React.FC<InputProps> = ({
+export const TextArea: React.FC<InputProps> = ({
   className,
   intent,
   label,
   lClass,
-  icon,
-  multiline,
   id,
   ...props
 }) => {
@@ -55,12 +49,11 @@ export const Input: React.FC<InputProps> = ({
           {label}
         </label>
       )}
-      <div className={VInput({ intent, className })}>
-        {icon}
-        <input
+      <div className={VTextArea({ intent, className })}>
+        <textarea
           className='border-none bg-transparent outline-none focus:border-none focus:outline-none focus:ring-0'
           {...props}
-        />
+        ></textarea>
       </div>
     </div>
   );
