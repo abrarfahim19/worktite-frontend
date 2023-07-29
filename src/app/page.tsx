@@ -4,6 +4,8 @@ import { cx } from 'class-variance-authority';
 import { Avatar } from '@/ui/Avatar';
 import { Input } from '@/ui/Input';
 import { BsCalendarDay } from 'react-icons/bs';
+import { TextArea } from '@/ui/TextArea';
+import { Text } from '@/ui/Text';
 
 const intents = [undefined, 'primary', 'secondary', 'tartiary'] as const;
 const sizes = [undefined, 'medium', 'small', 'large'] as const;
@@ -60,6 +62,19 @@ export default function Home() {
           label='Phone Number'
           placeholder='phone number 0122'
         />
+      </div>
+      <div className='m-4'>
+        <TextArea
+          lClass='primary'
+          label='Description'
+          placeholder='Add your description'
+          rows={4}
+        />
+      </div>
+      <div className='m-4'>
+        <Text tag='p' decoration='h1' className='text-red-400'>
+          hellow
+        </Text>
       </div>
     </div>
   );
