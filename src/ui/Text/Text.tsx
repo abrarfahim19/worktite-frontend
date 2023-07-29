@@ -1,5 +1,5 @@
 import { VariantProps, cva } from 'class-variance-authority';
-import React, { Component } from 'react';
+import React from 'react';
 
 const VTextVarinat = cva('', {
   variants: {

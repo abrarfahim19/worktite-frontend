@@ -28,7 +28,6 @@ export interface CustomInput {
   label?: string;
   /**textarea or input */
   multiline?: boolean;
-  /**icon for input */
   icon?: JSX.Element;
 }
 
