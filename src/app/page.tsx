@@ -1,3 +1,4 @@
+'use client';
 import { Button } from '@/ui/Button';
 import { IoArrowForwardCircleOutline } from 'react-icons/io5';
 import { cx } from 'class-variance-authority';
@@ -6,6 +7,8 @@ import { Input } from '@/ui/Input';
 import { BsCalendarDay } from 'react-icons/bs';
 import { TextArea } from '@/ui/TextArea';
 import { Text } from '@/ui/Text';
+import { Table } from '@/ui/Table';
+import { Dropdown } from '@/ui/Dropdown';
 
 const intents = [undefined, 'primary', 'secondary', 'tartiary'] as const;
 const sizes = [undefined, 'medium', 'small', 'large'] as const;
@@ -13,6 +16,23 @@ const sizes = [undefined, 'medium', 'small', 'large'] as const;
 export default function Home() {
   return (
     <div className=''>
+      <div>
+        <Dropdown
+          className='flex items-center justify-center gap-x-2'
+          menuText='Menu'
+          icon={<BsCalendarDay />}
+        >
+          <button className='group flex w-full items-center rounded-md px-2 py-2 text-sm'>
+            Account{' '}
+          </button>
+          <button className='group flex w-full items-center rounded-md px-2 py-2 text-sm'>
+            Account Settings
+          </button>
+          <button className='group flex w-full items-center rounded-md px-2 py-2 text-sm'>
+            Account{' '}
+          </button>
+        </Dropdown>
+      </div>
       <table
         className={cx(
           'relative h-max w-max self-center justify-self-center [&_:where(th,td)]:p-2'
@@ -75,6 +95,9 @@ export default function Home() {
         <Text tag='p' decoration='h1' className='text-red-400'>
           hellow
         </Text>
+      </div>
+      <div>
+        <Table />
       </div>
     </div>
   );
