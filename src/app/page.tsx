@@ -6,6 +6,8 @@ import { Input } from '@/ui/Input';
 import { BsCalendarDay } from 'react-icons/bs';
 import { TextArea } from '@/ui/TextArea';
 import { Text } from '@/ui/Text';
+import { Modal } from '@/ui/Modal';
+import TestModalBody from '@/components/Modal/TestModalBody';
 
 const intents = [undefined, 'primary', 'secondary', 'tartiary'] as const;
 const sizes = [undefined, 'medium', 'small', 'large'] as const;
@@ -76,6 +78,20 @@ export default function Home() {
           hellow
         </Text>
       </div>
+      <Modal
+        defaultCancel={true}
+        opener={
+          <div className='bg-red-200'>
+            <Button intent={'secondary'} className='my-10 ml-10'>
+              This is modal Opener
+            </Button>
+            <Button intent={'secondary'} className='my-10 ml-10'>
+              This is modal Opener
+            </Button>
+          </div>
+        }
+        content={<TestModalBody />}
+      />
     </div>
   );
 }
