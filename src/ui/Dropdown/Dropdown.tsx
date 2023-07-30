@@ -5,7 +5,7 @@ type Props = {
   children: ReactNode;
 };
 
-const MyDropdown: React.FC<Props> = ({ children }) => {
+const Dropdown: React.FC<Props> = ({ children }) => {
   const arrayChildren = Children.toArray(children);
   return (
     <Menu>
@@ -43,4 +43,4 @@ const MyDropdown: React.FC<Props> = ({ children }) => {
   );
 };
 
-export default MyDropdown;
+export default Dropdown;
