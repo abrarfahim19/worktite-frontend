@@ -1,29 +1,19 @@
 'use client';
-import TestModalBody from '@/components/Modal/TestModalBody';
 import { Dialog, Transition } from '@headlessui/react';
 import React, { Fragment, useState } from 'react';
 import { MdOutlineCancel } from 'react-icons/md';
 export interface IModal {
-  opener: JSX.Element;
   content: JSX.Element;
   defaultCancel: boolean;
+  isOpen: boolean;
+  closeModal: ()=> void;
 }
-export function Modal({ opener, content, defaultCancel }: IModal) {
-  let [isOpen, setIsOpen] = useState<boolean>(true);
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
-  }
+export function Modal({ isOpen, content, defaultCancel, closeModal }: IModal) {
+  
 
   return (
     <>
-      {/* Modal Opener with onClick  */}
-      {React.cloneElement(opener, { onClick: openModal })}
-
+      
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as='div' className='relative z-10' onClose={closeModal}>
           <Transition.Child
