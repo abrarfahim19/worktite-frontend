@@ -7,6 +7,9 @@ import { Input } from '@/ui/Input';
 import { BsCalendarDay } from 'react-icons/bs';
 import { TextArea } from '@/ui/TextArea';
 import { Text } from '@/ui/Text';
+import { Modal } from '@/ui/Modal';
+import TestModalBody from '@/components/Modal/TestModalBody';
+import { useState } from 'react';
 import { Table } from '@/ui/Table';
 import { Dropdown } from '@/ui/Dropdown';
 
@@ -14,6 +17,15 @@ const intents = [undefined, 'primary', 'secondary', 'tartiary'] as const;
 const sizes = [undefined, 'medium', 'small', 'large'] as const;
 
 export default function Home() {
+  let [isOpen, setIsOpen] = useState<boolean>(false);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
   return (
     <div className=''>
       <div>
@@ -96,6 +108,15 @@ export default function Home() {
           hellow
         </Text>
       </div>
+      <Button intent={'secondary'} size={'medium'} onClick={openModal}>
+        This is button
+      </Button>
+      <Modal
+        defaultCancel={true}
+              content={<TestModalBody />}
+              closeModal={closeModal}
+              isOpen={isOpen}
+      />
       <div>
         <Table />
       </div>
