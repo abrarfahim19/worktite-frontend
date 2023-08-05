@@ -1,93 +1,89 @@
 'use client';
 import { Button } from '@/ui/Button';
 import { IoArrowForwardCircleOutline } from 'react-icons/io5';
-import { cx } from 'class-variance-authority';
 import { Avatar } from '@/ui/Avatar';
 import { Input } from '@/ui/Input';
 import { BsCalendarDay } from 'react-icons/bs';
-import { TextArea } from '@/ui/TextArea';
 import { Text } from '@/ui/Text';
 import { Modal } from '@/ui/Modal';
 import TestModalBody from '@/components/Modal/TestModalBody';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Dropdown } from '@/ui/Dropdown';
-import { ColumnDef } from '@tanstack/react-table';
-import React from 'react';
-import { Table } from '@/ui/Table';
+// import { ColumnDef } from '@tanstack/react-table';
 
 const intents = [undefined, 'primary', 'secondary', 'tartiary'] as const;
 const sizes = [undefined, 'medium', 'small', 'large'] as const;
 
-type Person = {
-  firstName: string;
-  lastName: string;
-  age: number;
-  visits: number;
-  status: string;
-  progress: number;
-};
-
-const defaultData: Person[] = [
-  {
-    firstName: 'tanner',
-    lastName: 'linsley',
-    age: 24,
-    visits: 100,
-    status: 'In Relationship',
-    progress: 50,
-  },
-  {
-    firstName: 'tandy',
-    lastName: 'miller',
-    age: 40,
-    visits: 40,
-    status: 'Single',
-    progress: 80,
-  },
-  {
-    firstName: 'joe',
-    lastName: 'dirte',
-    age: 45,
-    visits: 20,
-    status: 'Complicated',
-    progress: 10,
-  },
-];
-
-const defaultColumns: ColumnDef<Person>[] = [
-  {
-    accessorKey: 'firstName',
-    cell: (info) => info.getValue(),
-    // footer: (props) => props.column.id,
-  },
-  {
-    accessorFn: (row) => row.lastName,
-    id: 'lastName',
-    cell: (info) => info.getValue(),
-    header: () => <span>Last Name</span>,
-    // footer: (props) => props.column.id,
-  },
-  {
-    accessorKey: 'age',
-    header: () => 'Age',
-    footer: (props) => props.column.id,
-  },
-  {
-    accessorKey: 'visits',
-    header: () => <span>Visits</span>,
-    footer: (props) => props.column.id,
-  },
-  {
-    accessorKey: 'status',
-    header: 'Status',
-    footer: (props) => props.column.id,
-  },
-  {
-    accessorKey: 'progress',
-    header: 'Profile Progress',
-    footer: (props) => props.column.id,
-  },
-];
+// type Person = {
+//   firstName: string;
+//   lastName: string;
+//   age: number;
+//   visits: number;
+//   status: string;
+//   progress: number;
+// };
+//
+// const defaultData: Person[] = [
+//   {
+//     firstName: 'tanner',
+//     lastName: 'linsley',
+//     age: 24,
+//     visits: 100,
+//     status: 'In Relationship',
+//     progress: 50,
+//   },
+//   {
+//     firstName: 'tandy',
+//     lastName: 'miller',
+//     age: 40,
+//     visits: 40,
+//     status: 'Single',
+//     progress: 80,
+//   },
+//   {
+//     firstName: 'joe',
+//     lastName: 'dirte',
+//     age: 45,
+//     visits: 20,
+//     status: 'Complicated',
+//     progress: 10,
+//   },
+// ];
+//
+// const defaultColumns: ColumnDef<Person>[] = [
+//   {
+//     accessorKey: 'firstName',
+//     cell: (info) => info.getValue(),
+//     // footer: (props) => props.column.id,
+//   },
+//   {
+//     accessorFn: (row) => row.lastName,
+//     id: 'lastName',
+//     cell: (info) => info.getValue(),
+//     header: () => <span>Last Name</span>,
+//     // footer: (props) => props.column.id,
+//   },
+//   {
+//     accessorKey: 'age',
+//     header: () => 'Age',
+//     footer: (props) => props.column.id,
+//   },
+//   {
+//     accessorKey: 'visits',
+//     header: () => <span>Visits</span>,
+//     footer: (props) => props.column.id,
+//   },
+//   {
+//     accessorKey: 'status',
+//     header: 'Status',
+//     footer: (props) => props.column.id,
+//   },
+//   {
+//     accessorKey: 'progress',
+//     header: 'Profile Progress',
+//     footer: (props) => props.column.id,
+//   },
+// ];
 export default function Home() {
   let [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -102,21 +98,30 @@ export default function Home() {
     <div className=''>
       <div>
         <Dropdown
+          hover={true}
+          menuButton={
+
+          <Button
+            intent={'secondary'}
+            className='flex flex-row items-center gap-3 text-xl text-brand'
+          >
+            <IoArrowForwardCircleOutline className='text-4xl' />
+           Complex Project</Button>
+        }
           className='flex items-center justify-center gap-x-2'
-          menuText='Menu'
-          icon={<BsCalendarDay />}
         >
           <button className='group flex w-full items-center rounded-md px-2 py-2 text-sm'>
             Account{' '}
           </button>
           <button className='group flex w-full items-center rounded-md px-2 py-2 text-sm'>
-            Account Settings
+            De Settings
           </button>
           <button className='group flex w-full items-center rounded-md px-2 py-2 text-sm'>
             Account{' '}
           </button>
         </Dropdown>
       </div>
+
       <div></div>
       <table className='relative h-max w-max self-center justify-self-center [&_:where(th,td)]:p-2'>
         <thead>
@@ -165,12 +170,12 @@ export default function Home() {
         />
       </div>
       <div className='m-4'>
-        <TextArea
-          lClass='primary'
-          label='Description'
-          placeholder='Add your description'
-          rows={4}
-        />
+        {/*<TextArea*/}
+        {/*  lClass='primary'*/}
+        {/*  label='Description'*/}
+        {/*  placeholder='Add your description'*/}
+        {/*  rows={4}*/}
+        {/*/>*/}
       </div>
       <div className='m-4'>
         <Text tag='p' decoration='h1' className='text-red-400'>
@@ -187,7 +192,7 @@ export default function Home() {
               isOpen={isOpen}
       />
       <div>
-        <Table data={defaultData} columns={defaultColumns} sorted={false}/>
+        {/*<Table data={defaultData} columns={defaultColumns} sorted={false}/>*/}
       </div>
     </div>
   );

@@ -11,7 +11,7 @@ const VDropdown = cva('', {
   variants: {
     variant: {
       primary:
-        'inline-flex w-full justify-center rounded-md bg-black bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75',
+        'w-full focus:outline-none',
     },
   },
   defaultVariants: {
@@ -21,8 +21,8 @@ const VDropdown = cva('', {
 
 export interface CustomInput {
   /**label for input field */
-  menuText: string;
-  icon?: JSX.Element;
+  menuButton?: JSX.Element;
+  hover?: boolean;
 }
 
 export interface DropdownProps
@@ -31,19 +31,53 @@ export interface DropdownProps
     VariantProps<typeof VDropdown> {}
 
 export const Dropdown: React.FC<DropdownProps> = ({
-  menuText,
-  icon,
+                                                    menuButton,
+
   className,
   children,
   variant,
+                                                    hover,
   ...props
 }) => {
+  const buttonRef = React.useRef(null)
+  const dropdownRef = React.useRef(null)
+  const timeoutDuration = 75
+  let timeout:any
+
+  // @ts-ignore
+  const openMenu = () => buttonRef?.current.click()
+  const closeMenu = () =>
+    // @ts-ignore
+    dropdownRef?.current?.dispatchEvent(
+      new KeyboardEvent('keydown', {
+        key: 'Escape',
+        bubbles: true,
+        cancelable: true,
+      })
+    )
+// @ts-ignore
+  const onMouseEnter =( closed=false) => {
+    clearTimeout(timeout)
+    closed && openMenu()
+  }
+  // @ts-ignore
+  const onMouseLeave = open => {
+    open && (timeout = setTimeout(() => closeMenu(), timeoutDuration))
+  }
   return (
-    <Menu>
-      <Menu.Button className={VDropdown({ variant, className })}>
-        {menuText}
-        {icon}
+    <Menu >
+      {({ open }) => (
+        <>
+          <div
+            className={VDropdown({variant, className})}
+           onClick={openMenu}
+            onMouseEnter={() => hover && onMouseEnter(!open)}
+            onMouseLeave={() => hover && onMouseLeave(open)}
+          >
+      <Menu.Button ref={buttonRef} className='focus:outline-none'>
+        hello
       </Menu.Button>
+          </div>
       <Transition
         as={Fragment}
         enter='transition ease-out duration-100'
@@ -53,7 +87,10 @@ export const Dropdown: React.FC<DropdownProps> = ({
         leaveFrom='transform opacity-100 scale-100'
         leaveTo='transform opacity-0 scale-95'
       >
-        <Menu.Items className='absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
+        <Menu.Items ref={dropdownRef}
+                    onMouseEnter={() => hover && onMouseEnter()}
+                    onMouseLeave={() => hover && onMouseLeave(open)}
+                    className='absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
           <div className='px-1 py-1'>
             {Children.map(children, (child, index) => {
               return (
@@ -78,6 +115,8 @@ export const Dropdown: React.FC<DropdownProps> = ({
           </div>
         </Menu.Items>
       </Transition>
+          </>
+          )}
     </Menu>
   );
 };
