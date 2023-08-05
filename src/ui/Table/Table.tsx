@@ -1,100 +1,71 @@
-'use client';
+import React from 'react';
+import { cva, VariantProps } from 'class-variance-authority';
 import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getSortedRowModel,
+  SortingState,
   useReactTable,
 } from '@tanstack/react-table';
-import React from 'react';
 import { THead } from './THead';
 import { TBody } from './TBody';
 
-type Person = {
-  firstName: string;
-  lastName: string;
-  age: number;
-  visits: number;
-  status: string;
-  progress: number;
-};
+interface ITable<T> {
+  columns: ColumnDef<T>[];
+  data: T[];
+  sorted?: boolean;
+  filter?: boolean;
+}
 
-const defaultData: Person[] = [
-  {
-    firstName: 'tanner',
-    lastName: 'linsley',
-    age: 24,
-    visits: 100,
-    status: 'In Relationship',
-    progress: 50,
-  },
-  {
-    firstName: 'tandy',
-    lastName: 'miller',
-    age: 40,
-    visits: 40,
-    status: 'Single',
-    progress: 80,
-  },
-  {
-    firstName: 'joe',
-    lastName: 'dirte',
-    age: 45,
-    visits: 20,
-    status: 'Complicated',
-    progress: 10,
-  },
-];
+interface DataType {
+  [key: string]: any;
+}
 
-const defaultColumns: ColumnDef<Person>[] = [
-  {
-    accessorKey: 'firstName',
-    cell: (info) => info.getValue(),
-    // footer: (props) => props.column.id,
+const VTable = cva('', {
+  variants: {
+    intent: {
+      primary: [
+        'flex items-center gap-x-4 p-4 rounded-md hover:opacity-80 border border-[#504845] text-xl',
+      ],
+    },
   },
-  {
-    accessorFn: (row) => row.lastName,
-    id: 'lastName',
-    cell: (info) => info.getValue(),
-    header: () => <span>Last Name</span>,
-    // footer: (props) => props.column.id,
+  defaultVariants: {
+    intent: 'primary',
   },
-  {
-    accessorKey: 'age',
-    header: () => 'Age',
-    footer: (props) => props.column.id,
-  },
-  {
-    accessorKey: 'visits',
-    header: () => <span>Visits</span>,
-    footer: (props) => props.column.id,
-  },
-  {
-    accessorKey: 'status',
-    header: 'Status',
-    footer: (props) => props.column.id,
-  },
-  {
-    accessorKey: 'progress',
-    header: 'Profile Progress',
-    footer: (props) => props.column.id,
-  },
-];
+});
 
-export const Table = () => {
-  const [data, setData] = React.useState(() => [...defaultData]);
-  const [columns] = React.useState<typeof defaultColumns>(() => [
-    ...defaultColumns,
-  ]);
-  const [columnVisibility, setColumnVisibility] = React.useState({});
+export interface TableProps<T extends DataType>
+  extends React.TableHTMLAttributes<HTMLTableElement>,
+    ITable<T>,
+    VariantProps<typeof VTable> {}
 
-  const rerender = React.useReducer(() => ({}), {})[1];
+export const Table = <T extends DataType>({
+  className,
+  intent,
+  data,
+  columns,
+  sorted = false,
+  filter = false,
+  ...props
+}: TableProps<T>) => {
+  const [tableData, setTableData] = React.useState<T[]>(() => [...data]);
+  const [sorting, setSorting] = React.useState<SortingState>([]);
 
-  const table = useReactTable({
-    data,
-    columns,
+  const [tableColumns] = React.useState<ColumnDef<T>[]>(() => [...columns]);
+  const [columnVisibility, setColumnVisibility] = React.useState<{
+    [key: string]: boolean;
+  }>({});
+
+  const table = useReactTable<T>({
+    data: tableData,
+    columns: tableColumns,
     state: {
       columnVisibility,
+      sorting,
     },
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
     debugTable: true,
@@ -104,7 +75,7 @@ export const Table = () => {
 
   return (
     <div className='p-2'>
-      <div className='inline-block rounded border border-black shadow'>
+      {filter && <div className='inline-block rounded border border-black shadow'>
         <div className='border-b border-black px-1'>
           <label className='flex items-center'>
             <input
@@ -121,31 +92,29 @@ export const Table = () => {
             </label>
           </label>
         </div>
-        {table.getAllLeafColumns().map((column) => {
-          return (
-            <ul className='space-y-2 text-sm' key={column.id}>
-              <li className='flex items-center'>
-                <input
-                  {...{
-                    className:
-                      'text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700',
-                    type: 'checkbox',
-                    checked: column.getIsVisible(),
-                    onChange: column.getToggleVisibilityHandler(),
-                  }}
-                />
+        {table.getAllLeafColumns().map((column) => (
+          <ul className='space-y-2 text-sm' key={column.id}>
+            <li className='flex items-center'>
+              <input
+                {...{
+                  className:
+                    'text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700',
+                  type: 'checkbox',
+                  checked: column.getIsVisible(),
+                  onChange: column.getToggleVisibilityHandler(),
+                }}
+              />
 
-                <label className='ml-2 text-sm font-medium text-gray-900 dark:text-gray-100'>
-                  {column.id}
-                </label>
-              </li>
-            </ul>
-          );
-        })}
-      </div>
+              <label className='ml-2 text-sm font-medium text-gray-900 dark:text-gray-100'>
+                {column.id}
+              </label>
+            </li>
+          </ul>
+        ))}
+      </div>}
       <div className='h-4' />
       <table className='w-full text-left text-sm text-gray-500 dark:text-gray-400'>
-        <THead table={table} flexRender={flexRender} />
+        <THead sorted={sorted ? 1 : 0} table={table} flexRender={flexRender} />
         <TBody table={table} flexRender={flexRender} />
       </table>
     </div>
