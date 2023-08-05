@@ -10,7 +10,6 @@ import { Text } from '@/ui/Text';
 import { Modal } from '@/ui/Modal';
 import TestModalBody from '@/components/Modal/TestModalBody';
 import { useState } from 'react';
-import { Table } from '@/ui/Table';
 import { Dropdown } from '@/ui/Dropdown';
 import { ColumnDef } from '@tanstack/react-table';
 import React from 'react';
