@@ -108,20 +108,22 @@ export default function Home() {
             <IoArrowForwardCircleOutline className='text-4xl' />
            Complex Project</Button>
         }
+        {/* <Dropdown
           className='flex items-center justify-center gap-x-2'
+          menuText='Menu'
+          icon={<BsCalendarDay />}
         >
           <button className='group flex w-full items-center rounded-md px-2 py-2 text-sm'>
             Account{' '}
           </button>
           <button className='group flex w-full items-center rounded-md px-2 py-2 text-sm'>
-            De Settings
+            Account Settings
           </button>
           <button className='group flex w-full items-center rounded-md px-2 py-2 text-sm'>
             Account{' '}
           </button>
         </Dropdown>
       </div>
-
       <div></div>
       <table className='relative h-max w-max self-center justify-self-center [&_:where(th,td)]:p-2'>
         <thead>
@@ -187,12 +189,13 @@ export default function Home() {
       </Button>
       <Modal
         defaultCancel={true}
-              content={<TestModalBody />}
-              closeModal={closeModal}
-              isOpen={isOpen}
+        content={<TestModalBody />}
+        closeModal={closeModal}
+        isOpen={isOpen}
       />
       <div>
         {/*<Table data={defaultData} columns={defaultColumns} sorted={false}/>*/}
+        <Table data={defaultData} columns={defaultColumns} sorted={false} />
       </div>
     </div>
   );

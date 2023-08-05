@@ -10,7 +10,7 @@ const avatar = cva('rounded-full p-1', {
       large: [],
     },
     decoration: {
-      ring: ['ring-2'],
+      ring: ['ring-1 ring-brand'],
       noRing: [],
     },
   },
