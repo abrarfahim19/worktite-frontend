@@ -29,7 +29,7 @@ export default function Home() {
   return (
     <div className=''>
       <div>
-        <Dropdown
+        {/* <Dropdown
           className='flex items-center justify-center gap-x-2'
           menuText='Menu'
           icon={<BsCalendarDay />}
@@ -43,9 +43,9 @@ export default function Home() {
           <button className='group flex w-full items-center rounded-md px-2 py-2 text-sm'>
             Account{' '}
           </button>
-        </Dropdown>
+        </Dropdown> */}
       </div>
-      <table
+      {/* <table
         className={cx(
           'relative h-max w-max self-center justify-self-center [&_:where(th,td)]:p-2'
         )}
@@ -74,7 +74,7 @@ export default function Home() {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
       <Button
         intent={'tertiary'}
         className='flex flex-row items-center gap-3 text-xl text-brand'
@@ -113,13 +113,13 @@ export default function Home() {
       </Button>
       <Modal
         defaultCancel={true}
-              content={<TestModalBody />}
-              closeModal={closeModal}
-              isOpen={isOpen}
+        content={<TestModalBody />}
+        closeModal={closeModal}
+        isOpen={isOpen}
       />
-      <div>
+      {/* <div>
         <Table />
-      </div>
+      </div> */}
     </div>
   );
 }
