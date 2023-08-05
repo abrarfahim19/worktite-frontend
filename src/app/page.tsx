@@ -12,10 +12,83 @@ import TestModalBody from '@/components/Modal/TestModalBody';
 import { useState } from 'react';
 import { Table } from '@/ui/Table';
 import { Dropdown } from '@/ui/Dropdown';
+import { ColumnDef } from '@tanstack/react-table';
+import React from 'react';
+import { Table } from '@/ui/Table';
 
 const intents = [undefined, 'primary', 'secondary', 'tartiary'] as const;
 const sizes = [undefined, 'medium', 'small', 'large'] as const;
 
+type Person = {
+  firstName: string;
+  lastName: string;
+  age: number;
+  visits: number;
+  status: string;
+  progress: number;
+};
+
+const defaultData: Person[] = [
+  {
+    firstName: 'tanner',
+    lastName: 'linsley',
+    age: 24,
+    visits: 100,
+    status: 'In Relationship',
+    progress: 50,
+  },
+  {
+    firstName: 'tandy',
+    lastName: 'miller',
+    age: 40,
+    visits: 40,
+    status: 'Single',
+    progress: 80,
+  },
+  {
+    firstName: 'joe',
+    lastName: 'dirte',
+    age: 45,
+    visits: 20,
+    status: 'Complicated',
+    progress: 10,
+  },
+];
+
+const defaultColumns: ColumnDef<Person>[] = [
+  {
+    accessorKey: 'firstName',
+    cell: (info) => info.getValue(),
+    // footer: (props) => props.column.id,
+  },
+  {
+    accessorFn: (row) => row.lastName,
+    id: 'lastName',
+    cell: (info) => info.getValue(),
+    header: () => <span>Last Name</span>,
+    // footer: (props) => props.column.id,
+  },
+  {
+    accessorKey: 'age',
+    header: () => 'Age',
+    footer: (props) => props.column.id,
+  },
+  {
+    accessorKey: 'visits',
+    header: () => <span>Visits</span>,
+    footer: (props) => props.column.id,
+  },
+  {
+    accessorKey: 'status',
+    header: 'Status',
+    footer: (props) => props.column.id,
+  },
+  {
+    accessorKey: 'progress',
+    header: 'Profile Progress',
+    footer: (props) => props.column.id,
+  },
+];
 export default function Home() {
   let [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -45,11 +118,8 @@ export default function Home() {
           </button>
         </Dropdown>
       </div>
-      <table
-        className={cx(
-          'relative h-max w-max self-center justify-self-center [&_:where(th,td)]:p-2'
-        )}
-      >
+      <div></div>
+      <table className='relative h-max w-max self-center justify-self-center [&_:where(th,td)]:p-2'>
         <thead>
           <tr>
             <th></th>
@@ -118,7 +188,7 @@ export default function Home() {
               isOpen={isOpen}
       />
       <div>
-        <Table />
+        <Table data={defaultData} columns={defaultColumns} sorted={false}/>
       </div>
     </div>
   );
