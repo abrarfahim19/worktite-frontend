@@ -10,8 +10,7 @@ import React, {
 const VDropdown = cva('', {
   variants: {
     variant: {
-      primary:
-        'w-full focus:outline-none',
+      primary: 'focus:outline-none relative',
     },
   },
   defaultVariants: {
@@ -31,21 +30,20 @@ export interface DropdownProps
     VariantProps<typeof VDropdown> {}
 
 export const Dropdown: React.FC<DropdownProps> = ({
-                                                    menuButton,
-
+  menuButton,
   className,
   children,
   variant,
-                                                    hover,
+  hover,
   ...props
 }) => {
-  const buttonRef = React.useRef(null)
-  const dropdownRef = React.useRef(null)
-  const timeoutDuration = 75
-  let timeout:any
+  const buttonRef = React.useRef(null);
+  const dropdownRef = React.useRef(null);
+  const timeoutDuration = 75;
+  let timeout: any;
 
   // @ts-ignore
-  const openMenu = () => buttonRef?.current.click()
+  const openMenu = () => buttonRef?.current.click();
   const closeMenu = () =>
     // @ts-ignore
     dropdownRef?.current?.dispatchEvent(
@@ -54,69 +52,76 @@ export const Dropdown: React.FC<DropdownProps> = ({
         bubbles: true,
         cancelable: true,
       })
-    )
-// @ts-ignore
-  const onMouseEnter =( closed=false) => {
-    clearTimeout(timeout)
-    closed && openMenu()
-  }
+    );
   // @ts-ignore
-  const onMouseLeave = open => {
-    open && (timeout = setTimeout(() => closeMenu(), timeoutDuration))
-  }
+  const onMouseEnter = (closed = false) => {
+    clearTimeout(timeout);
+    closed && openMenu();
+  };
+  // @ts-ignore
+  const onMouseLeave = (open) => {
+    open && (timeout = setTimeout(() => closeMenu(), timeoutDuration));
+  };
   return (
-    <Menu >
+    <Menu>
       {({ open }) => (
         <>
           <div
-            className={VDropdown({variant, className})}
-           onClick={openMenu}
+            className={VDropdown({ variant, className })}
+            onClick={openMenu}
             onMouseEnter={() => hover && onMouseEnter(!open)}
             onMouseLeave={() => hover && onMouseLeave(open)}
           >
-      <Menu.Button ref={buttonRef} className='focus:outline-none'>
-        hello
-      </Menu.Button>
-          </div>
-      <Transition
-        as={Fragment}
-        enter='transition ease-out duration-100'
-        enterFrom='transform opacity-0 scale-95'
-        enterTo='transform opacity-100 scale-100'
-        leave='transition ease-in duration-75'
-        leaveFrom='transform opacity-100 scale-100'
-        leaveTo='transform opacity-0 scale-95'
-      >
-        <Menu.Items ref={dropdownRef}
-                    onMouseEnter={() => hover && onMouseEnter()}
-                    onMouseLeave={() => hover && onMouseLeave(open)}
-                    className='absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'>
-          <div className='px-1 py-1'>
-            {Children.map(children, (child, index) => {
-              return (
-                <Menu.Item key={index}>
-                  {({ active }) => {
-                    let item = child as React.ReactElement<
-                      PropsWithChildren<HTMLButtonElement>
-                    >;
-                    const className = `${
-                      active ? 'bg-brand text-white' : 'text-gray-900'
-                    } ${item.props.className}`;
-                    item = cloneElement(item, {
-                      ...item.props,
-                      className,
-                    });
+            <Menu.Button
+              as='div'
+              ref={buttonRef}
+              className='focus:outline-none'
+            >
+              {menuButton}
+            </Menu.Button>
 
-                    return item;
-                  }}
-                </Menu.Item>
-              );
-            })}
+            <Transition
+              as={Fragment}
+              enter='transition ease-out duration-100'
+              enterFrom='transform opacity-0 scale-95'
+              enterTo='transform opacity-100 scale-100'
+              leave='transition ease-in duration-75'
+              leaveFrom='transform opacity-100 scale-100'
+              leaveTo='transform opacity-0 scale-95'
+            >
+              <Menu.Items
+                ref={dropdownRef}
+                onMouseEnter={() => hover && onMouseEnter()}
+                onMouseLeave={() => hover && onMouseLeave(open)}
+                className='absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'
+              >
+                <div className='px-1 py-1'>
+                  {Children.map(children, (child, index) => {
+                    return (
+                      <Menu.Item key={index}>
+                        {({ active }) => {
+                          let item = child as React.ReactElement<
+                            PropsWithChildren<HTMLButtonElement>
+                          >;
+                          const className = `${
+                            active ? 'bg-brand text-white' : 'text-gray-900'
+                          } ${item.props.className}`;
+                          item = cloneElement(item, {
+                            ...item.props,
+                            className,
+                          });
+
+                          return item;
+                        }}
+                      </Menu.Item>
+                    );
+                  })}
+                </div>
+              </Menu.Items>
+            </Transition>
           </div>
-        </Menu.Items>
-      </Transition>
-          </>
-          )}
+        </>
+      )}
     </Menu>
   );
 };
