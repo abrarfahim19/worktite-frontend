@@ -1,3 +1,4 @@
+'use client';
 import { Avatar } from '@/ui/Avatar';
 import { Button } from '@/ui/Button';
 import Image from 'next/image';
@@ -6,6 +7,7 @@ import { BsChevronCompactDown } from 'react-icons/bs';
 import { GoBell } from 'react-icons/go';
 import { TbMessageDots } from 'react-icons/tb';
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
+import { Dropdown } from '@/ui/Dropdown';
 
 type Props = {};
 
@@ -29,15 +31,43 @@ export const NavBar = (props: Props) => {
         />
       </div>
       <div className='hidden gap-4  md:flex md:flex-row'>
-        {items.map((item) => (
-          <Button
-            intent={'tertiary'}
-            className='flex items-center gap-3 text-sm text-brand'
-          >
-            {item.tag}
-            {item.child && <BsChevronCompactDown />}
-          </Button>
-        ))}
+        {items.map((item, index) => {
+          if (item.tag == 'Home') {
+            return (
+              <Dropdown
+                key={index}
+                hover={true}
+                menuButton={
+                  <Button
+                    key={index}
+                    intent={'tertiary'}
+                    className='flex items-center gap-3 text-sm text-brand'
+                  >
+                    {item.tag}
+                    {item.child && <BsChevronCompactDown />}
+                  </Button>
+                }
+              >
+                <Button key={index} intent='normal' size='normal'>
+                  1
+                </Button>
+                <Button key={index} intent='normal' size='normal'>
+                  2
+                </Button>
+              </Dropdown>
+            );
+          }
+          return (
+            <Button
+              key={index}
+              intent={'tertiary'}
+              className='flex items-center gap-3 text-sm text-brand'
+            >
+              {item.tag}
+              {item.child && <BsChevronCompactDown />}
+            </Button>
+          );
+        })}
       </div>
       <div className='flex items-center gap-4 '>
         <div className='flex items-center gap-4 text-xl'>
