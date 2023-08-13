@@ -1,40 +1,41 @@
 import React from 'react';
 import Image from 'next/image';
-import { Text } from '@/ui/Text';
 import { IoArrowForwardCircleOutline } from 'react-icons/io5';
+import { Text } from '@/ui/Text';
 import { Button } from '@/ui/Button';
 
-
 interface Props {
-  imageUrl?:string;
+  imageUrl?: string;
   alt?: string;
   title: string;
-  /** card orientation*/
-  reverse?: boolean
+  reverse?: boolean;
 }
-const HomeCard:React.FC<Props> = ({imageUrl, alt, title, reverse=false}) => {
+
+const HomeCard: React.FC<Props> = ({ imageUrl, alt, title, reverse = false }) => {
+  const imageProps = {
+    layout: 'responsive',
+    style: { borderRadius: '8px' },
+    width: 797,
+    height: 547,
+    src: imageUrl || '',
+    alt: alt || title || '',
+  };
 
   return (
-    <div >
-      <div>
-        {imageUrl && <Image src={imageUrl} alt={alt ? alt : title} />}
-      </div>
-      <div>
-        <Text tag='h2' >{title}</Text>
-        <Button
-          intent={'tertiary'}
-          className='flex flex-row items-center gap-3 text-xl text-brand'
-        >
-          <IoArrowForwardCircleOutline className='text-4xl' />
+    <div className={`flex w-full h-full bg-white rounded-lg ${reverse ? 'flex-col' : 'flex-col-reverse'}`}>
+      {/* eslint-disable-next-line jsx-a11y/alt-text */}
+      {imageUrl && <Image {...imageProps} />}
+      <div className="ps-8 my-8">
+        <Text tag="h1" decoration="h3" className="font-light">
+          {title}
+        </Text>
+        <Button intent="tertiary" className="flex items-center gap-3 text-xl text-brand font-bold">
+          <IoArrowForwardCircleOutline className="text-4xl" />
           Complex Project
         </Button>
       </div>
     </div>
   );
-};
-
-HomeCard.propTypes = {
-
 };
 
 export default HomeCard;

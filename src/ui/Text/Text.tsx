@@ -30,6 +30,7 @@ const VTextType = cva('', {
       h6: 'h6',
       p: 'text-md',
       span: 'text-sm',
+      big:'text-6xl'
     },
   },
   defaultVariants: {
