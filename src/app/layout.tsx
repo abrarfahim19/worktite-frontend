@@ -18,15 +18,12 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={inter.className}>
-      <section className="bg-[#F6F0EE]">
-        <nav>
-
-
-          <NavBar />
-        </nav>
-        {children}
-      </section>
-
+        <section className='bg-[#F6F0EE]'>
+          <nav>
+            <NavBar />
+          </nav>
+          <main>{children}</main>
+        </section>
       </body>
     </html>
   );
