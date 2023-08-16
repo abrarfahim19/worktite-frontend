@@ -1,19 +1,11 @@
 'use client';
 import { Button } from '@/ui/Button';
-import { IoArrowForwardCircleOutline } from 'react-icons/io5';
-import { cx } from 'class-variance-authority';
-import { Avatar } from '@/ui/Avatar';
-import { Input } from '@/ui/Input';
-import { BsCalendarDay } from 'react-icons/bs';
-import { TextArea } from '@/ui/TextArea';
 import { Text } from '@/ui/Text';
 import { Modal } from '@/ui/Modal';
 import TestModalBody from '@/components/Modal/TestModalBody';
-import { useState } from 'react';
-import { Dropdown } from '@/ui/Dropdown';
-import { ColumnDef } from '@tanstack/react-table';
-import React from 'react';
+import React, { useState } from 'react';
 import { Table } from '@/ui/Table';
+import { ColumnDef } from '@tanstack/react-table';
 
 const intents = [undefined, 'primary', 'secondary', 'tartiary'] as const;
 const sizes = [undefined, 'medium', 'small', 'large'] as const;
@@ -98,6 +90,7 @@ export default function Home() {
   function openModal() {
     setIsOpen(true);
   }
+
   return (
     <div className=''>
       <div>
@@ -187,6 +180,7 @@ export default function Home() {
         isOpen={isOpen}
       />
       <div>
+        {/*<Table data={defaultData} columns={defaultColumns} sorted={false}/>*/}
         <Table data={defaultData} columns={defaultColumns} sorted={false} />
       </div> */}
     </div>
