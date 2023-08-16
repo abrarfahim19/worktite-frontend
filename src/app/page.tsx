@@ -93,6 +93,78 @@ export default function Home() {
 
   return (
     <div className=''>
+      <div>
+        {/* <Dropdown
+          className='flex items-center justify-center gap-x-2'
+          menuText='Menu'
+          icon={<BsCalendarDay />}
+        >
+          <button className='group flex w-full items-center rounded-md px-2 py-2 text-sm'>
+            Account{' '}
+          </button>
+          <button className='group flex w-full items-center rounded-md px-2 py-2 text-sm'>
+            Account Settings
+          </button>
+          <button className='group flex w-full items-center rounded-md px-2 py-2 text-sm'>
+            Account{' '}
+          </button>
+        </Dropdown> */}
+      </div>
+      <div></div>
+      {/* <table className='relative h-max w-max self-center justify-self-center [&_:where(th,td)]:p-2'>
+        <thead>
+          <tr>
+            <th></th>
+            {intents.map((intent: any, index: number) => (
+              <th key={index} scope='col'>
+                {intent || 'default'}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {sizes.map((size, index) => (
+            <tr key={index}>
+              <th scope='row'>{size || 'default'}</th>
+              {intents.map((intent: any, index: number) => (
+                <td key={index} scope='col'>
+                  <Button {...(intent && { intent })} {...(size && { size })}>
+                    {intent || 'default'} button
+                  </Button>
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table> */}
+      {/* <Button
+        intent={'tertiary'}
+        className='flex flex-row items-center gap-3 text-xl text-brand'
+      >
+        <IoArrowForwardCircleOutline className='text-4xl' />
+        Complex Project
+      </Button>
+      <Avatar
+        imageUrl={'https://randomuser.me/api/portraits/men/9.jpg'}
+        size={'medium'}
+        decoration={'ring'}
+      />
+      <div className='m-4'>
+        <Input
+          icon={<BsCalendarDay />}
+          lClass='primary'
+          label='Phone Number'
+          placeholder='phone number 0122'
+        />
+      </div>
+      <div className='m-4'>
+        <TextArea
+          lClass='primary'
+          label='Description'
+          placeholder='Add your description'
+          rows={4}
+        />
+      </div>
       <div className='m-4'>
         <Text tag='p' decoration='h1' className='text-red-400'>
           hellow
@@ -110,7 +182,7 @@ export default function Home() {
       <div>
         {/*<Table data={defaultData} columns={defaultColumns} sorted={false}/>*/}
         <Table data={defaultData} columns={defaultColumns} sorted={false} />
-      </div>
+      </div> */}
     </div>
   );
 }
