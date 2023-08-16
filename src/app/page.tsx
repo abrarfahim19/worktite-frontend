@@ -118,7 +118,7 @@ export default function Home() {
         </Dropdown> */}
       </div>
       <div></div>
-      <table className='relative h-max w-max self-center justify-self-center [&_:where(th,td)]:p-2'>
+      {/* <table className='relative h-max w-max self-center justify-self-center [&_:where(th,td)]:p-2'>
         <thead>
           <tr>
             <th></th>
@@ -143,8 +143,8 @@ export default function Home() {
             </tr>
           ))}
         </tbody>
-      </table>
-      <Button
+      </table> */}
+      {/* <Button
         intent={'tertiary'}
         className='flex flex-row items-center gap-3 text-xl text-brand'
       >
@@ -188,7 +188,7 @@ export default function Home() {
       />
       <div>
         <Table data={defaultData} columns={defaultColumns} sorted={false} />
-      </div>
+      </div> */}
     </div>
   );
 }
