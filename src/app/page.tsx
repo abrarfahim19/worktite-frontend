@@ -6,6 +6,7 @@ import TestModalBody from '@/components/Modal/TestModalBody';
 import React, { useState } from 'react';
 import { Table } from '@/ui/Table';
 import { ColumnDef } from '@tanstack/react-table';
+import { TreeCard } from '@/components/Card';
 
 const intents = [undefined, 'primary', 'secondary', 'tartiary'] as const;
 const sizes = [undefined, 'medium', 'small', 'large'] as const;
@@ -91,5 +92,9 @@ export default function Home() {
     setIsOpen(true);
   }
 
-  return <div className=''></div>;
+  return (
+    <div className='p-5'>
+      <TreeCard />
+    </div>
+  );
 }
