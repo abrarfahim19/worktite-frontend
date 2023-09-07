@@ -9,6 +9,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import HomeCard from '@/components/Card/HomeCard';
 import MarkCard from '@/components/Card/MarkCard';
 import StyleHeading from '@/components/Header/StyleHeading';
+import HCarousel from '@/components/HCarousel/HCarousel';
 
 const intents = [undefined, 'primary', 'secondary', 'tartiary'] as const;
 const sizes = [undefined, 'medium', 'small', 'large'] as const;
@@ -119,6 +120,9 @@ export default function Home() {
 
   return (
     <div className='px-5 md:px-20'>
+      <div className='my-2 h-36 md:h-[500px]'>
+        <HCarousel />
+      </div>
       <div className='grid auto-rows-fr grid-cols-1 gap-3 md:grid-cols-2'>
         <HomeCard
           reverse={true}

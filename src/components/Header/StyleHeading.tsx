@@ -9,8 +9,8 @@ interface Props {
 
 const StyleHeading: React.FC<Props> = ({ title, description }) => {
   return (
-    <div className='my-24 flex flex-grow flex-col items-center justify-center py-1'>
-      <div className='flex items-center justify-center'>
+    <div className='my-24 py-1'>
+      <div className='flex items-center justify-between  gap-1 md:justify-center md:gap-24'>
         <svg
           className='inline-block px-1'
           xmlns='http://www.w3.org/2000/svg'
@@ -28,7 +28,7 @@ const StyleHeading: React.FC<Props> = ({ title, description }) => {
             stroke='#E55E2C'
           />
         </svg>
-        <Text decoration='h3' className='px-24 font-bold'>
+        <Text decoration='h3' className='text-lg font-bold md:text-5xl'>
           {title}
         </Text>
         <svg
