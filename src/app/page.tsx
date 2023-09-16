@@ -9,6 +9,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import HomeCard from '@/components/Card/HomeCard';
 import MarkCard from '@/components/Card/MarkCard';
 import StyleHeading from '@/components/Header/StyleHeading';
+import Image from 'next/image';
 
 const intents = [undefined, 'primary', 'secondary', 'tartiary'] as const;
 const sizes = [undefined, 'medium', 'small', 'large'] as const;
@@ -92,6 +93,7 @@ const marketing = [
   },
   {
     title: 'Professionalism',
+    image: true,
     description:
       'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has.',
   },
@@ -102,6 +104,29 @@ const marketing = [
   },
   {
     title: 'Versatility',
+    image: true,
+    description:
+      'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has.',
+  },
+  {
+    title: 'Loyalty',
+    description:
+      'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has.',
+  },
+  {
+    title: 'Professionalism',
+    image: true,
+    description:
+      'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has.',
+  },
+  {
+    title: 'Goodwill',
+    description:
+      'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has.',
+  },
+  {
+    title: 'Versatility',
+    image: true,
     description:
       'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has.',
   },
@@ -116,6 +141,19 @@ export default function Home() {
   function openModal() {
     setIsOpen(true);
   }
+  const imageProps = {
+    layout: 'responsive',
+    style: { borderRadius: '8px' },
+    width: 374,
+    height: 374,
+    src: 'https://picsum.photos/374/374' || '',
+    alt: '',
+  };
+
+  // return (
+  //   <div className={`flex w-full h-full bg-white rounded-lg ${reverse ? 'flex-col' : 'flex-col-reverse'}`}>
+  //     {/* eslint-disable-next-line jsx-a11y/alt-text */}
+  //     {imageUrl && <Image {...imageProps} />}
 
   return (
     <div className='px-5 md:px-20'>
@@ -169,16 +207,49 @@ export default function Home() {
           description='There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised '
         />
         <div className='grid grid-cols-1 gap-6 md:grid-cols-4'>
-          {marketing.map((e: any, index) => (
-            <MarkCard
-              key={index}
-              serial={index + 1}
-              title={e.title}
-              description={e.description}
-              intent='secondary'
-              color='secondary'
-            />
-          ))}
+          {marketing.map((e: any, index) => {
+            if (e?.image) {
+              return (
+                <div key={index}>
+                  <Image {...imageProps} />
+                </div>
+              );
+            }
+            return (
+              <MarkCard
+                key={index}
+                serial={index + 1}
+                title={e.title}
+                description={e.description}
+              />
+            );
+          })}
+        </div>
+      </div>
+
+      <div>
+        <StyleHeading
+          title='Our latest DIY projects'
+          description='There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised'
+        />
+        <div className='grid grid-cols-1 gap-6 md:grid-cols-4'>
+          {marketing.map((e: any, index) => {
+            if (e?.image) {
+              return (
+                <div key={index}>
+                  <Image {...imageProps} />
+                </div>
+              );
+            }
+            return (
+              <MarkCard
+                key={index}
+                serial={index + 1}
+                title={e.title}
+                description={e.description}
+              />
+            );
+          })}
         </div>
       </div>
       {/*<div className='m-4'>*/}
