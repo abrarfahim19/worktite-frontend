@@ -11,6 +11,8 @@ import MarkCard from '@/components/Card/MarkCard';
 import StyleHeading from '@/components/Header/StyleHeading';
 import HCarousel from '@/components/HCarousel/HCarousel';
 import Image from 'next/image';
+import ProjectTab from "@/components/ProjectTab/ProjectTab";
+import TechnicalExpertHero from "@/components/Hero/TechnicalExpertHero";
 
 const intents = [undefined, 'primary', 'secondary', 'tartiary'] as const;
 const sizes = [undefined, 'medium', 'small', 'large'] as const;
@@ -158,9 +160,7 @@ export default function Home() {
 
   return (
     <div className='px-5 md:px-20'>
-      <div className='my-2 h-36 md:h-[500px]'>
-        <HCarousel />
-      </div>
+
       <div className='grid auto-rows-fr grid-cols-1 gap-3 md:grid-cols-2'>
         <HomeCard
           reverse={true}
@@ -236,44 +236,41 @@ export default function Home() {
           title='Our latest DIY projects'
           description='There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised'
         />
-        <div className='grid grid-cols-1 gap-6 md:grid-cols-4'>
-          {marketing.map((e: any, index) => {
-            if (e?.image) {
-              return (
-                <div key={index}>
-                  <Image {...imageProps} />
-                </div>
-              );
-            }
-            return (
-              <MarkCard
-                key={index}
-                serial={index + 1}
-                title={e.title}
-                description={e.description}
-              />
-            );
-          })}
+        <div className='my-2 h-36 md:h-[500px]'>
+          <HCarousel />
         </div>
       </div>
-      {/*<div className='m-4'>*/}
-      {/*  <Text tag='p' decoration='h1' className='text-red-400'>*/}
-      {/*    hellow*/}
-      {/*  </Text>*/}
-      {/*</div>*/}
-      {/*<Button intent={'secondary'} size={'medium'} onClick={openModal}>*/}
-      {/*  This is button*/}
-      {/*</Button>*/}
-      {/*<Modal*/}
-      {/*  defaultCancel={true}*/}
-      {/*  content={<TestModalBody />}*/}
-      {/*  closeModal={closeModal}*/}
-      {/*  isOpen={isOpen}*/}
-      {/*/>*/}
-      {/*<div>*/}
-      {/*  /!*<Table data={defaultData} columns={defaultColumns} sorted={false}/>*!/*/}
-      {/*  /!*<Table data={defaultData} columns={defaultColumns} sorted={false} />*!/*/}
-      {/*</div>*/}
+
+      <div>
+        <StyleHeading
+          title='Our DIY projects'
+          description='There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised'
+        />
+        <div className='my-2 h-36 md:h-[500px]'>
+          <ProjectTab />
+        </div>
+      </div>
+
+      <div>
+        <StyleHeading
+          title='Technical equipments expert'
+          description='There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised'
+        />
+
+        <div className='my-2 h-36 md:h-[500px]'>
+          <TechnicalExpertHero />
+        </div>
+      </div>
+      <div>
+        <StyleHeading
+          title='Technical equipments expert'
+          description='There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised'
+        />
+
+        <div className='my-2 h-36 md:h-[500px]'>
+          <TechnicalExpertHero />
+        </div>
+      </div>
     </div>
   );
 }

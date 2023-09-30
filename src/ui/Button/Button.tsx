@@ -17,7 +17,7 @@ const button = cva('button', {
         'pl-0',
         'text-black font-raleway',
         'active:text-brand',
-        'before:block before:absolute before:-inset-1 before:border-b-2 before:border-transparent active:before:border-brand before:w-1/2 relative inline-block',
+        'before:block before:absolute before:-inset-1 before:border-b-2 before:border-transparent hover:before:border-brand before:w-1/2 relative inline-block',
       ],
       normal:['flex w-full items-center rounded-md px-2 py-2 text-sm']
     },
