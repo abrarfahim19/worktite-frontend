@@ -57,7 +57,7 @@ export const Input: React.FC<InputProps> = ({
       <div className={VInput({ intent, className })}>
         {icon}
         <input
-          className='border-none bg-transparent outline-none focus:border-none focus:outline-none focus:ring-0'
+          className='w-full border-none bg-transparent outline-none focus:border-none focus:outline-none focus:ring-0'
           {...props}
         />
       </div>

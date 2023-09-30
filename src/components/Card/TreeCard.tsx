@@ -64,7 +64,10 @@ export const TreeCard = () => {
       {data.map((item, index) => {
         if (index !== 1 && index % 2 == 0 && index !== data.length - 1) {
           return (
-            <div className='col-span-3 row-span-2 flex min-h-[150px] flex-row rounded-md'>
+            <div
+              key={index}
+              className='col-span-3 row-span-2 flex min-h-[150px] flex-row rounded-md'
+            >
               <div className='w-4/3 my-2 rounded-md bg-white p-5'>
                 <Text tag={'p'} className='font-raleway font-bold'>
                   {item.title}
@@ -133,7 +136,10 @@ export const TreeCard = () => {
           );
         } else {
           return (
-            <div className='col-span-3 row-span-2 flex min-h-[150px] flex-row rounded-md md:flex-row-reverse'>
+            <div
+              key={index}
+              className='col-span-3 row-span-2 flex min-h-[150px] flex-row rounded-md md:flex-row-reverse'
+            >
               <div className='w-4/3 my-2 rounded-md bg-white p-5'>
                 <Text tag={'p'} className='font-raleway font-bold'>
                   {item.title}
