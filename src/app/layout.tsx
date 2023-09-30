@@ -1,11 +1,10 @@
-import { NavBar } from '../components/NavBar';
+import { NavBar } from '@/components/NavBar';
 import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { NavBar } from '../components/NavBar';
-import './globals.css';
+import { Footer } from '@/components/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,24 +14,23 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
-}: {
+                                     children,
+                                   }: {
   children: React.ReactNode;
 }) {
   return (
     <html lang='en'>
-      <body className={inter.className}>
-        <section className='bg-[#F6F0EE]'>
-          <nav>
-            <NavBar />
-          </nav>
-          <main>{children}</main>
-        </section>
+    <body className={inter.className}>
+    <section className='bg-[#F6F0EE]'>
+      <nav>
         <NavBar />
-        {children}
-        <Footer />
-        <ToastContainer />
-      </body>
+      </nav>
+      <main>{children}</main>
+      <Footer />
+    </section>
+
+    <ToastContainer />
+    </body>
     </html>
   );
 }

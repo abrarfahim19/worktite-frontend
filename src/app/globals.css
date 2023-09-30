@@ -50,3 +50,10 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+/*.swiper-button-prev:after {*/
+/*  content: '';*/
+/*  background-image: url('../../public/Images/svg/nextBtn.svg');*/
+/*  width: 20px;*/
+/*  height: 20px;*/
+/*}*/

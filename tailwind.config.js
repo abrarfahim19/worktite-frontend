@@ -15,6 +15,7 @@ module.exports = {
       },
       colors: {
         brand: '#E55E2C',
+        brandBackground: '#F6F0EE',
         softDark: '#2C2C2C',
         whiteText: '#FEF8F6',
       },

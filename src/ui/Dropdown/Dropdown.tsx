@@ -1,11 +1,6 @@
 import { Menu, Transition } from '@headlessui/react';
-import { VariantProps, cva } from 'class-variance-authority';
-import React, {
-  Fragment,
-  Children,
-  PropsWithChildren,
-  cloneElement,
-} from 'react';
+import { cva, VariantProps } from 'class-variance-authority';
+import React, { Children, cloneElement, Fragment, PropsWithChildren } from 'react';
 
 const VDropdown = cva('', {
   variants: {
@@ -27,16 +22,17 @@ export interface CustomInput {
 export interface DropdownProps
   extends React.HTMLAttributes<HTMLElement>,
     CustomInput,
-    VariantProps<typeof VDropdown> {}
+    VariantProps<typeof VDropdown> {
+}
 
 export const Dropdown: React.FC<DropdownProps> = ({
-  menuButton,
-  className,
-  children,
-  variant,
-  hover,
-  ...props
-}) => {
+                                                    menuButton,
+                                                    className,
+                                                    children,
+                                                    variant,
+                                                    hover,
+                                                    ...props
+                                                  }) => {
   const buttonRef = React.useRef(null);
   const dropdownRef = React.useRef(null);
   const timeoutDuration = 75;
@@ -51,7 +47,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
         key: 'Escape',
         bubbles: true,
         cancelable: true,
-      })
+      }),
     );
   // @ts-ignore
   const onMouseEnter = (closed = false) => {
@@ -59,12 +55,12 @@ export const Dropdown: React.FC<DropdownProps> = ({
     closed && openMenu();
   };
   // @ts-ignore
-  const onMouseLeave = (open) => {
+  const onMouseLeave = (open: boolean) => {
     open && (timeout = setTimeout(() => closeMenu(), timeoutDuration));
   };
   return (
     <Menu>
-      {({ open }) => (
+      {({ open }: { open: boolean }) => (
         <>
           <div
             className={VDropdown({ variant, className })}
