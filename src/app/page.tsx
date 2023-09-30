@@ -1,6 +1,6 @@
 'use client';
+import AppointmentModalBody from '@/components/ModalBody/AppointmentModalBody';
 import { Button } from '@/ui/Button';
-import { Text } from '@/ui/Text';
 import { Modal } from '@/ui/Modal';
 import TestModalBody from '@/components/Modal/TestModalBody';
 import React, { useState } from 'react';
@@ -16,6 +16,8 @@ import TechnicalExpertHero from "@/components/Hero/TechnicalExpertHero";
 
 const intents = [undefined, 'primary', 'secondary', 'tartiary'] as const;
 const sizes = [undefined, 'medium', 'small', 'large'] as const;
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 type Person = {
   firstName: string;
@@ -135,7 +137,7 @@ const marketing = [
   },
 ];
 export default function Home() {
-  let [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   function closeModal() {
     setIsOpen(false);
@@ -158,7 +160,18 @@ export default function Home() {
   //     {/* eslint-disable-next-line jsx-a11y/alt-text */}
   //     {imageUrl && <Image {...imageProps} />}
 
+  const toastify = () => toast('This is Toast');
+
   return (
+    <div className='p-5'>
+      <Button onClick={openModal}>Modal</Button>
+      <Modal
+        closeModal={closeModal}
+        content={<AppointmentModalBody closeModal={closeModal} />}
+        isOpen={isOpen}
+        defaultCancel={true}
+      />
+      <Button onClick={toastify}>Toast</Button>
     <div className='px-5 md:px-20'>
 
       <div className='grid auto-rows-fr grid-cols-1 gap-3 md:grid-cols-2'>
