@@ -15,6 +15,8 @@ module.exports = {
       },
       colors: {
         brand: '#E55E2C',
+        softDark: '#2C2C2C',
+        whiteText: '#FEF8F6',
       },
       fontSize: {
         h1: ['80px', { lineHeight: '80px', letterSpacing: '-0.032em' }],

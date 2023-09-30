@@ -9,6 +9,30 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+.new-selected {
+  color: green;
+}
+
+.my-selected:not([disabled]) {
+  font-weight: bold;
+  border: 2px solid currentColor;
+}
+.my-selected:hover:not([disabled]) {
+  border-color: #e55e2c;
+  color: #e55e2c;
+}
+.my-selected:not([disabled]) {
+  border-color: #e55e2c;
+  color: #ffffff;
+  border-radius: 10%;
+  background: #e55e2c;
+}
+.my-today {
+  font-weight: bold;
+  font-size: 140%;
+  color: red;
+}
+
 /* @media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
