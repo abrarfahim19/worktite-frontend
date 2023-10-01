@@ -1,0 +1,34 @@
+<!--<svg xmlns="http://www.w3.org/2000/svg" width="531" height="353" viewBox="0 0 531 353" fill="none">-->
+<!--    <g filter="url(#filter0_b_421_5166)">-->
+<!--        <path d="M530.705 0.543945H5.96924C3.06201 0.543945 0.7052 2.90074 0.7052 5.808V352.544H530.705V0.543945Z" fill="#FFB195" fill-opacity="0.17"/>-->
+<!--    </g>-->
+<!--    <defs>-->
+<!--        <filter id="filter0_b_421_5166" x="-4.83696" y="-4.99822" width="541.084" height="363.084" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">-->
+<!--            <feFlood flood-opacity="0" result="BackgroundImageFix"/>-->
+<!--            <feGaussianBlur in="BackgroundImageFix" stdDeviation="2.77108"/>-->
+<!--            <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_421_5166"/>-->
+<!--            <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_421_5166" result="shape"/>-->
+<!--        </filter>-->
+<!--    </defs>-->
+<!--</svg>-->
+<svg xmlns="http://www.w3.org/2000/svg" width="531" height="353" viewBox="0 0 531 353" fill="none">
+        <g clip-path="url(#clipPath)">
+            <path d="M530.705 0.543945H5.96924C3.06201 0.543945 0.7052 2.90074 0.7052 5.808V352.544H530.705V0.543945Z" fill="#FFB195" fill-opacity="0.17"/>
+        </g>
+    <defs>
+        <clipPath id="clipPath">
+            <path d="M530.705 0.543945H5.96924C3.06201 0.543945 0.7052 2.90074 0.7052 5.808V352.544H530.705V0.543945Z" fill="#FFB195" fill-opacity="0.17"/>
+        </clipPath>
+<!--        <filter id="filter0_b_421_5166" x="-4.83696" y="-4.99822" width="541.084" height="363.084" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">-->
+<!--            <feFlood flood-opacity="0" result="BackgroundImageFix"/>-->
+<!--            <feGaussianBlur in="BackgroundImageFix" stdDeviation="2.77108"/>-->
+<!--            <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_421_5166"/>-->
+<!--            <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_421_5166" result="shape"/>-->
+<!--        </filter>-->
+    </defs>
+
+    <!-- Apply the clipPath to an element using the clip-path attribute -->
+<!--    <g filter="url(#filter0_b_421_5166)" clip-path="url(#clipPath)">-->
+<!--        &lt;!&ndash; Your content goes here &ndash;&gt;-->
+<!--    </g>-->
+</svg>

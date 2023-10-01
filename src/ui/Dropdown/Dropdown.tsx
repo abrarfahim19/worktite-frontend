@@ -5,7 +5,7 @@ import React, { Children, cloneElement, Fragment, PropsWithChildren } from 'reac
 const VDropdown = cva('', {
   variants: {
     variant: {
-      primary: 'focus:outline-none relative',
+      primary: 'focus:outline-none relative z-40',
     },
   },
   defaultVariants: {

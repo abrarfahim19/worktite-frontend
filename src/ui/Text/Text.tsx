@@ -29,7 +29,7 @@ const VTextType = cva('', {
       h5: 'text-xl',
       h6: 'h6',
       p: 'text-md',
-      span: 'text-sm',
+      span: 'text-sm text-[#504845]',
       big:'text-6xl'
     },
   },
