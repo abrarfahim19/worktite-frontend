@@ -6,10 +6,11 @@ import { string } from 'zod';
 
 interface IProps {
   btnText: string
+    onClick?: any
 };
-const ButtonWithCircleIcon = ({btnText}: IProps) => {
+const ButtonWithCircleIcon = ({btnText, onClick}: IProps) => {
   return (
-      <Button intent="tertiary" className="flex items-center gap-3 text-xl text-brand font-bold">
+      <Button onClick={onClick && onClick} intent="tertiary" className="flex items-center gap-3 text-xl text-brand font-bold">
         <IoArrowForwardCircleOutline className="text-6xl font-light" />
         {btnText}
       </Button>

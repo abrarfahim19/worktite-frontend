@@ -5,12 +5,12 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './style.css';
-
+import image from '../../../public/Images/image 347.png'
 const HCarousel = () => {
   const [activeSlide, setActiveSlide] = useState(0);
   const imageProps = {
     height: 547,
-    src: 'https://picsum.photos/797/547',
+    src: image,
   };
   return (
     <Swiper
@@ -27,7 +27,7 @@ const HCarousel = () => {
           key={index}
           className='rounded-xl'
           style={{
-            backgroundImage: `url(${imageProps.src})`,
+            backgroundImage: `url('/Images/image 347.png')`,
             objectFit: 'cover',
           }}
         >

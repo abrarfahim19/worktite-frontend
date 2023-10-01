@@ -1,6 +1,11 @@
 .clip-svg {
     /*position: absolute;*/
     /*clip-path: circle(60px at center);*/
+
     clip-path: url(#clipPath);
     /*clip: rect(0px,565px,353px,0px);*/
+}
+
+.img-svg{
+    clip-path: circle(120px at 300px 250px);
 }

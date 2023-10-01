@@ -1,6 +1,6 @@
 'use client';
 import { Button } from '@/ui/Button';
-import React from 'react';
+import React, {useState} from 'react';
 import MarkCard from '@/components/Card/MarkCard';
 import StyleHeading from '@/components/Header/StyleHeading';
 import HCarousel from '@/components/HCarousel/HCarousel';
@@ -13,6 +13,9 @@ import TechnicalExpertHero from '@/components/Hero/TechnicalExpertHero';
 import All from '@/components/Home/DIYProjects/All';
 import { Input } from '@/ui/Input';
 import Banner from '@/components/SimpleProject/Banner';
+import Partner from "@/components/SimpleProject/Partner";
+import {Modal} from "@/ui/Modal";
+import AppointmentModalBody from "@/components/ModalBody/AppointmentModalBody";
 
 
 const marketing = [
@@ -62,6 +65,16 @@ const marketing = [
   },
 ];
 export default function SimpleProject() {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
   const imageProps = {
     layout: 'responsive',
     style: { borderRadius: '8px' },
@@ -73,7 +86,14 @@ export default function SimpleProject() {
   return (
     <div className='p-5 mt-4'>
       <div className='px-5 md:px-20'>
-        <Banner />
+        <Modal
+            closeModal={closeModal}
+            content={<AppointmentModalBody closeModal={closeModal} />}
+            isOpen={isOpen}
+            defaultCancel={true}
+        />
+        <Banner onClick={openModal} />
+        <Partner />
         <div>
           <StyleHeading
             title='Why choose us'
@@ -149,7 +169,7 @@ export default function SimpleProject() {
             description='There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised'
           />
 
-          <div className='my-2 h-36 md:h-[500px]'>
+          <div className='my-2 '>
             <TechnicalExpertHero />
           </div>
         </div>
@@ -160,7 +180,7 @@ export default function SimpleProject() {
             title='Our DIY projects'
             description='There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised'
           />
-          <div className='my-2 h-36 md:h-[500px]'>
+          <div className='my-2 '>
             <Tabs tabElements={{
               All: <All />,
               Simple: <All />,
@@ -170,7 +190,7 @@ export default function SimpleProject() {
         </div>
 
         <div>
-          <div className='grid grid-cols-1 px-12 gap-x-32 gap-y-12 md:grid-cols-4 md:px-0'>
+          <div className='grid grid-cols-1 px-12 gap-x-32 gap-y-12 md:grid-cols-4 md:px-0 mt-20'>
             {Array(4).fill(1).map((e) => <Statics key={e} />)}
           </div>
         </div>
