@@ -3,9 +3,29 @@
     /*clip-path: circle(60px at center);*/
 
     clip-path: url(#clipPath);
+    filter: blur(4px) ;
+    object-fit: fill;
+    /*transform: scale(1.5);*/
     /*clip: rect(0px,565px,353px,0px);*/
 }
-
-.img-svg{
-    clip-path: circle(120px at 300px 250px);
+.circle-img{
+    position: absolute;
+    top: 0;
+    left: 0;
+    shape-outside: circle(50%);
+    /*z-index: ;*/
+    transform: scale(0.8);
+    /*clip-path: circle(6rem at 12rem 8rem);*/
+    clip-path: circle(160px at 310px 250px);
 }
+
+/*.img-dev{*/
+/*    width: 170px;*/
+/*    height: 170px;*/
+/*    border-radius: 50%;*/
+/*    padding: 10px;*/
+/*    border: 1px solid red;*/
+/*}*/
+/*.img-svg{*/
+/*    clip-path: circle(120px at 300px 250px);*/
+/*}*/

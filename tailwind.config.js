@@ -21,6 +21,7 @@ module.exports = {
       },
       fontSize: {
         h1: ['80px', { lineHeight: '80px', letterSpacing: '-0.032em' }],
+        heading: ['40px', { lineHeight: '60px', letterSpacing: '-0.032em' }],
       },
       fontFamily: {
         kaushan: ['Kaushan Script', 'cursive'],

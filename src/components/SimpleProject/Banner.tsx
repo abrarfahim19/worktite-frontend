@@ -39,17 +39,20 @@ const Banner = ({onClick}:IProps) => {
               </defs>
           </svg>
         <Image
-          className='clip-svg right-0 absolute transform translate-x-9'
+          className='clip-svg right-0 transform translate-x-8 top-0 absolute'
           priority
           src={tablePNG}
           alt='banner bg'
         />
-          <Image
-          className='img-svg left-0 top-0 absolute  z-10'
+
+
+        <Image
+          className='circle-img z-10'
           priority
           src={tablePNG}
-          alt='banner bg'
+          alt='banner'
         />
+        <div className='absolute bottom-0 left-0 z-20 img-dev'></div>
       </div>
     </div>
   );

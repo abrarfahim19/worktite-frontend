@@ -10,7 +10,7 @@ interface Props {
 const SvgComp = () => {
   return (
     <svg
-      className='block w-12 px-1  md:w-16  lg:w-24'
+      className='block w-12  md:w-16  lg:w-24'
       xmlns='http://www.w3.org/2000/svg'
       // width='72'
       // height='15'
@@ -36,7 +36,7 @@ const StyleHeading: React.FC<Props> = ({ title, description }) => {
         <SvgComp />
         <Text
           decoration='h3'
-          className='px-7 text-lg font-bold md:text-5xl lg:px-24'
+          className='px-7 text-lg font-bold md:text-2xl lg:px-24 lg:text-heading'
         >
           {title}
         </Text>
