@@ -8,10 +8,12 @@ import { GoBell } from 'react-icons/go';
 import { TbMessageDots } from 'react-icons/tb';
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
 import { Dropdown } from '@/ui/Dropdown';
+import Link from 'next/link';
+import { routers } from '@/components/common/routes';
 
 type Props = {};
 
-export const NavBar = (props: Props) => {
+export const NavBar = ({}: Props) => {
   const items = [
     { tag: 'Home', link: '', child: true },
     { tag: 'worktite gallary', link: '', child: false },
@@ -48,12 +50,16 @@ export const NavBar = (props: Props) => {
                   </Button>
                 }
               >
-                <Button key={index} intent='normal' size='normal'>
-                  1
-                </Button>
-                <Button key={index} intent='normal' size='normal'>
-                  2
-                </Button>
+                <Link href={routers.SimpleDesign}>
+                  <Button key={index} intent='normal' size='normal'>
+                    Simple Design
+                  </Button>
+                </Link>
+                <Link href={routers.ComplexDesign}>
+                  <Button key={index} intent='normal' size='normal'>
+                    Complex Design
+                  </Button>
+                </Link>
               </Dropdown>
             );
           }

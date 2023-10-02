@@ -3,7 +3,6 @@ import HCarousel from '@/components/HCarousel/HCarousel';
 import StyleHeading from '@/components/Header/StyleHeading';
 import Tabs from '@/components/ProjectTab/Tabs';
 import { Button } from '@/ui/Button';
-import Image from 'next/image';
 import { useState } from 'react';
 
 import { TreeCard } from '@/components/Card';
@@ -14,10 +13,10 @@ import Banner from '@/components/SimpleProject/Banner';
 import All from '@/components/SimpleProject/DIYProjects/All';
 import Simple from '@/components/SimpleProject/DIYProjects/Simple';
 import Partner from '@/components/SimpleProject/Partner';
-import { Input } from '@/ui/Input';
 import { Modal } from '@/ui/Modal';
 import { Text } from '@/ui/Text';
-import experienceIcon from '../../../public/Images/svg/experience.svg';
+import ServiceStat from '@/components/SimpleProject/ServiceStat';
+import NewsLetters from '@/components/common/NewsLetters';
 
 const marketing = [
   {
@@ -169,60 +168,14 @@ export default function Home() {
         </div>
 
         <div>
-          <div className='grid grid-cols-1 gap-x-32 gap-y-12 px-12 md:grid-cols-4 md:px-0'>
-            {Array(4)
-              .fill(1)
-              .map((e) => (
-                <Statics key={e} />
-              ))}
+          <div className='mt-24 grid grid-cols-1 gap-x-32 gap-y-12 px-12 md:grid-cols-4 md:px-0'>
+            <ServiceStat />
           </div>
         </div>
 
         {/*  subscribe news channel */}
-        <div className='mt-24 flex flex-col rounded-md bg-[#FFCD8D] md:flex-row'>
-          <div className='rounded-md'>
-            <Image
-              className='rounded-md'
-              priority
-              width={581}
-              height={420}
-              src='https://s3-alpha-sig.figma.com/img/7b49/b732/bb3e260010eae85135faf525712a250d?Expires=1696809600&Signature=S~uidnVih0ut19HVxZnxklefS4GZdiJZt7rjB1DtGx8WdsSXZ4KHQZMipM1R2-jgJGuhgyDG9GRUOX52bFFSDHuahbrfyELwLy0sjDvDuH5WIq5bs~0sOOS-W9Lx31FqTZslrZib2-HKWJEGbKmL6jLRCQWXc8nc9qJKYhxW4Vu-Wm6~~TRgEadwYJKkj5hJYhZMWidW~SW4LwhOCqt6uyENqQktKw-tOWLeMPn~m5LwGrkaVRqQ9RSSzR9Mjzo~QrfkVTjWdW--Lav9243-bN62pCTsKGGX4UfkCEXC5aR37ENEGSyq3ptawaznxvohKPIPVUJ~~WDcbEFGw2SHRQ__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4'
-              alt='subscribe to our news letter'
-            />
-          </div>
-          <div className=' px-3 py-4 md:px-12 md:py-24'>
-            <Text decoration='h2' tag='h2'>
-              Subscribe Newsletters
-            </Text>
-            <Text decoration='p' tag='p' className='text-lg font-light'>
-              Contrary to popular belief, Lorem Ipsum is not simply random text.
-              It has roots in a piece of classical{' '}
-            </Text>
-            <form className='flex rounded border-2 border-white'>
-              <Input className='w-full border-none' placeholder='Mark Jhon' />
-              <Button className='w-2/5 bg-white text-brand '>subscribe</Button>
-            </form>
-          </div>
-        </div>
+        <NewsLetters />
       </div>
     </div>
   );
 }
-
-const Statics = () => {
-  return (
-    <div className='relative flex items-center justify-center rounded-md border border-brand py-5'>
-      <div className='absolute left-0 -translate-x-1/2 transform bg-brandBackground'>
-        <Image priority src={experienceIcon} alt='Follow us on Twitter' />
-      </div>
-      <div>
-        <Text decoration='h1' tag='h1'>
-          05+
-        </Text>
-        <Text decoration='p' tag='p'>
-          Years experience
-        </Text>
-      </div>
-    </div>
-  );
-};
