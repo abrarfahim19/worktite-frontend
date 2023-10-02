@@ -1,22 +1,22 @@
 'use client';
-import { Button } from '@/ui/Button';
-import React, {useState} from 'react';
 import MarkCard from '@/components/Card/MarkCard';
-import StyleHeading from '@/components/Header/StyleHeading';
 import HCarousel from '@/components/HCarousel/HCarousel';
-import Image from 'next/image';
+import StyleHeading from '@/components/Header/StyleHeading';
 import Tabs from '@/components/ProjectTab/Tabs';
+import { Button } from '@/ui/Button';
+import Image from 'next/image';
+import { useState } from 'react';
 
-import experienceIcon from '../../../public/Images/svg/experience.svg';
-import { Text } from '@/ui/Text';
 import TechnicalExpertHero from '@/components/Hero/TechnicalExpertHero';
-import All from '@/components/Home/DIYProjects/All';
-import { Input } from '@/ui/Input';
+import AppointmentModalBody from '@/components/ModalBody/AppointmentModalBody';
 import Banner from '@/components/SimpleProject/Banner';
-import Partner from "@/components/SimpleProject/Partner";
-import {Modal} from "@/ui/Modal";
-import AppointmentModalBody from "@/components/ModalBody/AppointmentModalBody";
-
+import All from '@/components/SimpleProject/DIYProjects/All';
+import Simple from '@/components/SimpleProject/DIYProjects/Simple';
+import Partner from '@/components/SimpleProject/Partner';
+import { Input } from '@/ui/Input';
+import { Modal } from '@/ui/Modal';
+import { Text } from '@/ui/Text';
+import experienceIcon from '../../../public/Images/svg/experience.svg';
 
 const marketing = [
   {
@@ -84,13 +84,13 @@ export default function SimpleProject() {
     alt: '',
   };
   return (
-    <div className='p-5 mt-4'>
+    <div className='mt-4 p-5'>
       <div className='px-5 md:px-20'>
         <Modal
-            closeModal={closeModal}
-            content={<AppointmentModalBody closeModal={closeModal} />}
-            isOpen={isOpen}
-            defaultCancel={true}
+          closeModal={closeModal}
+          content={<AppointmentModalBody closeModal={closeModal} />}
+          isOpen={isOpen}
+          defaultCancel={true}
         />
         <Banner onClick={openModal} />
         <Partner />
@@ -109,9 +109,9 @@ export default function SimpleProject() {
                 designed from us
               </Text>
               <Text>
-                It is a long established fact that a reader will be distracted by
-                the readable content of a page when looking at its layout. The
-                point of using Lorem Ipsum is that it has.
+                It is a long established fact that a reader will be distracted
+                by the readable content of a page when looking at its layout.
+                The point of using Lorem Ipsum is that it has.
               </Text>
               <Button className='w-1/2 py-4 font-bold'>Contact us</Button>
             </div>
@@ -181,25 +181,31 @@ export default function SimpleProject() {
             description='There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised'
           />
           <div className='my-2 '>
-            <Tabs tabElements={{
-              All: <All />,
-              Simple: <All />,
-              Complex: <All />,
-            }} />
+            <Tabs
+              tabElements={{
+                All: <All />,
+                Simple: <Simple />,
+                Complex: <All />,
+              }}
+            />
           </div>
         </div>
 
         <div>
-          <div className='grid grid-cols-1 px-12 gap-x-32 gap-y-12 md:grid-cols-4 md:px-0 mt-20'>
-            {Array(4).fill(1).map((e) => <Statics key={e} />)}
+          <div className='mt-20 grid grid-cols-1 gap-x-32 gap-y-12 px-12 md:grid-cols-4 md:px-0'>
+            {Array(4)
+              .fill(1)
+              .map((e) => (
+                <Statics key={e} />
+              ))}
           </div>
         </div>
 
         {/*  subscribe news channel */}
-        <div className='bg-[#FFCD8D] flex flex-col md:flex-row mt-24 rounded-md'>
+        <div className='mt-24 flex flex-col rounded-md bg-[#FFCD8D] md:flex-row'>
           <div className='rounded-md'>
             <Image
-              className='rounded-md'
+              className='h-full w-auto rounded-md'
               priority
               width={581}
               height={420}
@@ -207,13 +213,19 @@ export default function SimpleProject() {
               alt='subscribe to our news letter'
             />
           </div>
-          <div className=' py-4 md:py-24 px-3 md:px-12'>
-            <Text decoration='h2' tag='h2'>Subscribe Newsletters</Text>
-            <Text decoration='p' tag='p' className='font-light text-lg'>Contrary to popular belief, Lorem Ipsum is not
-              simply random text. It has roots in a piece of classical </Text>
-            <form className='rounded border-2 border-white flex'>
-              <Input className='border-none w-full' placeholder='Mark Jhon' />
-              <Button className='text-brand w-2/5 bg-white '>subscribe</Button>
+          <div className=' px-3 py-4 md:px-12 md:py-24'>
+            <Text decoration='h2' tag='h2'>
+              Subscribe Newsletters
+            </Text>
+            <Text decoration='p' tag='p' className='text-lg font-light'>
+              Contrary to popular belief, Lorem Ipsum is not simply random text.
+              It has roots in a piece of classical{' '}
+            </Text>
+            <form className='flex rounded border-2 border-white'>
+              <Input className='w-full border-none' placeholder='Mark Jhon' />
+              <Button intent={'secondary'} className='w-2/5'>
+                subscribe
+              </Button>
             </form>
           </div>
         </div>
@@ -222,19 +234,20 @@ export default function SimpleProject() {
   );
 }
 
-
 const Statics = () => {
-  return (<div className='relative border border-brand rounded-md py-5 flex justify-center items-center'>
-    <div className='absolute left-0 transform -translate-x-1/2 bg-brandBackground'>
-      <Image
-        priority
-        src={experienceIcon}
-        alt='Follow us on Twitter'
-      />
+  return (
+    <div className='relative flex items-center justify-center rounded-md border border-brand py-5'>
+      <div className='absolute left-0 -translate-x-1/2 transform bg-brandBackground'>
+        <Image priority src={experienceIcon} alt='Follow us on Twitter' />
+      </div>
+      <div>
+        <Text decoration='h1' tag='h1'>
+          05+
+        </Text>
+        <Text decoration='p' tag='p'>
+          Years experience
+        </Text>
+      </div>
     </div>
-    <div>
-      <Text decoration='h1' tag='h1'>05+</Text>
-      <Text decoration='p' tag='p'>Years experience</Text>
-    </div>
-  </div>);
+  );
 };

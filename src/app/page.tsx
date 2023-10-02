@@ -1,13 +1,10 @@
 'use client';
-import React from 'react';
-import HomeCard from '@/components/Card/HomeCard';
+import HomeCard from '@/components/Home/HomeCard';
 
 export default function Home() {
-
   return (
     <div className='p-5'>
       <div className='px-5 md:px-20'>
-
         <div className='grid auto-rows-fr grid-cols-1 gap-3 md:grid-cols-2'>
           <HomeCard
             btnText='Simple Project'
@@ -27,5 +24,3 @@ export default function Home() {
     </div>
   );
 }
-
-

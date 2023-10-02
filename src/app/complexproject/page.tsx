@@ -1,22 +1,23 @@
 'use client';
-import { Button } from '@/ui/Button';
-import React, { useState } from 'react';
-import StyleHeading from '@/components/Header/StyleHeading';
 import HCarousel from '@/components/HCarousel/HCarousel';
-import Image from 'next/image';
+import StyleHeading from '@/components/Header/StyleHeading';
 import Tabs from '@/components/ProjectTab/Tabs';
+import { Button } from '@/ui/Button';
+import Image from 'next/image';
+import { useState } from 'react';
 
-import experienceIcon from '../../../public/Images/svg/experience.svg';
-import { Input } from '@/ui/Input';
-import All from '@/components/Home/DIYProjects/All';
-import { Text } from '@/ui/Text';
-import MarkCard from '@/components/Card/MarkCard';
 import { TreeCard } from '@/components/Card';
+import MarkCard from '@/components/Card/MarkCard';
 import WorkingWithOtherCom from '@/components/ComplexProject/WorkingWithOtherCom';
-import { Modal } from '@/ui/Modal';
 import AppointmentModalBody from '@/components/ModalBody/AppointmentModalBody';
 import Banner from '@/components/SimpleProject/Banner';
+import All from '@/components/SimpleProject/DIYProjects/All';
+import Simple from '@/components/SimpleProject/DIYProjects/Simple';
 import Partner from '@/components/SimpleProject/Partner';
+import { Input } from '@/ui/Input';
+import { Modal } from '@/ui/Modal';
+import { Text } from '@/ui/Text';
+import experienceIcon from '../../../public/Images/svg/experience.svg';
 
 const marketing = [
   {
@@ -74,7 +75,6 @@ export default function Home() {
   function openModal() {
     setIsOpen(true);
   }
-
 
   return (
     <div className='p-5'>
@@ -161,7 +161,7 @@ export default function Home() {
             <Tabs
               tabElements={{
                 All: <All />,
-                Simple: <All />,
+                Simple: <Simple />,
                 Complex: <All />,
               }}
             />
