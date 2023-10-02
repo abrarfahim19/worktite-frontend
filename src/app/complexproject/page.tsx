@@ -6,11 +6,10 @@ import HCarousel from '@/components/HCarousel/HCarousel';
 import Image from 'next/image';
 import Tabs from '@/components/ProjectTab/Tabs';
 
-import experienceicon from '../../../public/Images/svg/experience.svg';
+import experienceIcon from '../../../public/Images/svg/experience.svg';
 import { Input } from '@/ui/Input';
 import All from '@/components/Home/DIYProjects/All';
 import { Text } from '@/ui/Text';
-import TechnicalExpertHero from '@/components/Hero/TechnicalExpertHero';
 import MarkCard from '@/components/Card/MarkCard';
 import { TreeCard } from '@/components/Card';
 import WorkingWithOtherCom from '@/components/ComplexProject/WorkingWithOtherCom';
@@ -76,14 +75,6 @@ export default function Home() {
     setIsOpen(true);
   }
 
-  const imageProps = {
-    layout: 'responsive',
-    style: { borderRadius: '8px' },
-    width: 374,
-    height: 374,
-    src: 'https://picsum.photos/374/374' || '',
-    alt: '',
-  };
 
   return (
     <div className='p-5'>
@@ -166,7 +157,7 @@ export default function Home() {
             title='Our DIY projects'
             description='There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised'
           />
-          <div className='my-2 h-36 md:h-[500px]'>
+          <div className='my-2'>
             <Tabs
               tabElements={{
                 All: <All />,
@@ -222,7 +213,7 @@ const Statics = () => {
   return (
     <div className='relative flex items-center justify-center rounded-md border border-brand py-5'>
       <div className='absolute left-0 -translate-x-1/2 transform bg-brandBackground'>
-        <Image priority src={experienceicon} alt='Follow us on Twitter' />
+        <Image priority src={experienceIcon} alt='Follow us on Twitter' />
       </div>
       <div>
         <Text decoration='h1' tag='h1'>

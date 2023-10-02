@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Text } from '@/ui/Text';
 
 interface Props {
@@ -36,7 +35,7 @@ const StyleHeading: React.FC<Props> = ({ title, description }) => {
         <SvgComp />
         <Text
           decoration='h3'
-          className='px-7 text-lg font-bold md:text-2xl lg:px-24 lg:text-heading'
+          className='px-7 text-center text-lg font-bold md:text-2xl lg:px-24 lg:text-heading'
         >
           {title}
         </Text>

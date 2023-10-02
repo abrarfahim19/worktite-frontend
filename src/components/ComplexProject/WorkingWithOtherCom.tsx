@@ -6,14 +6,22 @@ const WorkingWithOtherCom = () => {
   const imageProps = {
     layout: 'responsive',
     style: { borderRadius: '8px' },
-    width: 338,
-    height: 150,
-    src: 'https://picsum.photos/350/150' || '',
+    width: 295,
+    height: 270,
+    src: 'https://picsum.photos/295/270' || '',
+    alt: '',
+  };
+  const imageProps1 = {
+    layout: 'responsive',
+    style: { borderRadius: '8px' },
+    width: 295,
+    height: 370,
+    src: 'https://picsum.photos/295/370' || '',
     alt: '',
   };
   return (
-    <div className='grid grid-cols-1 gap-x-3 md:grid-cols-2'>
-      <div className='my-8 ps-8'>
+    <div className='grid grid-cols-1 gap-x-5 md:grid-cols-2'>
+      <div className='flex flex-col items-center justify-center'>
         <Text tag='h2' decoration='h4' className='text-3xl font-bold'>
           Companies for outsourcing
         </Text>
@@ -29,10 +37,14 @@ const WorkingWithOtherCom = () => {
           accident,
         </Text>
       </div>
-      <div className='grid grid-flow-col grid-rows-2 gap-4'>
-        <Image className='row-span-2' {...imageProps} />
-        <Image {...imageProps} />
-        <Image {...imageProps} />
+      <div className='grid grid-cols-2 gap-4'>
+        <div className='col-span-1 flex items-center justify-center'>
+          <Image className='' {...imageProps1} />
+        </div>
+        <div className='grid grid-rows-2 gap-4'>
+          <Image {...imageProps} />
+          <Image {...imageProps} />
+        </div>
       </div>
     </div>
   );
