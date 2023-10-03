@@ -43,23 +43,33 @@ export const NavBar = ({}: Props) => {
                   <Button
                     key={index}
                     intent={'tertiary'}
-                    className='flex items-center gap-3 text-sm text-brand'
+                    className='flex items-center gap-3 text-lg text-brand'
                   >
                     {item.tag}
                     {item.child && <BsChevronCompactDown />}
                   </Button>
                 }
               >
-                <Link href={routers.SimpleDesign}>
-                  <Button key={index} intent='normal' size='normal'>
-                    Simple Design
-                  </Button>
-                </Link>
-                <Link href={routers.ComplexDesign}>
-                  <Button key={index} intent='normal' size='normal'>
-                    Complex Design
-                  </Button>
-                </Link>
+                <Button
+                  as='link'
+                  href={routers.SimpleDesign}
+                  key={index}
+                  intent='normal'
+                  size='normal'
+                  btnClassName='text-left w-full text-lg'
+                >
+                  Simple Design
+                </Button>
+                <Button
+                  as='link'
+                  href={routers.ComplexDesign}
+                  key={index}
+                  intent='normal'
+                  size='normal'
+                  btnClassName='text-left w-full text-lg'
+                >
+                  Complex Design
+                </Button>
               </Dropdown>
             );
           }
@@ -67,7 +77,7 @@ export const NavBar = ({}: Props) => {
             <Button
               key={index}
               intent={'tertiary'}
-              className='flex items-center gap-3 text-sm text-brand'
+              className='flex items-center gap-3 text-lg text-brand'
             >
               {item.tag}
               {item.child && <BsChevronCompactDown />}

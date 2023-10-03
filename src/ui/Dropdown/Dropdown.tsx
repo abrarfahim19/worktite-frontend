@@ -1,6 +1,11 @@
 import { Menu, Transition } from '@headlessui/react';
 import { cva, VariantProps } from 'class-variance-authority';
-import React, { Children, cloneElement, Fragment, PropsWithChildren } from 'react';
+import React, {
+  Children,
+  cloneElement,
+  Fragment,
+  PropsWithChildren,
+} from 'react';
 
 const VDropdown = cva('', {
   variants: {
@@ -22,17 +27,16 @@ export interface CustomInput {
 export interface DropdownProps
   extends React.HTMLAttributes<HTMLElement>,
     CustomInput,
-    VariantProps<typeof VDropdown> {
-}
+    VariantProps<typeof VDropdown> {}
 
 export const Dropdown: React.FC<DropdownProps> = ({
-                                                    menuButton,
-                                                    className,
-                                                    children,
-                                                    variant,
-                                                    hover,
-                                                    ...props
-                                                  }) => {
+  menuButton,
+  className,
+  children,
+  variant,
+  hover,
+  ...props
+}) => {
   const buttonRef = React.useRef(null);
   const dropdownRef = React.useRef(null);
   const timeoutDuration = 75;
@@ -47,7 +51,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
         key: 'Escape',
         bubbles: true,
         cancelable: true,
-      }),
+      })
     );
   // @ts-ignore
   const onMouseEnter = (closed = false) => {
@@ -100,7 +104,9 @@ export const Dropdown: React.FC<DropdownProps> = ({
                             PropsWithChildren<HTMLButtonElement>
                           >;
                           const className = `${
-                            active ? 'bg-brand text-white' : 'text-gray-900'
+                            active
+                              ? 'bg-brand text-white w-full'
+                              : 'text-gray-900'
                           } ${item.props.className}`;
                           item = cloneElement(item, {
                             ...item.props,

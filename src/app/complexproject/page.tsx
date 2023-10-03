@@ -9,7 +9,7 @@ import { TreeCard } from '@/components/Card';
 import MarkCard from '@/components/Card/MarkCard';
 import WorkingWithOtherCom from '@/components/ComplexProject/WorkingWithOtherCom';
 import AppointmentModalBody from '@/components/ModalBody/AppointmentModalBody';
-import Banner from '@/components/SimpleProject/Banner';
+import Banner from '@/components/common/Banner';
 import All from '@/components/SimpleProject/DIYProjects/All';
 import Simple from '@/components/SimpleProject/DIYProjects/Simple';
 import Partner from '@/components/SimpleProject/Partner';
@@ -134,7 +134,7 @@ export default function Home() {
             title='Our latest Complex projects'
             description='There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised'
           />
-          <div className='my-2 h-36 md:h-[500px]'>
+          <div className='my-2'>
             <HCarousel />
           </div>
         </div>
@@ -145,7 +145,7 @@ export default function Home() {
             description='There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised'
           />
 
-          <div className='my-2 h-36 md:h-[500px]'>
+          <div className='my-2'>
             <WorkingWithOtherCom />
           </div>
         </div>

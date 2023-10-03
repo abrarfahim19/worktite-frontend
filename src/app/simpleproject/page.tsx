@@ -8,7 +8,7 @@ import Tabs from '@/components/ProjectTab/Tabs';
 import Image from 'next/image';
 
 import TechnicalExpertHero from '@/components/Hero/TechnicalExpertHero';
-import Banner from '@/components/SimpleProject/Banner';
+import Banner from '@/components/common/Banner';
 import All from '@/components/SimpleProject/DIYProjects/All';
 import Simple from '@/components/SimpleProject/DIYProjects/Simple';
 import { Text } from '@/ui/Text';
@@ -158,7 +158,7 @@ export default function SimpleProject() {
             title='Our latest DIY projects'
             description='There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised'
           />
-          <div className='my-2 h-36 md:h-[500px]'>
+          <div className='my-2'>
             <HCarousel />
           </div>
         </div>

@@ -11,7 +11,7 @@
 .circle-img{
     position: absolute;
     top: 0;
-    left: 0;
+    left: -50px;
     shape-outside: circle(50%);
     /*z-index: ;*/
     transform: scale(0.8);
