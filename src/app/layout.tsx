@@ -5,6 +5,7 @@ import { Inter } from 'next/font/google';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Footer } from '@/components/Footer';
+import NextTopLoader from 'nextjs-toploader';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -14,23 +15,34 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-                                     children,
-                                   }: {
+  children,
+}: {
   children: React.ReactNode;
 }) {
   return (
     <html lang='en'>
-    <body className={inter.className}>
-    <section className='bg-[#F6F0EE]'>
-      <nav>
-        <NavBar />
-      </nav>
-      <main>{children}</main>
-      <Footer />
-    </section>
+      <body className={inter.className}>
+        <NextTopLoader
+          color='#E55E2C'
+          initialPosition={0.08}
+          crawlSpeed={200}
+          height={3}
+          crawl={true}
+          showSpinner={false}
+          easing='ease'
+          speed={200}
+          shadow='0 0 10px #E55E2C,0 0 5px #E55E2C'
+        />
+        <section className='bg-[#F6F0EE]'>
+          <nav>
+            <NavBar />
+          </nav>
+          <main>{children}</main>
+          <Footer />
+        </section>
 
-    <ToastContainer />
-    </body>
+        <ToastContainer />
+      </body>
     </html>
   );
 }

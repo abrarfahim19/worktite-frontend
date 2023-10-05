@@ -25,7 +25,7 @@ axiosInstance.interceptors.request.use(
       config.headers['Authorization'] = `Bearer ${userAccessToken}`;
     }
     config.headers['Apikey'] =
-      '0Lhj2xP06fzyHuf11EInRXe3S6MqKr4oHq7pf4FqwpWBqUwWCC1';
+      '0Lhj2xP06fzyHuf11EerInRXe3S6MqKr4oHq7pf4FqwpWBqUwWCC1';
 
     return config;
   },

@@ -7,9 +7,7 @@ import { BsChevronCompactDown } from 'react-icons/bs';
 import { GoBell } from 'react-icons/go';
 import { TbMessageDots } from 'react-icons/tb';
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
-import { Dropdown } from '@/ui/Dropdown';
-import Link from 'next/link';
-import { routers } from '@/components/common/routes';
+import DropdownBtn from '@/components/NavBar/DropdownBtn';
 
 type Props = {};
 
@@ -35,44 +33,86 @@ export const NavBar = ({}: Props) => {
       <div className='hidden gap-4  md:flex md:flex-row'>
         {items.map((item, index) => {
           if (item.tag == 'Home') {
-            return (
-              <Dropdown
-                key={index}
-                hover={true}
-                menuButton={
-                  <Button
-                    key={index}
-                    intent={'tertiary'}
-                    className='flex items-center gap-3 text-lg text-brand'
-                  >
-                    {item.tag}
-                    {item.child && <BsChevronCompactDown />}
-                  </Button>
-                }
-              >
-                <Button
-                  as='link'
-                  href={routers.SimpleDesign}
-                  key={index}
-                  intent='normal'
-                  size='normal'
-                  btnClassName='text-left w-full text-lg'
-                >
-                  Simple Design
-                </Button>
-                <Button
-                  as='link'
-                  href={routers.ComplexDesign}
-                  key={index}
-                  intent='normal'
-                  size='normal'
-                  btnClassName='text-left w-full text-lg'
-                >
-                  Complex Design
-                </Button>
-              </Dropdown>
-            );
+            return <DropdownBtn />;
           }
+          // key={index}
+          // hover={true}
+          // menuButton={
+          //   <Button
+          //     key={index}
+          //     intent={'tertiary'}
+          //     className='flex items-center gap-3 text-lg text-brand'
+          //   >
+          //     {item.tag}
+          //     {item.child && <BsChevronCompactDown />}
+          //   </Button>
+          // }/
+          // >
+          {
+            /*  <Button*/
+          }
+          {
+            /*    as='link'*/
+          }
+          {
+            /*    href={routers.SimpleDesign}*/
+          }
+          {
+            /*    key={index}*/
+          }
+          {
+            /*    intent='normal'*/
+          }
+          {
+            /*    size='normal'*/
+          }
+          {
+            /*    btnClassName='text-left w-full text-lg'*/
+          }
+          {
+            /*  >*/
+          }
+          {
+            /*    Simple Design*/
+          }
+          {
+            /*  </Button>*/
+          }
+          {
+            /*  <Button*/
+          }
+          {
+            /*    as='link'*/
+          }
+          {
+            /*    href={routers.ComplexDesign}*/
+          }
+          {
+            /*    key={index}*/
+          }
+          {
+            /*    intent='normal'*/
+          }
+          {
+            /*    size='normal'*/
+          }
+          {
+            /*    btnClassName='text-left w-full text-lg'*/
+          }
+          {
+            /*  >*/
+          }
+          {
+            /*    Complex Design*/
+          }
+          {
+            /*  </Button>*/
+          }
+          {
+            /*</DropdownBtn>*/
+          }
+          //   );
+          // }
           return (
             <Button
               key={index}

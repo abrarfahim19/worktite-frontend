@@ -5,8 +5,6 @@ import Cookies, {
 } from 'universal-cookie';
 import {frontendLinks} from '../common/app-link';
 
-export const OIDC_LOGIN_STATUS_COOKIE = 'oidc:login:status';
-export const OIDC_REDIRECT_URL_SESSION_KEY = 'oidc:login:redirect_URL';
 
 const cookieInstance = new Cookies();
 
