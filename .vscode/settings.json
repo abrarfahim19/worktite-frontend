@@ -1,0 +1,18 @@
+{
+    "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+},
+"tailwindCSS.experimental.classRegex": [
+    ["Classes \\=([^;]*);", "'([^']*)'"],
+    ["Classes \\=([^;]*);", "\"([^\"]*)\""],
+    ["Classes \\=([^;]*);", "\\`([^\\`]*)\\`"],
+    ["(\\w*Class)\\s*:\\s*['\"]([^'\"]*)['\"]", "'([^']*)'"],
+    ["(\\w*Class)\\s*:\\s*['\"]([^'\"]*)['\"]", "\"([^\"]*)\""],
+    ["(\\w*Class)\\s*:\\s*['\"]([^'\"]*)['\"]", "\\`([^\\`]*)\\`"],
+    ["\\{\\s*(\\w*Class)\\s*:\\s*['\"]([^'\"]*)['\"]\\s*\\}", "'([^']*)'"],
+    ["\\{\\s*(\\w*Class)\\s*:\\s*['\"]([^'\"]*)['\"]\\s*\\}", "\"([^\"]*)\""],
+    ["\\{\\s*(\\w*Class)\\s*:\\s*['\"]([^'\"]*)['\"]\\s*\\}", "\\`([^\\`]*)\\`"],
+    
+  ],
+  "tailwindCSS.classAttributes": ["class", "className", "ngClass","customClass","(\\w*Class)\\s*","\\{\\s*(\\w*Class)\\s*:\\s*['\"]([^'\"]*)['\"]\\s*\\}", ".*Styles"]
+}
