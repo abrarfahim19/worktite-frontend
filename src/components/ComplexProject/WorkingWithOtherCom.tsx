@@ -4,7 +4,7 @@ import Image from 'next/image';
 
 const WorkingWithOtherCom = () => {
   const imageProps = {
-    layout: 'responsive',
+    // layout: 'responsive',
     style: { borderRadius: '8px' },
     width: 295,
     height: 270,
@@ -12,7 +12,7 @@ const WorkingWithOtherCom = () => {
     alt: '',
   };
   const imageProps1 = {
-    layout: 'responsive',
+    // layout: 'responsive',
     style: { borderRadius: '8px' },
     width: 295,
     height: 370,

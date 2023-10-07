@@ -41,8 +41,8 @@ const Svg = ({ className = '' }: { className: string }) => {
       <path
         d='M0.999998 1.08008L5.40742 5.44835C8.92226 8.93196 10.6797 10.6738 10.9503 12.7967C11.0166 13.3169 11.0166 13.8433 10.9503 14.3634C10.6797 16.4864 8.92226 18.2282 5.40742 21.7118L1 26.0801'
         stroke='#FEF8F6'
-        stroke-width='1.5'
-        stroke-linecap='round'
+        strokeWidth='1.5'
+        strokeLinecap='round'
       />
     </svg>
   );

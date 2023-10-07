@@ -24,6 +24,7 @@ module.exports = {
         heading: ['40px', { lineHeight: '60px', letterSpacing: '-0.032em' }],
       },
       fontFamily: {
+        sans: ["var(--display-font)",'Raleway', 'sans-serif'],
         kaushan: ['Kaushan Script', 'cursive'],
         raleway: ['Raleway', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],

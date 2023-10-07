@@ -15,7 +15,7 @@ interface Props {
 
 const HomeCard: React.FC<Props> = ({ imageUrl, alt, title, path, btnText, reverse = false }) => {
   const imageProps = {
-    layout: 'responsive',
+    // layout: 'responsive',
     style: { borderRadius: '8px' },
     width: 797,
     height: 547,
