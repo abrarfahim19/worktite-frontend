@@ -2,7 +2,6 @@
 import { Button } from '@/ui/Button';
 import React, { useState } from 'react';
 import MarkCard from '@/components/Card/MarkCard';
-import HCarousel from '@/components/HCarousel/HCarousel';
 import StyleHeading from '@/components/Header/StyleHeading';
 import Tabs from '@/components/ProjectTab/Tabs';
 import Image from 'next/image';
@@ -17,6 +16,7 @@ import { Modal } from '@/ui/Modal';
 import AppointmentModalBody from '@/components/ModalBody/AppointmentModalBody';
 import ServiceStat from '@/components/SimpleProject/ServiceStat';
 import NewsLetters from '@/components/common/NewsLetters';
+import HCarousel from '@/components/HCarousel/HCarousel';
 
 const marketing = [
   {
@@ -76,8 +76,8 @@ export default function SimpleProject() {
   }
 
   const imageProps = {
-    layout: 'responsive',
-    style: { borderRadius: '8px' },
+    // layout: 'responsive',
+    // style: { borderRadius: '8px' },
     width: 374,
     height: 374,
     src: 'https://picsum.photos/374/374' || '',
@@ -92,7 +92,7 @@ export default function SimpleProject() {
           isOpen={isOpen}
           defaultCancel={true}
         />
-        <Banner onClick={openModal} />
+        {/* <Banner onClick={openModal} /> */}
         <Partner />
         <div>
           <StyleHeading
@@ -132,12 +132,12 @@ export default function SimpleProject() {
             title='Benifits for the DIY wood worker'
             description='There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised '
           />
-          <div className='grid grid-cols-1 gap-6 md:grid-cols-4'>
+          <div className='grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4'>
             {marketing.map((e: any, index) => {
               if (e?.image) {
                 return (
                   <div key={index}>
-                    <Image {...imageProps} className='h-full' />
+                    <Image {...imageProps} className='h-full rounded-[8px]' />
                   </div>
                 );
               }
@@ -158,7 +158,7 @@ export default function SimpleProject() {
             title='Our latest DIY projects'
             description='There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised'
           />
-          <div className='my-2'>
+          <div className='my-2 h-[151px] md:h-[550px]'>
             <HCarousel />
           </div>
         </div>
@@ -192,7 +192,7 @@ export default function SimpleProject() {
         </div>
 
         <div>
-          <div className='mt-24 grid grid-cols-1 gap-x-32 gap-y-12 px-12 md:grid-cols-4 md:px-0'>
+          <div className='mt-24 grid grid-cols-1 gap-x-32 gap-y-12 px-12 md:grid-cols-2 md:px-0 xl:grid-cols-2'>
             <ServiceStat />
           </div>
         </div>

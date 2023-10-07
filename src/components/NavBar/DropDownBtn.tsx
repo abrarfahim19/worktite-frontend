@@ -1,11 +1,19 @@
+import { ClassPropertiess } from '@/ui/common/interface';
 import { Menu, Transition } from '@headlessui/react';
 import { cva, VariantProps } from 'class-variance-authority';
-import React, {
-  Children,
-  cloneElement,
-  Fragment,
-  PropsWithChildren,
-} from 'react';
+import React, { Children, Fragment, ReactElement } from 'react';
+
+const DropDownCss: ClassPropertiess = {
+  cloneElementClass: (active: boolean, child: ReactElement) =>
+    `${
+      active ? 'bg-brand text-white' : 'text-gray-900'
+    } group flex w-full items-center rounded-md text-sm ${
+      child?.props?.className && child.props?.className
+    } `,
+  menuItemsClass:
+    'absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none',
+  menuDivClass: 'relative inline-block text-left',
+};
 
 const VDropdown = cva('', {
   variants: {
@@ -29,99 +37,54 @@ export interface DropdownProps
     CustomInput,
     VariantProps<typeof VDropdown> {}
 
-export const Dropdown: React.FC<DropdownProps> = ({
+const DropDownBtn: React.FC<DropdownProps> = ({
   menuButton,
-  className,
   children,
-  variant,
-  hover,
-  ...props
+  className,
 }) => {
-  const buttonRef = React.useRef(null);
-  const dropdownRef = React.useRef(null);
-  const timeoutDuration = 75;
-  let timeout: any;
-
-  // @ts-ignore
-  const openMenu = () => buttonRef?.current.click();
-  const closeMenu = () =>
-    // @ts-ignore
-    dropdownRef?.current?.dispatchEvent(
-      new KeyboardEvent('keydown', {
-        key: 'Escape',
-        bubbles: true,
-        cancelable: true,
-      })
-    );
-  // @ts-ignore
-  const onMouseEnter = (closed = false) => {
-    clearTimeout(timeout);
-    closed && openMenu();
-  };
-  // @ts-ignore
-  const onMouseLeave = (open: boolean) => {
-    open && (timeout = setTimeout(() => closeMenu(), timeoutDuration));
+  const arrayChildren = Children.toArray(children);
+  const transitionProps = {
+    enter: 'transition ease-out duration-100',
+    enterFrom: 'transform opacity-0 scale-95',
+    enterTo: 'transform opacity-100 scale-100',
+    leave: 'transition ease-in duration-75',
+    leaveFrom: 'transform opacity-100 scale-100',
+    leaveTo: 'transform opacity-0 scale-95',
   };
   return (
-    <Menu>
-      {({ open }: { open: boolean }) => (
-        <>
-          <div
-            className={VDropdown({ variant, className })}
-            onClick={openMenu}
-            onMouseEnter={() => hover && onMouseEnter(!open)}
-            onMouseLeave={() => hover && onMouseLeave(open)}
-          >
-            <Menu.Button
-              as='div'
-              ref={buttonRef}
-              className='focus:outline-none'
-            >
-              {menuButton}
-            </Menu.Button>
-
-            <Transition
-              as={Fragment}
-              enter='transition ease-out duration-100'
-              enterFrom='transform opacity-0 scale-95'
-              enterTo='transform opacity-100 scale-100'
-              leave='transition ease-in duration-75'
-              leaveFrom='transform opacity-100 scale-100'
-              leaveTo='transform opacity-0 scale-95'
-            >
-              <Menu.Items
-                ref={dropdownRef}
-                onMouseEnter={() => hover && onMouseEnter()}
-                onMouseLeave={() => hover && onMouseLeave(open)}
-                className='absolute right-0 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none'
-              >
-                <div className='px-1 py-1'>
-                  {Children.map(children, (child, index) => {
-                    return (
-                      <Menu.Item key={index}>
-                        {({ active }) => {
-                          let item = child as React.ReactElement<
-                            PropsWithChildren<HTMLButtonElement>
-                          >;
-                          const className = `${
-                            active ? 'bg-brand text-white' : 'text-gray-900'
-                          } ${item.props.className}`;
-                          item = cloneElement(item, {
-                            ...item.props,
-                            className,
-                          });
-
-                          return item;
-                        }}
-                      </Menu.Item>
-                    );
-                  })}
-                </div>
-              </Menu.Items>
-            </Transition>
+    <Menu as='div' className={DropDownCss.menuDivClass}>
+      <div>
+        <Menu.Button as='div' className={className}>
+          {menuButton && menuButton}
+        </Menu.Button>
+      </div>
+      <Transition as={Fragment} {...transitionProps}>
+        <Menu.Items className={DropDownCss.menuItemsClass}>
+          <div className='px-1 py-1 '>
+            {Children.map(arrayChildren, (child, index) => {
+              return <MenuItem key={index} child={child} />;
+            })}
           </div>
-        </>
-      )}
+        </Menu.Items>
+      </Transition>
     </Menu>
   );
+};
+
+export default DropDownBtn;
+
+const MenuItem = ({ child }: { child: ReactElement | any }) => {
+  if (child.type.name === 'Button') {
+    return (
+      <Menu.Item>
+        {({ active }) =>
+          React.cloneElement(child, {
+            ...child?.props,
+            className: DropDownCss.cloneElementClass(active),
+          })
+        }
+      </Menu.Item>
+    );
+  }
+  return child;
 };

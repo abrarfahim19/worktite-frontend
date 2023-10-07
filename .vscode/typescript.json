@@ -1,0 +1,19 @@
+{
+    "Typescript default React component": {
+        "scope": "typescriptreact",
+        "prefix": "rfcd",
+      "body": [
+        "import { ClassPropertiess } from '@/ui/common/interface';",
+        "",
+        "const customClass: ClassPropertiess = {",
+        "\t${1:divClass}: '',",
+        "};",
+        "",
+        "export default function ${2:ComponentName}() {",
+        "\treturn <div className={customClass.${1:divClass}}></div>;",
+        "}"
+      ],
+      "description": "Create a custom class object with a component"
+    }
+  }
+  

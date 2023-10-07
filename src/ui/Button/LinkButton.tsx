@@ -40,28 +40,18 @@ const button = cva('button', {
 
 type AS = 'link' | 'button';
 
-export interface ButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof button> {
-  as?: AS;
-  href?: string;
-  btnClassName?: string;
-}
+export interface LinkButtonProps
+  extends React.LinkHTMLAttributes<HTMLAnchorElement>,
+    VariantProps<typeof button> {}
 
-export const Button: React.FC<ButtonProps> = ({
+export const LinkButton: React.FC<LinkButtonProps> = ({
   className,
   intent,
   size,
-  as = 'button',
-  href = '#',
+  href = '',
   ...props
 }) => {
-  if (as == 'link') {
-    return (
-      <Link href={href}>
-        <button className={button({ intent, size, className })} {...props} />
-      </Link>
-    );
-  }
-  return <button className={button({ intent, size, className })} {...props} />;
+  return (
+    <Link href={href} className={button({ intent, size, className })}></Link>
+  );
 };

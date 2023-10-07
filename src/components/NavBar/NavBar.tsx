@@ -7,117 +7,54 @@ import { BsChevronCompactDown } from 'react-icons/bs';
 import { GoBell } from 'react-icons/go';
 import { TbMessageDots } from 'react-icons/tb';
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
-import DropdownBtn from '@/components/NavBar/DropdownBtn';
+import ListItemBtn from './ListItemBtn';
+import DropDownBtn from './DropDownBtn';
+import { frontendLinks } from '@/config/common/app-link';
+import { ClassPropertiess } from '@/ui/common/interface';
 
 type Props = {};
+const NavBarCss: ClassPropertiess = {
+  containerClass: 'flex h-10 items-center justify-between px-5 py-10 md:px-20',
+  containerListItemClass: 'hidden gap-4  md:flex md:flex-row',
+  listItemBtnClass:
+    'flex  items-center gap-3 overflow-hidden text-ellipsis whitespace-nowrap text-left text-lg text-brand',
+  otherNavItemClass: 'flex items-center gap-4 ',
+  listItemHrLineClass: 'h-px border-0 bg-gray-200 ',
+  dropdownDivClass: 'items-center sm:block md:hidden',
+};
+
+// TODO: move route link to common component
+const items = [
+  { tag: 'Home', link: '', child: true },
+  { tag: 'worktite gallary', link: '', child: false },
+  { tag: 'about us', link: '', child: false },
+  { tag: 'services', link: '', child: false },
+  { tag: 'contact', link: '', child: false },
+  { tag: 'FAQ', link: '', child: false },
+];
 
 export const NavBar = ({}: Props) => {
-  const items = [
-    { tag: 'Home', link: '', child: true },
-    { tag: 'worktite gallary', link: '', child: false },
-    { tag: 'about us', link: '', child: false },
-    { tag: 'services', link: '', child: false },
-    { tag: 'contact', link: '', child: false },
-    { tag: 'FAQ', link: '', child: false },
-  ];
+  const logoProps = {
+    src: '/worktite_logo.png',
+    alt: 'Worktite company logo',
+    width: 70,
+    height: 20,
+  };
   return (
-    <div className='flex h-10 items-center justify-between px-5 py-10 md:px-20'>
+    <div className={NavBarCss.containerClass}>
       <div className='items-center'>
-        <Image
-          src={'/worktite_logo.png'}
-          alt='Worktite company logo'
-          width={70}
-          height={20}
-        />
+        <Image {...logoProps} />
       </div>
-      <div className='hidden gap-4  md:flex md:flex-row'>
+      <div className={NavBarCss.containerListItemClass}>
         {items.map((item, index) => {
           if (item.tag == 'Home') {
-            return <DropdownBtn />;
+            return <ListItemBtn key={index} />;
           }
-          // key={index}
-          // hover={true}
-          // menuButton={
-          //   <Button
-          //     key={index}
-          //     intent={'tertiary'}
-          //     className='flex items-center gap-3 text-lg text-brand'
-          //   >
-          //     {item.tag}
-          //     {item.child && <BsChevronCompactDown />}
-          //   </Button>
-          // }/
-          // >
-          {
-            /*  <Button*/
-          }
-          {
-            /*    as='link'*/
-          }
-          {
-            /*    href={routers.SimpleDesign}*/
-          }
-          {
-            /*    key={index}*/
-          }
-          {
-            /*    intent='normal'*/
-          }
-          {
-            /*    size='normal'*/
-          }
-          {
-            /*    btnClassName='text-left w-full text-lg'*/
-          }
-          {
-            /*  >*/
-          }
-          {
-            /*    Simple Design*/
-          }
-          {
-            /*  </Button>*/
-          }
-          {
-            /*  <Button*/
-          }
-          {
-            /*    as='link'*/
-          }
-          {
-            /*    href={routers.ComplexDesign}*/
-          }
-          {
-            /*    key={index}*/
-          }
-          {
-            /*    intent='normal'*/
-          }
-          {
-            /*    size='normal'*/
-          }
-          {
-            /*    btnClassName='text-left w-full text-lg'*/
-          }
-          {
-            /*  >*/
-          }
-          {
-            /*    Complex Design*/
-          }
-          {
-            /*  </Button>*/
-          }
-          {
-            /*</DropdownBtn>*/
-          }
-          //   );
-          // }
           return (
             <Button
               key={index}
               intent={'tertiary'}
-              className='flex items-center gap-3 text-lg text-brand'
+              className={NavBarCss.listItemBtnClass}
             >
               {item.tag}
               {item.child && <BsChevronCompactDown />}
@@ -125,19 +62,54 @@ export const NavBar = ({}: Props) => {
           );
         })}
       </div>
-      <div className='flex items-center gap-4 '>
-        <div className='flex items-center gap-4 text-xl'>
+      <div className={NavBarCss.otherNavItemClass}>
+        <div className={NavBarCss.otherNavItemClass + ' text-xl'}>
           <GoBell />
           <TbMessageDots />
-          <Avatar
-            decoration={'ring'}
-            imageUrl='https://randomuser.me/api/portraits/men/9.jpg'
-          />
+          <NavProfileDropDown />
         </div>
-        <div className='items-center sm:block md:hidden'>
-          <HiOutlineMenuAlt3 />
-        </div>
+        <NavHiddenDropDown />
       </div>
     </div>
+  );
+};
+const CommonBtn = ({ text, href }: { text: string; href: string }) => {
+  return (
+    <Button as='link' href={href} size='normal' intent='normal'>
+      {text}
+    </Button>
+  );
+};
+
+const NavProfileDropDown = () => {
+  const menuBtn = (
+    <Avatar
+      decoration={'ring'}
+      imageUrl='https://randomuser.me/api/portraits/men/9.jpg'
+    />
+  );
+
+  return (
+    <DropDownBtn menuButton={menuBtn}>
+      <CommonBtn text='profile' href={frontendLinks.PROFILE} />
+      <hr className={NavBarCss.listItemHrLineClass} />
+      <CommonBtn text='Dashboard' href={frontendLinks.DASHBOARD} />
+      <CommonBtn text='Orders' href={frontendLinks.DASHBOARD} />
+      <hr className={NavBarCss.listItemHrLineClass} />
+      <CommonBtn text='Logout' href={frontendLinks.LOGOUT} />
+    </DropDownBtn>
+  );
+};
+
+const NavHiddenDropDown = () => {
+  return (
+    <DropDownBtn
+      className={NavBarCss.dropdownDivClass}
+      menuButton={<HiOutlineMenuAlt3 />}
+    >
+      {items.map((item) => (
+        <CommonBtn key={item.tag} text={item.tag} href={item.link} />
+      ))}
+    </DropDownBtn>
   );
 };
