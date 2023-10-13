@@ -1,10 +1,15 @@
 import React from 'react';
-import { AiOutlineSortAscending, AiOutlineSortDescending } from 'react-icons/ai';
+import {
+  AiOutlineSortAscending,
+  AiOutlineSortDescending,
+} from 'react-icons/ai';
 
 interface ITHead {
   table: any;
   flexRender: any;
   sorted: any;
+  thClassName?: string;
+  thCellClassName?: string;
 }
 
 enum Sort {
@@ -12,7 +17,13 @@ enum Sort {
   disable = 0,
 }
 
-export const THead: React.FC<ITHead> = ({ sorted = Sort.disable, table, flexRender }) => {
+export const THead: React.FC<ITHead> = ({
+  sorted = Sort.disable,
+  table,
+  flexRender,
+  thClassName = 'text-xs uppercase',
+  thCellClassName = 'px-6 py-3',
+}) => {
   const renderSort = (header: any) => {
     switch (sorted) {
       case Sort.enable:
@@ -38,18 +49,20 @@ export const THead: React.FC<ITHead> = ({ sorted = Sort.disable, table, flexRend
     }
   };
   return (
-    <thead className='bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400'>
-    {table.getHeaderGroups().map((headerGroup: any) => (
-      <tr key={headerGroup.id}>
-        {headerGroup.headers.map((header: any) => (
-          <th className='px-6 py-3' key={header.id} colSpan={header.colSpan}>
-            {header.isPlaceholder
-              ? null
-              : renderSort(header)}
-          </th>
-        ))}
-      </tr>
-    ))}
+    <thead className={thClassName}>
+      {table.getHeaderGroups().map((headerGroup: any) => (
+        <tr key={headerGroup.id}>
+          {headerGroup.headers.map((header: any) => (
+            <th
+              className={thCellClassName}
+              key={header.id}
+              colSpan={header.colSpan}
+            >
+              {header.isPlaceholder ? null : renderSort(header)}
+            </th>
+          ))}
+        </tr>
+      ))}
     </thead>
   );
 };

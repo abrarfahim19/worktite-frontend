@@ -1,4 +1,4 @@
-import { VariantProps, cva } from 'class-variance-authority';
+import { cva, VariantProps } from 'class-variance-authority';
 import React from 'react';
 
 const VTextVarinat = cva('', {
@@ -28,13 +28,20 @@ const VTextType = cva('', {
       h4: 'text-2xl',
       h5: 'text-xl',
       h6: 'h6',
-      p: 'text-md',
+      p: 'text-lg',
+      secondary: 'text-md',
+      tertiary: 'text-sm',
       span: 'text-sm text-[#504845]',
-      big:'text-6xl'
+      big: 'text-6xl',
+    },
+    trunc: {
+      ellipse: 'overflow-hidden text-ellipsis whitespace-nowrap',
+      normal: 'whitespace-nowrap',
     },
   },
   defaultVariants: {
     decoration: 'p',
+    trunc: 'normal',
   },
 });
 
@@ -47,12 +54,13 @@ export const Text: React.FC<TextProps> = ({
   className,
   children,
   decoration,
+  trunc,
   tag,
   ...props
 }) => {
   const component = React.createElement(
     VTextVarinat({ tag }),
-    { ...props, className: VTextType({ decoration, className }) },
+    { ...props, className: VTextType({ decoration, className, trunc }) },
     children
   );
   return component;
