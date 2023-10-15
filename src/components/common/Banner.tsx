@@ -21,11 +21,12 @@ const Banner = ({ onClick }: IProps) => {
           alt='Follow us on Twitter'
         />
         <h2 className='font-kaushan text-7xl'>
-          DIY <span className='text-brand'>Woodwork</span> project with your
-          Choice
+          DIY <span className='font-kaushan text-brand'>Woodwork</span> project
+          with your Choice
         </h2>
         {/* eslint-disable-next-line react/no-unescaped-entities */}
         <Text decoration='span' tag='p' className='mb-3 mt-6 md:mb-8 md:mt-9'>
+          {/* eslint-disable-next-line react/no-unescaped-entities */}
           You need to be sure there isn't anything embarrassing hidden in the
           middle of text. All the Lorem Ipsum generators on the
         </Text>

@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import { createColumnHelper } from '@tanstack/table-core';
 import { Table } from '@/ui/Table';
 import Timer from '@/components/common/Timer';
@@ -106,7 +106,7 @@ const columnsAppointment = [
     id: 'message',
     cell: (info) => (
       <span className='flex items-center justify-center'>
-        <Tooltip message={'hello world'}>
+        <Tooltip message={info.getValue()}>
           <GrDocumentDownload className='text-xl text-brand' />
         </Tooltip>
       </span>
@@ -118,8 +118,9 @@ const columnsAppointment = [
     header: () => 'Meeting Note',
     cell: (info) => (
       <span className='flex items-center justify-center'>
-        {' '}
-        <CgNotes className='text-xl text-brand' />
+        <Tooltip message={info.getValue()}>
+          <CgNotes className='text-xl text-brand' />
+        </Tooltip>
       </span>
     ),
     footer: (info) => info.column.id,
@@ -146,16 +147,6 @@ const columnsAppointment = [
 ];
 
 export default function Home() {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
   return (
     <div className=' flex flex-col gap-y-10'>
       <div className='flex flex-col items-center gap-y-10 rounded-lg bg-secondary'>
@@ -175,9 +166,6 @@ export default function Home() {
         </div>
       </div>
       <div className='rounded-lg bg-secondary px-8 py-6'>
-        <Text tag='p' decoration='p' className='font-raleway font-medium'>
-          Appointment
-        </Text>
         <Text tag='p' decoration='p' className='font-medium'>
           Appointment
         </Text>

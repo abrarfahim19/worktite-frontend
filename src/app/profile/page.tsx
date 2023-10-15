@@ -1,23 +1,14 @@
 'use client';
-import React, { useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { Avatar } from '@/ui/Avatar';
 import { Text } from '@/ui/Text';
 import { Button } from '@/ui/Button';
 import Tabs from '@/components/ProjectTab/Tabs';
 import Image from 'next/image';
 import Timer from '@/components/common/Timer';
+import { Transition } from '@headlessui/react';
 
 export default function Home() {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
   return (
     <div className=''>
       <div className='grid grid-cols-1 gap-x-5 md:grid-cols-3'>
@@ -106,26 +97,54 @@ const ProfileSection = () => {
 };
 
 const RunningProject = () => {
+  const [isShowing, setIsShowing] = useState(false);
+  useEffect(() => setIsShowing(true), []);
   return (
-    <div className='flex w-full flex-col gap-y-4'>
-      {Array(3)
-        .fill(1)
-        .map((e) => (
-          <ProjectCard timer={true} key={e} />
-        ))}
-    </div>
+    <Transition
+      appear={true}
+      show={isShowing}
+      as={Fragment}
+      enter='transition ease-out duration-700'
+      enterFrom='transform opacity-0'
+      enterTo='transform opacity-100'
+      leave='transition ease-in duration-375'
+      leaveFrom='transform opacity-100'
+      leaveTo='transform opacity-0'
+    >
+      <div className='flex w-full flex-col gap-y-4'>
+        {Array(3)
+          .fill(1)
+          .map((e) => (
+            <ProjectCard timer={true} key={e} />
+          ))}
+      </div>
+    </Transition>
   );
 };
 
 const ProjectRequest = () => {
+  const [isShowing, setIsShowing] = useState(false);
+  useEffect(() => setIsShowing(true), []);
   return (
-    <div className='flex w-full flex-col gap-y-4'>
-      {Array(3)
-        .fill(1)
-        .map((e) => (
-          <ProjectCard timer={false} key={e} />
-        ))}
-    </div>
+    <Transition
+      appear={true}
+      show={isShowing}
+      as={Fragment}
+      enter='transition ease-out duration-700'
+      enterFrom='transform opacity-0'
+      enterTo='transform opacity-100'
+      leave='transition ease-in duration-375'
+      leaveFrom='transform opacity-100'
+      leaveTo='transform opacity-0'
+    >
+      <div className='flex w-full flex-col gap-y-4'>
+        {Array(1)
+          .fill(1)
+          .map((e) => (
+            <ProjectCard timer={false} key={e} />
+          ))}
+      </div>
+    </Transition>
   );
 };
 

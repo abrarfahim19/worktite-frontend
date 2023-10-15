@@ -36,7 +36,7 @@ const VTextType = cva('', {
     },
     trunc: {
       ellipse: 'overflow-hidden text-ellipsis whitespace-nowrap',
-      normal: 'whitespace-nowrap',
+      normal: '',
     },
   },
   defaultVariants: {
@@ -58,10 +58,9 @@ export const Text: React.FC<TextProps> = ({
   tag,
   ...props
 }) => {
-  const component = React.createElement(
+  return React.createElement(
     VTextVarinat({ tag }),
     { ...props, className: VTextType({ decoration, className, trunc }) },
     children
   );
-  return component;
 };
