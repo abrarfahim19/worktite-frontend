@@ -14,7 +14,8 @@ import { ClassPropertiess } from '@/ui/common/interface';
 
 type Props = {};
 const NavBarCss: ClassPropertiess = {
-  containerClass: 'flex h-10 items-center justify-between px-5 py-10 md:px-20',
+  containerClass:
+    'flex h-10 items-center justify-between container mx-auto py-10 ',
   containerListItemClass: 'hidden gap-4  md:flex md:flex-row',
   listItemBtnClass:
     'flex  items-center gap-3 overflow-hidden text-ellipsis whitespace-nowrap text-left text-lg text-brand',
@@ -91,10 +92,10 @@ const NavProfileDropDown = () => {
 
   return (
     <DropDownBtn menuButton={menuBtn}>
-      <CommonBtn text='profile' href={frontendLinks.PROFILE} />
+      <CommonBtn text='profile' href={frontendLinks.PROTECTED.PROFILE} />
       <hr className={NavBarCss.listItemHrLineClass} />
-      <CommonBtn text='Dashboard' href={frontendLinks.DASHBOARD} />
-      <CommonBtn text='Orders' href={frontendLinks.DASHBOARD} />
+      <CommonBtn text='Dashboard' href={frontendLinks.PRIVATE.DASHBOARD} />
+      <CommonBtn text='Orders' href={frontendLinks.PRIVATE.DASHBOARD} />
       <hr className={NavBarCss.listItemHrLineClass} />
       <CommonBtn text='Logout' href={frontendLinks.LOGOUT} />
     </DropDownBtn>

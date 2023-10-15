@@ -27,7 +27,45 @@ export interface CustomInput {
   /**label for input field */
   label?: string;
 }
+/**
+ * Returns the sum of three numbers.
+ * @param {number} a - The first number to add.
+ * @param {number} b - The second number to add.
+ * @returns {number} The sum of a and b.
+ */
+function add(a, b) {
+  return a + b;
+}
 
+/**
+ * Represent a Source.
+ */
+export interface ISource {
+  /**
+   * Bias: bias_text[rating.bias[0]],
+   */
+  b: string;
+
+  /**
+   * Domain: `rating.domain.replace(/^www\./, "")`
+   */
+  d: string;
+}
+
+const a: ISource = {
+  b: 'hello',
+  d: 'mello',
+};
+
+/**
+ * Returns the sum of three numbers.
+ * @param {number} a - The first number to add.
+ * @param {number} b - The second number to add.
+ */
+interface int {
+  a: number;
+  b: number;
+}
 export interface InputProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement>,
     CustomInput,

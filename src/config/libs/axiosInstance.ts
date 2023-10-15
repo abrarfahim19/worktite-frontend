@@ -1,7 +1,8 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-// import registerAxiosMockAdapter from './registerAxiosMockAdapter';
 import { apiRoutes } from '../common/api-routes';
-// import {userManager} from '../oidc/oidc';
+import { getCookie, removeCookie, setCookie } from '@/config/common';
+import { constants } from '@/config/common/app-link';
+import { toast } from 'react-toastify';
 
 const axiosInstance: AxiosInstance = axios.create({
   baseURL: apiRoutes.API_BASE_SERVICE_PATH,
@@ -14,23 +15,19 @@ axiosInstance.interceptors.request.use(
   // @ts-ignore
   async (config: AxiosRequestConfig) => {
     // const jwtAuth = await userManager.getUser();
-    const jwtAuth = { access_token: 'sdf' };
+    const jwtAuthToken = getCookie(constants.JWT_TOKEN_KEY);
 
     if (!config.headers) {
       config.headers = {};
     }
-
-    const userAccessToken = jwtAuth?.access_token;
-    if (!config.headers['Authorization'] && userAccessToken) {
-      config.headers['Authorization'] = `Bearer ${userAccessToken}`;
+    if (!config.headers['Authorization'] && jwtAuthToken) {
+      config.headers['Authorization'] = `Bearer ${jwtAuthToken}`;
     }
-    config.headers['Apikey'] =
-      '0Lhj2xP06fzyHuf11EerInRXe3S6MqKr4oHq7pf4FqwpWBqUwWCC1';
-
     return config;
   },
   (error) => {
     console.log('error in axios->', error);
+    errorHandler(error).then();
     Promise.reject(error);
   }
 );
@@ -42,19 +39,72 @@ axiosInstance.interceptors.response.use(
   },
   async function (error) {
     // const originalRequest = error.config;
+    await errorHandler(error);
     console.log('axios interceptor error->', error);
     console.count('countFailedRequest');
-
-    /*if (error?.response?.status === 401 /!* && !originalRequest._retry*!/) {
-      // originalRequest._retry = true;
-      await userManager.signinSilent();
-    }*/
-
-    /*if (error.code === 'ERR_NETWORK') {
-      console.log('err');
-    }*/
     return Promise.reject(error);
   }
 );
 
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async function (error) {
+    const originalRequest = error.config;
+    if (error.response.status === 403 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      const access_token = await refreshAccessToken();
+      axios.defaults.headers.common['Authorization'] = 'Bearer ' + access_token;
+      return axiosInstance(originalRequest);
+    }
+    return Promise.reject(error);
+  }
+);
+
+const errorHandler = (error: any) => {
+  if (error.response.status === 500) {
+    toast.error(`${error.response.data.detail}`, {
+      position: 'top-center',
+      autoClose: false,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: 0,
+    });
+  }
+
+  return Promise.reject({ ...error });
+};
+
 export default axiosInstance;
+
+export const axiosPublic = axios.create({
+  baseURL: 'http://localhost:3333/api',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+const refreshAccessToken = async () => {
+  const refreshToken = getCookie(constants.JWT_REFRESH_TOKEN_KEY);
+
+  try {
+    const response = await axiosPublic.post(apiRoutes.REFRESH_TOKEN, {
+      refreshToken: refreshToken,
+    });
+
+    const { session } = response.data;
+
+    if (!session?.accessToken) {
+      removeCookie(constants.JWT_TOKEN_KEY);
+      removeCookie(constants.JWT_REFRESH_TOKEN_KEY);
+    }
+    setCookie(constants.JWT_TOKEN_KEY, session?.accessToken, {});
+    return session?.accessToken;
+  } catch (error) {
+    removeCookie(constants.JWT_TOKEN_KEY);
+    removeCookie(constants.JWT_REFRESH_TOKEN_KEY);
+  }
+};

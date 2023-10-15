@@ -158,7 +158,7 @@ export const Footer = (props: Props) => {
         <div className='mx-auto '>
           <Text
             tag={'p'}
-            className='self-center pb-5 text-center text-whiteText'
+            className='self-center pb-5 text-center text-secondary'
           >
             @2022 Worktite , All Rights Reserved
           </Text>

@@ -1,8 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['randomuser.me', "images.unsplash.com", "picsum.photos", "s3-alpha-sig.figma.com"],
+    domains: [
+      'randomuser.me',
+      'images.unsplash.com',
+      'picsum.photos',
+      's3-alpha-sig.figma.com',
+    ],
   },
+  skipTrailingSlashRedirect: true,
   // experimental: {
   //   appDir: true,
   //   fontLoaders: [

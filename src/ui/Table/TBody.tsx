@@ -3,18 +3,22 @@ import React from 'react';
 interface ITBoady {
   table: any;
   flexRender: any;
+  tRowClassName?: string;
+  tdClassName?: string;
 }
 
-export const TBody: React.FC<ITBoady> = ({ table, flexRender }) => {
+export const TBody: React.FC<ITBoady> = ({
+  table,
+  flexRender,
+  tRowClassName,
+  tdClassName = 'px-6 py-4',
+}) => {
   return (
     <tbody>
       {table.getRowModel().rows.map((row: any) => (
-        <tr
-          key={row.id}
-          className='border-b bg-white hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-600'
-        >
+        <tr key={row.id} className={tRowClassName}>
           {row.getVisibleCells().map((cell: any) => (
-            <td key={cell.id} className='px-6 py-4'>
+            <td key={cell.id} className={tdClassName}>
               {flexRender(cell.column.columnDef.cell, cell.getContext())}
             </td>
           ))}

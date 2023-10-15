@@ -12,10 +12,14 @@ import { THead } from './THead';
 import { TBody } from './TBody';
 
 interface ITable<T> {
-  columns: ColumnDef<T>[];
+  columns: ColumnDef<T>[] | any;
   data: T[];
   sorted?: boolean;
   filter?: boolean;
+  tRowClassName?: string;
+  tdClassName?: string;
+  thClassName?: string;
+  thCellClassName?: string;
 }
 
 interface DataType {
@@ -42,6 +46,10 @@ export interface TableProps<T extends DataType>
 
 export const Table = <T extends DataType>({
   className,
+  tRowClassName,
+  tdClassName,
+  thClassName,
+  thCellClassName,
   intent,
   data,
   columns,
@@ -74,49 +82,62 @@ export const Table = <T extends DataType>({
   });
 
   return (
-    <div className='p-2'>
-      {filter && <div className='inline-block rounded border border-black shadow'>
-        <div className='border-b border-black px-1'>
-          <label className='flex items-center'>
-            <input
-              {...{
-                className:
-                  'text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700',
-                type: 'checkbox',
-                checked: table.getIsAllColumnsVisible(),
-                onChange: table.getToggleAllColumnsVisibilityHandler(),
-              }}
-            />{' '}
-            <label className='ml-2 text-sm font-medium text-gray-900 dark:text-gray-100'>
-              Toggle all
-            </label>
-          </label>
-        </div>
-        {table.getAllLeafColumns().map((column) => (
-          <ul className='space-y-2 text-sm' key={column.id}>
-            <li className='flex items-center'>
+    <>
+      {filter && (
+        <div className='inline-block rounded border border-black shadow'>
+          <div className='border-b border-black px-1'>
+            <label className='flex items-center'>
               <input
                 {...{
                   className:
-                    'text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-500 dark:bg-gray-600 dark:ring-offset-gray-700',
+                    'text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2',
                   type: 'checkbox',
-                  checked: column.getIsVisible(),
-                  onChange: column.getToggleVisibilityHandler(),
+                  checked: table.getIsAllColumnsVisible(),
+                  onChange: table.getToggleAllColumnsVisibilityHandler(),
                 }}
-              />
-
+              />{' '}
               <label className='ml-2 text-sm font-medium text-gray-900 dark:text-gray-100'>
-                {column.id}
+                Toggle all
               </label>
-            </li>
-          </ul>
-        ))}
-      </div>}
+            </label>
+          </div>
+          {table.getAllLeafColumns().map((column) => (
+            <ul className='space-y-2 text-sm' key={column.id}>
+              <li className='flex items-center'>
+                <input
+                  {...{
+                    className:
+                      'text-primary-600 focus:ring-primary-500 dark:focus:ring-primary-600 h-4 w-4 rounded border-gray-300 bg-gray-100 focus:ring-2 dark:border-gray-500 ',
+                    type: 'checkbox',
+                    checked: column.getIsVisible(),
+                    onChange: column.getToggleVisibilityHandler(),
+                  }}
+                />
+
+                <label className='ml-2 text-sm font-medium text-gray-900 dark:text-gray-100'>
+                  {column.id}
+                </label>
+              </li>
+            </ul>
+          ))}
+        </div>
+      )}
       <div className='h-4' />
-      <table className='w-full text-left text-sm text-gray-500 dark:text-gray-400'>
-        <THead sorted={sorted ? 1 : 0} table={table} flexRender={flexRender} />
-        <TBody table={table} flexRender={flexRender} />
+      <table className={className}>
+        <THead
+          thClassName={thClassName}
+          thCellClassName={thCellClassName}
+          sorted={sorted ? 1 : 0}
+          table={table}
+          flexRender={flexRender}
+        />
+        <TBody
+          tdClassName={tdClassName}
+          tRowClassName={tRowClassName}
+          table={table}
+          flexRender={flexRender}
+        />
       </table>
-    </div>
+    </>
   );
 };

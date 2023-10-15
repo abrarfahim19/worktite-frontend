@@ -17,14 +17,14 @@ module.exports = {
         brand: '#E55E2C',
         brandBackground: '#F6F0EE',
         softDark: '#2C2C2C',
-        whiteText: '#FEF8F6',
+        secondary: '#FEF8F6',
       },
       fontSize: {
         h1: ['80px', { lineHeight: '80px', letterSpacing: '-0.032em' }],
         heading: ['40px', { lineHeight: '60px', letterSpacing: '-0.032em' }],
       },
       fontFamily: {
-        sans: ["var(--display-font)",'Raleway', 'sans-serif'],
+        sans: ['Raleway', 'sans-serif'],
         kaushan: ['Kaushan Script', 'cursive'],
         raleway: ['Raleway', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
