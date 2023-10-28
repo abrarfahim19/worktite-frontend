@@ -18,6 +18,7 @@ module.exports = {
         brandBackground: '#F6F0EE',
         softDark: '#2C2C2C',
         secondary: '#FEF8F6',
+        tertiary: '#FFF0EB',
       },
       fontSize: {
         h1: ['80px', { lineHeight: '80px', letterSpacing: '-0.032em' }],

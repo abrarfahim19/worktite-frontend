@@ -189,7 +189,9 @@ const ProjectCard = ({ timer = true }: { timer?: boolean }) => {
         } gap-y-4 justify-self-center md:items-end md:justify-self-end`}
       >
         {timer && <Timer />}
-        <Button>Project Page</Button>
+        <Button as='link' href='projectpage'>
+          Project Page
+        </Button>
       </div>
     </div>
   );
