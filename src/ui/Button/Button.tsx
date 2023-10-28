@@ -13,6 +13,15 @@ const button = cva('button', {
         'font-normal',
         'rounded',
       ],
+      outlined: [
+        'bg-white',
+        'text-brand',
+        'hover:opacity-80',
+        'font-normal',
+        'rounded',
+        'border-brand',
+        'border',
+      ],
       tertiary: [
         'bg-transparent',
         'pl-0',
