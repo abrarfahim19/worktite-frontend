@@ -110,9 +110,14 @@ export default function Home() {
                   <CiMicrophoneOn />
                   <BsEmojiSmile />
                   <CiImageOn />
-                  <Button intent='outlined'>Project page</Button>
+                  <Button className='bg-secondary' intent='outlined'>
+                    Project page
+                  </Button>
                 </div>
-                <Button className='justify-self-end' intent='outlined'>
+                <Button
+                  className='justify-self-end bg-transparent'
+                  intent='outlined'
+                >
                   Send
                 </Button>
               </div>
@@ -148,7 +153,11 @@ const UserChat = ({ message }: { message: string }) => {
     <div className='flex w-full justify-end'>
       <div className='max-w-1/2 flex w-1/2 items-center justify-end gap-x-4'>
         <div className='rounded bg-brand p-4'>
-          <Text tag='p' decoration='p' className='whitespace-normal text-left'>
+          <Text
+            tag='p'
+            decoration='p'
+            className='whitespace-normal text-left text-secondary'
+          >
             {message}
           </Text>
         </div>
