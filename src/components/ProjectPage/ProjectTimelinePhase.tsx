@@ -55,7 +55,7 @@ const ProjectTimelinePhase = () => {
             <div
               key={index}
               className={`flex flex-col md:flex-row md:bg-special ${
-                index === data.length - 1 && 'md:rounded-r-3xl md:rounded-t-3xl'
+                index === data.length - 1 && 'md:rounded-r-3xl md:rounded-rt-3xl'
               } ${index === 0 && 'md:rounded-l-3xl md:rounded-t-3xl '}`}
             >
               <div

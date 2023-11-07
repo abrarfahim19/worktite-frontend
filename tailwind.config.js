@@ -19,7 +19,7 @@ module.exports = {
         softDark: '#2C2C2C',
         secondary: '#FEF8F6',
         tertiary: '#FFF0EB',
-        special: '#e55e2c1a',
+        special: '#f4e1db',
       },
       fontSize: {
         h1: ['80px', { lineHeight: '80px', letterSpacing: '-0.032em' }],
