@@ -1,16 +1,16 @@
 'use client';
+import { frontendLinks } from '@/config/common/app-link';
 import { Avatar } from '@/ui/Avatar';
 import { Button } from '@/ui/Button';
+import { Text } from '@/ui/Text';
+import { ClassPropertiess } from '@/ui/common/interface';
 import Image from 'next/image';
-import React from 'react';
 import { BsChevronCompactDown } from 'react-icons/bs';
 import { GoBell } from 'react-icons/go';
-import { TbMessageDots } from 'react-icons/tb';
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
-import ListItemBtn from './ListItemBtn';
+import { TbMessageDots } from 'react-icons/tb';
 import DropDownBtn from './DropDownBtn';
-import { frontendLinks } from '@/config/common/app-link';
-import { ClassPropertiess } from '@/ui/common/interface';
+import ListItemBtn from './ListItemBtn';
 
 type Props = {};
 const NavBarCss: ClassPropertiess = {
@@ -37,14 +37,13 @@ const items = [
 export const NavBar = ({}: Props) => {
   const logoProps = {
     src: '/worktite_logo.png',
-    alt: 'Worktite company logo',
     width: 70,
     height: 20,
   };
   return (
     <div className={NavBarCss.containerClass}>
       <div className='items-center'>
-        <Image {...logoProps} />
+        <Image {...logoProps} alt='Worktite company logo' />
       </div>
       <div className={NavBarCss.containerListItemClass}>
         {items.map((item, index) => {
@@ -65,7 +64,8 @@ export const NavBar = ({}: Props) => {
       </div>
       <div className={NavBarCss.otherNavItemClass}>
         <div className={NavBarCss.otherNavItemClass + ' text-xl'}>
-          <GoBell />
+          {/* <GoBell /> */}
+          <NotificationDropDown />
           <TbMessageDots />
           <NavProfileDropDown />
         </div>
@@ -111,6 +111,15 @@ const NavHiddenDropDown = () => {
       {items.map((item) => (
         <CommonBtn key={item.tag} text={item.tag} href={item.link} />
       ))}
+    </DropDownBtn>
+  );
+};
+const NotificationDropDown = () => {
+  const menuBtn = <GoBell />;
+
+  return (
+    <DropDownBtn menuButton={menuBtn}>
+      <Text tag={'h5'}>Notification</Text>
     </DropDownBtn>
   );
 };
