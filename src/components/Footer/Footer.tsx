@@ -1,21 +1,19 @@
 import { Text } from '@/ui/Text';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 import {
   AiFillFacebook,
   AiFillInstagram,
   AiFillLinkedin,
   AiFillTwitterSquare,
 } from 'react-icons/ai';
-import Empower from '../../../public/Empower_logo.png';
-import Texture from '../../../public/Textures_logo.png';
-import Photography from '../../../public/Photography_logo.png';
-import CircleLogo from '../../../public/Circle_logo.png';
-import VLogo from '../../../public/V_logo.png';
-import { BiLogoGmail } from 'react-icons/bi';
+import { BiLogoGmail, BiSolidLocationPlus } from 'react-icons/bi';
 import { BsFillTelephoneFill } from 'react-icons/bs';
-import { BiSolidLocationPlus } from 'react-icons/bi';
+import CircleLogo from '../../../public/Circle_logo.png';
+import Empower from '../../../public/Empower_logo.png';
+import Photography from '../../../public/Photography_logo.png';
+import Texture from '../../../public/Textures_logo.png';
+import VLogo from '../../../public/V_logo.png';
 
 type Props = {};
 
@@ -49,9 +47,9 @@ export const Footer = (props: Props) => {
             <div className=''>
               <Image
                 alt='Worktite Logo'
-                src={'/worktite_white_logo.png'}
-                width={120}
-                height={40}
+                src={'/Furnicove_white.png'}
+                width={150}
+                height={80}
                 sizes='()'
               />
               <Text className='mt-5 w-72 text-xs'>

@@ -1,16 +1,20 @@
 'use client';
+import { notificationData } from '@/config/common'; // Import your notification data
 import { frontendLinks } from '@/config/common/app-link';
+import { processNotifications } from '@/config/libs/notification';
 import { Avatar } from '@/ui/Avatar';
 import { Button } from '@/ui/Button';
 import { Text } from '@/ui/Text';
 import { ClassPropertiess } from '@/ui/common/interface';
 import Image from 'next/image';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { BsChevronCompactDown } from 'react-icons/bs';
 import { GoBell } from 'react-icons/go';
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
 import { TbMessageDots } from 'react-icons/tb';
+import { NotificationCard } from '../NotificationCard';
 import DropDownBtn from './DropDownBtn';
-import ListItemBtn from './ListItemBtn';
 
 type Props = {};
 const NavBarCss: ClassPropertiess = {
@@ -26,20 +30,21 @@ const NavBarCss: ClassPropertiess = {
 
 // TODO: move route link to common component
 const items = [
-  { tag: 'Home', link: '', child: true },
-  { tag: 'worktite gallary', link: '', child: false },
-  { tag: 'about us', link: '', child: false },
-  { tag: 'services', link: '', child: false },
-  { tag: 'contact', link: '', child: false },
-  { tag: 'FAQ', link: '', child: false },
+  { tag: 'Home', link: '/', child: false },
+  { tag: 'Simple', link: '/simpleproject', child: false },
+  { tag: 'Complex', link: '/complexproject', child: false },
+  { tag: 'Gallery', link: '/gallery', child: false },
+  { tag: 'About us', link: '/about', child: false },
+  { tag: 'services', link: '/services', child: false },
 ];
 
 export const NavBar = ({}: Props) => {
   const logoProps = {
-    src: '/worktite_logo.png',
-    width: 70,
-    height: 20,
+    src: '/Furnicove.png',
+    width: 150,
+    height: 80,
   };
+  const pathName = usePathname();
   return (
     <div className={NavBarCss.containerClass}>
       <div className='items-center'>
@@ -47,18 +52,16 @@ export const NavBar = ({}: Props) => {
       </div>
       <div className={NavBarCss.containerListItemClass}>
         {items.map((item, index) => {
-          if (item.tag == 'Home') {
-            return <ListItemBtn key={index} />;
-          }
           return (
-            <Button
-              key={index}
-              intent={'tertiary'}
-              className={NavBarCss.listItemBtnClass}
-            >
-              {item.tag}
-              {item.child && <BsChevronCompactDown />}
-            </Button>
+            <Link key={index} href={item.link}>
+              <Button
+                intent={pathName === item.link ? 'active' : 'tertiary'}
+                className={''}
+              >
+                {item.tag}
+                {item.child && <BsChevronCompactDown />}
+              </Button>
+            </Link>
           );
         })}
       </div>
@@ -66,7 +69,9 @@ export const NavBar = ({}: Props) => {
         <div className={NavBarCss.otherNavItemClass + ' text-xl'}>
           {/* <GoBell /> */}
           <NotificationDropDown />
-          <TbMessageDots />
+          <Link href={'/message'}>
+            <TbMessageDots />
+          </Link>
           <NavProfileDropDown />
         </div>
         <NavHiddenDropDown />
@@ -116,10 +121,36 @@ const NavHiddenDropDown = () => {
 };
 const NotificationDropDown = () => {
   const menuBtn = <GoBell />;
+  // Function to get unread notifications
+  const processedNotification = processNotifications(notificationData);
+  const getUnreadNotifications = () => {
+    return notificationData.filter((notification) => !notification.read);
+  };
+
+  const unreadNotifications = getUnreadNotifications();
 
   return (
     <DropDownBtn menuButton={menuBtn}>
-      <Text tag={'h5'}>Notification</Text>
+      <div className='w-[500px]'>
+        <Text tag={'h5'}>Notification</Text>
+        <div className='mt-2'>
+          {processedNotification.map((item, index) => {
+            if (item.notifications.length > 0)
+              return (
+                <div key={index}>
+                  <Text className='font-semibold'>{item.tag}</Text>
+                  {item.notifications.map((itemNotification, index) => {
+                    return (
+                      <div key={itemNotification.id}>
+                        <NotificationCard notification={itemNotification} />
+                      </div>
+                    );
+                  })}
+                </div>
+              );
+          })}
+        </div>
+      </div>
     </DropDownBtn>
   );
 };
