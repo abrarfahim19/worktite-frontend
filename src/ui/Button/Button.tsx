@@ -1,6 +1,6 @@
 import { cva, type VariantProps } from 'class-variance-authority';
-import React from 'react';
 import Link from 'next/link';
+import React from 'react';
 
 const button = cva('button', {
   variants: {
@@ -27,7 +27,18 @@ const button = cva('button', {
         'pl-0',
         'text-black font-raleway',
         'active:text-brand',
+        'active:font-semibold',
+        'hover:text-brand',
         'before:block before:absolute before:-inset-1 before:border-b-2 before:border-transparent hover:before:border-brand before:w-1/2 relative inline-block',
+      ],
+      active: [
+        'bg-transparent',
+        'pl-0',
+        'text-black font-raleway',
+        'text-brand',
+        'font-semibold',
+        'border-b-2 border-brand w-1/2',
+        'before:block before:absolute before:-inset-1 before:border-b-2 before:border-transparent before:border-brand before:w-1/2 relative inline-block',
       ],
       normal: ['flex w-full items-center rounded-md px-2 py-2 text-sm'],
       disabled: ['bg-gray-100 rounded text-gray-400'],
