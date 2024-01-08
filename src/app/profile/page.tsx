@@ -1,16 +1,17 @@
 'use client';
-import React, { Fragment, useEffect, useState } from 'react';
-import { Avatar } from '@/ui/Avatar';
-import { Text } from '@/ui/Text';
-import { Button } from '@/ui/Button';
 import Tabs from '@/components/ProjectTab/Tabs';
-import Image from 'next/image';
 import Timer from '@/components/common/Timer';
+import { Avatar } from '@/ui/Avatar';
+import { Button } from '@/ui/Button';
+import { Text } from '@/ui/Text';
 import { Transition } from '@headlessui/react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { Fragment, useEffect, useState } from 'react';
 
 export default function Home() {
   return (
-    <div className=''>
+    <div className='container mx-auto'>
       <div className='grid grid-cols-1 gap-x-5 md:grid-cols-3'>
         <ProfileSection />
         <div className='col-span-1 md:col-span-2'>
@@ -47,7 +48,9 @@ const ProfileSection = () => {
           alma.lawson@example.com
         </Text>
         <div className='pt-5'>
-          <Button>Edit Profile</Button>
+          <Link href={'/editprofile'}>
+            <Button>Edit Profile</Button>
+          </Link>
         </div>
         <div className='grid w-full grid-cols-1  gap-y-6'>
           <div className='flex justify-between'>

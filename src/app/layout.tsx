@@ -1,12 +1,12 @@
+import { Footer } from '@/components/Footer';
 import { NavBar } from '@/components/NavBar';
-import './globals.css';
+import { AuthProvider } from '@/config/provider/authProvider';
 import type { Metadata } from 'next';
 import { Inter, Raleway } from 'next/font/google';
+import NextTopLoader from 'nextjs-toploader';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Footer } from '@/components/Footer';
-import NextTopLoader from 'nextjs-toploader';
-import { AuthProvider } from '@/config/provider/authProvider';
+import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 const relay = Raleway({
@@ -42,7 +42,7 @@ export default function RootLayout({
             <nav>
               <NavBar />
             </nav>
-            <main className='container mx-auto font-raleway'>{children}</main>
+            <main className='mx-auto font-raleway'>{children}</main>
             <Footer />
           </section>
 

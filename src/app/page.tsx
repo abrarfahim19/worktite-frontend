@@ -3,7 +3,7 @@ import HomeCard from '@/components/Home/HomeCard';
 
 export default function Home() {
   return (
-    <div className=''>
+    <div className='container mx-auto'>
       <div className='grid auto-rows-fr grid-cols-1 gap-3 md:grid-cols-2'>
         <HomeCard
           btnText='Simple Project'

@@ -1,9 +1,7 @@
 'use client';
-import { useState } from 'react';
 import AppointmentModalBody from '@/components/ModalBody/AppointmentModalBody';
-import Banner from '@/components/common/Banner';
 import Partner from '@/components/SimpleProject/Partner';
-import { Modal } from '@/ui/Modal';
+import Banner from '@/components/common/Banner';
 import NewsLetters from '@/components/common/NewsLetters';
 import {
   OurDiyProjects,
@@ -13,6 +11,8 @@ import {
   WhyChooseUs,
   WorkingWithDifferentCompany,
 } from '@/components/common/SimpleAndComplexProject';
+import { Modal } from '@/ui/Modal';
+import { useState } from 'react';
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -26,7 +26,7 @@ export default function Home() {
   }
 
   return (
-    <div className='pt-20'>
+    <div className='container mx-auto pt-20'>
       <Modal
         closeModal={closeModal}
         content={<AppointmentModalBody closeModal={closeModal} />}
