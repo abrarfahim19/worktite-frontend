@@ -12,7 +12,7 @@ console.log(processedNotification);
 
 const page = () => {
   return (
-    <div className='container px-5'>
+    <div className='container mx-auto px-5'>
       {/* half card */}
       <div className='mx-auto max-w-xl rounded-md bg-white p-5'>
         <Text decoration={'h4'} tag={'h4'}>

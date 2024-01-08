@@ -48,7 +48,7 @@ export const Input: React.FC<InputProps> = ({
   ...props
 }) => {
   return (
-    <>
+    <div>
       {label && (
         <label htmlFor={id} className={VLabel({ lClass })}>
           {label}
@@ -61,6 +61,6 @@ export const Input: React.FC<InputProps> = ({
           {...props}
         />
       </div>
-    </>
+    </div>
   );
 };

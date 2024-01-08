@@ -14,7 +14,7 @@ const button = cva('button', {
         'rounded',
       ],
       outlined: [
-        'bg-white',
+        'bg-transparent',
         'text-brand',
         'hover:opacity-80',
         'font-normal',
@@ -51,7 +51,7 @@ const button = cva('button', {
       normal: [' px-2 py-2 text-sm'],
     },
   },
-  compoundVariants: [{ intent: 'primary', size: 'medium', class: 'uppercase' }],
+  compoundVariants: [{ intent: 'primary', size: 'medium', class: '' }],
   defaultVariants: {
     intent: 'primary',
     size: 'medium',
