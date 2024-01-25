@@ -9,7 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
-const relay = Raleway({
+const raleway = Raleway({
   variable: '--display-font',
   subsets: ['latin'],
 });
@@ -24,9 +24,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang='en' className={`${relay.variable} `}>
+    <html lang='en'>
       <AuthProvider>
-        <body className={inter.className}>
+        <body className={raleway.className}>
           <NextTopLoader
             color='#E55E2C'
             initialPosition={0.08}
