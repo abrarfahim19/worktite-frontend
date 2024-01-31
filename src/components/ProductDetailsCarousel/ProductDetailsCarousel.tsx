@@ -65,6 +65,7 @@ export const ProductDetailsCarousel = () => {
         })}
       </Swiper>
       <Swiper
+        // @ts-ignore
         onSwiper={setThumbsSwiper}
         loop={true}
         spaceBetween={10}
