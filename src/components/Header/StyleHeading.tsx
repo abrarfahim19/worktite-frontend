@@ -1,5 +1,5 @@
-import React from 'react';
 import { Text } from '@/ui/Text';
+import React from 'react';
 
 interface Props {
   title: string;
@@ -30,7 +30,7 @@ const SvgComp = () => {
 
 const StyleHeading: React.FC<Props> = ({ title, description }) => {
   return (
-    <div className='my-24 flex flex-grow flex-col items-center justify-center py-1'>
+    <div className='my-12 flex flex-grow flex-col items-center justify-center py-1'>
       <div className='flex w-full items-center justify-center'>
         <SvgComp />
         <Text
@@ -41,7 +41,11 @@ const StyleHeading: React.FC<Props> = ({ title, description }) => {
         </Text>
         <SvgComp />
       </div>
-      <Text className='mt-3 text-center' tag='p' decoration='h4'>
+      <Text
+        className='mt-3 text-center text-base md:text-2xl'
+        tag='p'
+        decoration='h4'
+      >
         {description}
       </Text>
     </div>

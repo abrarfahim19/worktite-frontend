@@ -31,6 +31,9 @@ module.exports = {
         raleway: ['Raleway', 'sans-serif'],
         inter: ['Inter', 'sans-serif'],
       },
+      gridTemplateColumns: {
+        gallery: 'repeat(auto-fit, minmax(300px, 1fr))',
+      },
     },
   },
   plugins: [],

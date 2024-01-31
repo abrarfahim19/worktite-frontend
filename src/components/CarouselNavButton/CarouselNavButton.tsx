@@ -1,7 +1,6 @@
-import React from 'react';
 import { useSwiper } from 'swiper/react';
 
-const NavButtons = () => {
+export const NavButtons = () => {
   const commonCss = {
     navBtn:
       'absolute top-1/2 z-10 flex h-[28px] w-[28px] -translate-y-1/2 transform items-center justify-center rounded-[4px] bg-brand text-brand  md:h-[60px] md:w-[60px]  md:rounded-[8px]',
@@ -25,8 +24,6 @@ const NavButtons = () => {
     </div>
   );
 };
-
-export default NavButtons;
 
 const Svg = ({ className = '' }: { className: string }) => {
   return (
