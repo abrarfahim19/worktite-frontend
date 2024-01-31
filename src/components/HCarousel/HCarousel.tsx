@@ -1,10 +1,11 @@
-import { A11y, Navigation } from 'swiper/modules';
-import React, { useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { useState } from 'react';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import { A11y, Navigation } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { NavButtons } from '../CarouselNavButton';
 import './style.css';
-import NavButtons from '@/components/HCarousel/NavButtons';
+// import NavButtons from '@/components/HCarousel/NavButtons';
 
 const HCarousel = () => {
   const [activeSlide, setActiveSlide] = useState(0);
@@ -38,6 +39,7 @@ const HCarousel = () => {
           )}
         </SwiperSlide>
       ))}
+      {/* <NavButtons /> */}
       <NavButtons />
     </Swiper>
   );
