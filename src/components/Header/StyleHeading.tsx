@@ -4,6 +4,7 @@ import React from 'react';
 interface Props {
   title: string;
   description: string;
+  variant?: 'dark' | 'light';
 }
 
 const SvgComp = () => {
@@ -28,21 +29,23 @@ const SvgComp = () => {
   );
 };
 
-const StyleHeading: React.FC<Props> = ({ title, description }) => {
+const StyleHeading: React.FC<Props> = ({ title, description, variant }) => {
   return (
-    <div className='my-12 flex flex-grow flex-col items-center justify-center py-1'>
+    <div
+      className={`${variant === 'dark' ? 'my-4' : 'my-12'} flex flex-grow flex-col items-center justify-center py-1`}
+    >
       <div className='flex w-full items-center justify-center'>
         <SvgComp />
         <Text
           decoration='h3'
-          className='px-7 text-center text-lg font-bold md:text-2xl lg:px-24 lg:text-heading'
+          className={`${variant === 'dark' && 'text-white'} px-7 text-center text-lg font-bold md:text-2xl lg:px-24 lg:text-heading`}
         >
           {title}
         </Text>
         <SvgComp />
       </div>
       <Text
-        className='mt-3 text-center text-base md:text-2xl'
+        className={`${variant === 'dark' && 'text-white'} mt-3 text-center text-base md:text-2xl`}
         tag='p'
         decoration='h4'
       >

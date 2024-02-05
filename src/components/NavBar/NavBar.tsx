@@ -34,7 +34,7 @@ const items = [
   { tag: 'Simple', link: '/simpleproject', child: false },
   { tag: 'Complex', link: '/complexproject', child: false },
   { tag: 'Gallery', link: '/gallery', child: false },
-  { tag: 'About us', link: '/about', child: false },
+  { tag: 'About', link: '/about', child: false },
   { tag: 'services', link: '/services', child: false },
 ];
 
