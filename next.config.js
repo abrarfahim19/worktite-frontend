@@ -20,7 +20,7 @@
 // module.exports = nextConfig;
 
 // @ts-check
-import withPlaiceholder from "@plaiceholder/next";
+// import withPlaiceholder from "@plaiceholder/next";
 
 /**
  * @type {import('next').NextConfig}
@@ -69,4 +69,5 @@ const config = {
   },
 };
 
-export default withPlaiceholder(config);
+// export default withPlaiceholder(config);
+module.exports  = config;
