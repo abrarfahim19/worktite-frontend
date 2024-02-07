@@ -38,7 +38,7 @@ const StyleHeading: React.FC<Props> = ({ title, description, variant }) => {
         <SvgComp />
         <Text
           decoration='h3'
-          className={`${variant === 'dark' && 'text-white'} px-7 text-center text-lg font-bold md:text-2xl lg:px-24 lg:text-heading`}
+          className={`${variant === 'dark' && 'text-white'} px-7 text-center text-lg font-semibold md:text-2xl lg:px-24 lg:text-heading`}
         >
           {title}
         </Text>
