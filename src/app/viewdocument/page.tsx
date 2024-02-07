@@ -1,10 +1,9 @@
 'use client';
-import React from 'react';
 import StyleHeading from '@/components/Header/StyleHeading';
-import GeneralProjectInfo from '@/components/ViewDocument/GeneralProjectInfo';
 import Documents from '@/components/ViewDocument/Documents';
-import { Button } from '@/ui/Button';
+import GeneralProjectInfo from '@/components/ViewDocument/GeneralProjectInfo';
 import ProjectInfo from '@/components/ViewDocument/ProjectInfo';
+import { Button } from '@/ui/Button';
 
 const sections = {
   VIEW_DOCUMENTS: {
@@ -35,7 +34,7 @@ const data = [
 
 export default function Home() {
   return (
-    <div className=' flex flex-col gap-y-4'>
+    <div className='container mx-auto flex flex-col gap-y-4 px-4'>
       <StyleHeading
         title={sections.VIEW_DOCUMENTS.title}
         description={sections.VIEW_DOCUMENTS.description}

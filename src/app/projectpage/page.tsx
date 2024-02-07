@@ -1,15 +1,14 @@
 'use client';
-import React from 'react';
 import AppointmentTable from '@/components/ProjectPage/AppointmentTable';
-import ProjectTimelineTable from '@/components/ProjectPage/ProjectTimelineTable';
-import ProjectDetailsTable from '@/components/ProjectPage/ProjectDetailsTable';
 import FinalDocumentation from '@/components/ProjectPage/FinalDocumentation';
 import Invoice from '@/components/ProjectPage/Invoice';
+import ProjectDetailsTable from '@/components/ProjectPage/ProjectDetailsTable';
 import ProjectTimelinePhase from '@/components/ProjectPage/ProjectTimelinePhase';
+import ProjectTimelineTable from '@/components/ProjectPage/ProjectTimelineTable';
 
 export default function Home() {
   return (
-    <div className=' flex flex-col gap-y-10'>
+    <div className='container mx-auto flex flex-col gap-y-10 px-4'>
       <div className='rounded-lg bg-secondary px-8 py-6 md:h-48'>
         <ProjectTimelinePhase />
       </div>

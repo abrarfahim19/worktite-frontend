@@ -1,12 +1,12 @@
 'use client';
-import React from 'react';
-import { Text } from '@/ui/Text';
 import { Avatar } from '@/ui/Avatar';
-import { SlOptionsVertical } from 'react-icons/sl';
-import { CiImageOn, CiMicrophoneOn } from 'react-icons/ci';
-import { BsEmojiSmile } from 'react-icons/bs';
 import { Button } from '@/ui/Button';
 import { Input } from '@/ui/Input';
+import { Text } from '@/ui/Text';
+import React from 'react';
+import { BsEmojiSmile } from 'react-icons/bs';
+import { CiImageOn, CiMicrophoneOn } from 'react-icons/ci';
+import { SlOptionsVertical } from 'react-icons/sl';
 
 const message = [
   {
@@ -66,9 +66,9 @@ const message = [
 
 export default function Home() {
   return (
-    <div className=''>
+    <div className='container mx-auto px-4'>
       <div className='grid h-screen grid-cols-1 gap-x-5 md:grid-cols-3'>
-        <div className='col-span-1 h-[90%] flex-col overflow-y-auto bg-secondary p-4'>
+        <div className='col-span-1 hidden h-[90%] flex-col overflow-y-auto bg-secondary p-4 md:block'>
           <ChatMember />
         </div>
         <div className='col-span-1 flex h-[90%] flex-col bg-secondary  p-4 md:col-span-2'>
