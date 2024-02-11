@@ -45,8 +45,10 @@ export const NotificationCard: React.FC<NotificationCardProps> = ({
         </div>
       </div>
       <div>
-        <h3>{notification.message}</h3>
-        <p className='font-thin italic text-gray-500'>{timeAgo}</p>
+        <h3 className='text-sm md:text-base'>{notification.message}</h3>
+        <p className='text-sm font-thin italic text-gray-500 md:text-base'>
+          {timeAgo}
+        </p>
       </div>
     </div>
   );

@@ -8,7 +8,7 @@ const Page = () => {
     <div className=''>
       <Image src={GalleryBg} alt='Empower Logo' style={{ width: '100%' }} />
       <GalleryDropdown />
-      <div className='container mx-auto'>
+      <div className='container mx-auto px-4'>
         <Gallery />
       </div>
     </div>

@@ -11,7 +11,7 @@ const DropDownCss: ClassPropertiess = {
       child?.props?.className && child.props?.className
     } `,
   menuItemsClass:
-    'absolute z-50 w-[500px] mt-2 right-0 divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none',
+    'absolute z-50 w-[100px] md:w-[500px] mt-2 right-0 divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none',
   menuDivClass: 'relative inline-block text-left',
 };
 
