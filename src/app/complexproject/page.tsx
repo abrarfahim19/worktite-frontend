@@ -26,7 +26,7 @@ export default function Home() {
   }
 
   return (
-    <div className='container mx-auto pt-20'>
+    <div className='container mx-auto px-4 pt-20'>
       <Modal
         closeModal={closeModal}
         content={<AppointmentModalBody closeModal={closeModal} />}

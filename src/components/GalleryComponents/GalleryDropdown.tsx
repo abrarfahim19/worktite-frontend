@@ -14,7 +14,7 @@ export const GalleryDropdown = () => {
   const [selectedMaterial, setSelectedMaterial] = useState(category[0]);
   const [selectedPrice, setSelectedPrice] = useState(category[0]);
   return (
-    <div className='container mx-auto'>
+    <div className='container mx-auto px-4'>
       <div className='mt-4 grid grid-cols-1 gap-2 md:grid-cols-4 md:gap-4'>
         <SelectDropDown
           className=''
