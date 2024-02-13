@@ -4,7 +4,7 @@ const VTextArea = cva('', {
   variants: {
     intent: {
       primary: [
-        'flex items-center  gap-x-4 p-4 rounded-md hover:opacity-80 border border-[#504845]  text-2xl',
+        'flex items-center  gap-x-4 p-4 rounded-md hover:opacity-80 border border-[#504845]  text-base',
       ],
     },
   },
