@@ -1,8 +1,11 @@
 import React from 'react';
 import { Text } from '@/ui/Text';
 import { GoCheckCircle, GoCheckCircleFill } from 'react-icons/go';
+import { useAxiosSWR } from '@/hooks/useAxiosSwr';
+import { apiRoutes } from '@/config/common/apiRoutes';
 
 const ProjectTimelinePhase = () => {
+  const {data: milestones, isLoading} = useAxiosSWR(apiRoutes.PRIVATE.PROJECTS.PROJECT_MILESTONE("1")({limit:10}))
   const data = [
     {
       id: 1,
@@ -49,7 +52,7 @@ const ProjectTimelinePhase = () => {
   ];
   return (
     <div className='mt-5 flex w-8 flex-col rounded-3xl bg-special md:h-[44px] md:w-full md:flex-row md:items-center md:justify-between'>
-      {data.map((item, index) => {
+      {milestones?.map((item, index) => {
         return (
           <>
             <div

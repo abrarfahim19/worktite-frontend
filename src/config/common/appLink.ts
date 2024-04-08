@@ -15,6 +15,7 @@ export const frontendLinks = Object.freeze({
   },
   HOME: '/',
   LINK_SIGNUP: '/signup',
+  LOGIN: '/login',
   SIMPLE_PROJECT: '/simpleproject',
   COMPLEX_PROJECT: '/complexproject',
   LOGOUT: '/logout',

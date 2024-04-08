@@ -3,7 +3,7 @@ import Cookies, {
   CookieGetOptions,
   CookieSetOptions,
 } from 'universal-cookie';
-import {frontendLinks} from '../common/app-link';
+import {frontendLinks} from '../common/appLink';
 
 
 const cookieInstance = new Cookies();

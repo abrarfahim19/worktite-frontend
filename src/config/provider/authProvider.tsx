@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, ReactNode, useContext, useState } from 'react';
-import { apiRoutes } from '@/config/common/api-routes';
+import { apiRoutes } from '@/config/common/apiRoutes';
 import { apiPost } from '@/config/common/api';
 
 interface AuthProviderProps {

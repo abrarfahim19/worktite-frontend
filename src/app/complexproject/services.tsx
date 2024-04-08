@@ -1,5 +1,5 @@
 import { apiGet } from '@/config/common/api';
-import { apiRoutes } from '@/config/common/api-routes';
+import { apiRoutes } from '@/config/common/apiRoutes';
 
 export const downloadDemoCandidates = async () => {
   try {

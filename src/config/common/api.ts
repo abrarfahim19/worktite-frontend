@@ -1,48 +1,63 @@
-import {AxiosRequestConfig, AxiosResponse} from 'axios';
-import axiosInstance from '../libs/axiosInstance';
+import {AxiosRequestConfig, AxiosResponse} from "axios";
+import axiosInstance from "@/config/libs/axiosInstance";
 
-/** Axios catch block handler */
-const errorHandler = (error: {response: any; request?: any; message?: any}) => {
-  throw error;
+
+const errorHandler = (error: any) => {
+    throw error;
 };
 
-function apiGet<T = any>(apiPath: string, config: AxiosRequestConfig = {}) {
-  return axiosInstance
-    .get(apiPath, config)
-    .then((response: AxiosResponse<T>) => response)
-    .catch(errorHandler);
+async function apiGet<T = any>(apiPath: string, config: AxiosRequestConfig = {}) {
+    try {
+    const response = await axiosInstance
+      .get(apiPath, config);
+    return response;
+  } catch (error) {
+    return errorHandler(error);
+  }
 }
 
-function apiPost<R = any, T = any>(
-  apiPath: string,
-  data?: R,
-  config: AxiosRequestConfig = {},
+async function apiPost<R = any, T = any>(
+    apiPath: string,
+    data?: R,
+    config: AxiosRequestConfig = {},
 ) {
-  return axiosInstance
-    .post(apiPath, data, config)
-    .then((response: AxiosResponse<T>) => response)
-    .catch(errorHandler);
+    try {
+    const response = await axiosInstance
+      .post(apiPath, data, config);
+    return response;
+  } catch (error) {
+    return errorHandler(error);
+  }
 }
 
-function apiDelete<T = any>(apiPath: string, config: AxiosRequestConfig = {}) {
-  return axiosInstance
-    .delete(apiPath, config)
-    .then((response: AxiosResponse<T>) => response)
-    .catch(errorHandler);
+async function apiDelete<T = any>(apiPath: string, config: AxiosRequestConfig = {}) {
+    try {
+    const response = await axiosInstance
+      .delete(apiPath, config);
+    return response;
+  } catch (error) {
+    return errorHandler(error);
+  }
 }
 
-function apiPut<R = any, T = any>(apiPath: string, data?: R) {
-  return axiosInstance
-    .put(apiPath, data)
-    .then((response: AxiosResponse<T>) => response)
-    .catch(errorHandler);
+async function apiPut<R = any, T = any>(apiPath: string, data?: R) {
+    try {
+    const response = await axiosInstance
+      .put(apiPath, data);
+    return response;
+  } catch (error) {
+    return errorHandler(error);
+  }
 }
 
-function apiPatch<R = any, T = any>(apiPath: string, data?: R) {
-  return axiosInstance
-    .patch(apiPath, data)
-    .then((response: AxiosResponse<T>) => response)
-    .catch(errorHandler);
+async function apiPatch<R = any, T = any>(apiPath: string, data?: R) {
+    try {
+    const response = await axiosInstance
+      .patch(apiPath, data);
+    return response;
+  } catch (error) {
+    return errorHandler(error);
+  }
 }
 
 export {apiGet, apiPost, apiDelete, apiPut, apiPatch};

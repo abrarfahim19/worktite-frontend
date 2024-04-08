@@ -1,7 +1,7 @@
 import { Fragment, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import Link from 'next/link';
-import { frontendLinks } from '@/config/common/app-link';
+import { frontendLinks } from '@/config/common/appLink';
 import { useRouter, usePathname } from 'next/navigation';
 import { Button } from '@/ui/Button';
 import { ClassPropertiess } from '@/ui/common/interface';

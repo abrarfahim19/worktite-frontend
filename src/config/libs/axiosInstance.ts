@@ -1,110 +1,75 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import { apiRoutes } from '../common/api-routes';
-import { getCookie, removeCookie, setCookie } from '@/config/common';
-import { constants } from '@/config/common/app-link';
-import { toast } from 'react-toastify';
+import axios from "axios";
+import { getJWTToken, setCookie } from "@/config/common";
+import { jwtTokens } from "@/config/common/AppEnums";
+import { apiRoutes } from "@/config/common/apiRoutes";
+import { config } from "@/config/common/appConfig";
 
-const axiosInstance: AxiosInstance = axios.create({
-  baseURL: apiRoutes.API_BASE_SERVICE_PATH,
-  timeout: 300000,
-});
-axiosInstance.defaults.headers.common['Accept'] = 'application/json';
-axiosInstance.defaults.headers.common['Content-Type'] = 'application/json';
-
-axiosInstance.interceptors.request.use(
-  // @ts-ignore
-  async (config: AxiosRequestConfig) => {
-    // const jwtAuth = await userManager.getUser();
-    const jwtAuthToken = getCookie(constants.JWT_TOKEN_KEY);
-
-    if (!config.headers) {
-      config.headers = {};
-    }
-    if (!config.headers['Authorization'] && jwtAuthToken) {
-      config.headers['Authorization'] = `Bearer ${jwtAuthToken}`;
-    }
-    return config;
-  },
-  (error) => {
-    console.log('error in axios->', error);
-    errorHandler(error).then();
-    Promise.reject(error);
-  }
-);
-
-// Response interceptor for API calls
-axiosInstance.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  async function (error) {
-    // const originalRequest = error.config;
-    await errorHandler(error);
-    console.log('axios interceptor error->', error);
-    console.count('countFailedRequest');
-    return Promise.reject(error);
-  }
-);
-
-axiosInstance.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  async function (error) {
-    const originalRequest = error.config;
-    if (error.response.status === 403 && !originalRequest._retry) {
-      originalRequest._retry = true;
-      const access_token = await refreshAccessToken();
-      axios.defaults.headers.common['Authorization'] = 'Bearer ' + access_token;
-      return axiosInstance(originalRequest);
-    }
-    return Promise.reject(error);
-  }
-);
-
-const errorHandler = (error: any) => {
-  if (error.response.status === 500) {
-    toast.error(`${error.response.data.detail}`, {
-      position: 'top-center',
-      autoClose: false,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: 0,
-    });
-  }
-
-  return Promise.reject({ ...error });
-};
-
-export default axiosInstance;
-
-export const axiosPublic = axios.create({
-  baseURL: 'http://localhost:3333/api',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-});
+interface IRefreshToken {
+    accessToken: string;
+    refreshToken: string;
+}
 
 const refreshAccessToken = async () => {
-  const refreshToken = getCookie(constants.JWT_REFRESH_TOKEN_KEY);
-
-  try {
-    const response = await axiosPublic.post(apiRoutes.REFRESH_TOKEN, {
-      refreshToken: refreshToken,
-    });
-
-    const { session } = response.data;
-
-    if (!session?.accessToken) {
-      removeCookie(constants.JWT_TOKEN_KEY);
-      removeCookie(constants.JWT_REFRESH_TOKEN_KEY);
+    const refresh_token = getJWTToken(jwtTokens.USER_REFRESH_TOKEN);
+    if (refresh_token) {
+        try {
+            const response = await axios.post<IRefreshToken>(
+                `${config.BASE_URL}${apiRoutes.AUTH.REFRESH_TOKEN}`,
+                {refresh: refresh_token},
+            );
+            setCookie(jwtTokens.USER_ACCESS_TOKEN, response.data.accessToken);
+            setCookie(jwtTokens.USER_REFRESH_TOKEN, response.data.refreshToken);
+            return response.data.accessToken;
+        } catch (error) {
+            // eslint-disable-next-line no-console
+            console.error(error);
+            // window.location.href = frontendRoute.PUBLIC.LOGIN;
+            throw error; // Make sure to rethrow the error after handling it
+        }
     }
-    setCookie(constants.JWT_TOKEN_KEY, session?.accessToken, {});
-    return session?.accessToken;
-  } catch (error) {
-    removeCookie(constants.JWT_TOKEN_KEY);
-    removeCookie(constants.JWT_REFRESH_TOKEN_KEY);
-  }
 };
+
+export const axiosInstance = axios.create({
+    baseURL: `${config.BASE_URL}`,
+    headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+    },
+    timeout: 30000,
+});
+
+axiosInstance.interceptors.request.use(
+    (config) => {
+        const accessToken = getJWTToken(jwtTokens.USER_ACCESS_TOKEN);
+        if (accessToken) {
+            config.headers.Authorization = `Bearer ${accessToken}`;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    },
+);
+axiosInstance.interceptors.response.use(
+    (response) => {
+        return response;
+    },
+    async (error) => {
+        // 401 Unauthorized
+        const originalRequest = error.config;
+        if (error.response?.status === 401 && !originalRequest._retry) {
+            originalRequest._retry = true;
+            try {
+                originalRequest.headers.Authorization =
+                    await refreshAccessToken();
+                return axiosInstance(originalRequest);
+            } catch (error) {
+                // eslint-disable-next-line no-console
+                return Promise.reject(error);
+            }
+        }
+        throw error;
+    },
+);
+
+export default axiosInstance;

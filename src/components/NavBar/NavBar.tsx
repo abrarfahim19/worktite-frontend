@@ -1,6 +1,6 @@
 'use client';
 import { notificationData } from '@/config/common'; // Import your notification data
-import { frontendLinks } from '@/config/common/app-link';
+import { frontendLinks } from '@/config/common/appLink';
 import { processNotifications } from '@/config/libs/notification';
 import { Avatar } from '@/ui/Avatar';
 import { Button } from '@/ui/Button';
