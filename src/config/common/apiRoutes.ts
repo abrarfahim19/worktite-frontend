@@ -45,7 +45,8 @@ FILES: {
   PRIVATE:{
     PROJECTS: {
       ALL_PROJECT: addQueryParams("/projects/api/v1/private/projects/"),
-      PROJECT_MILESTONE:(projectId:string)=> addQueryParams(`/projects/api/v1/private/projects/${projectId}/milestones/`)
+      PROJECT_MILESTONE:(projectId:string)=> addQueryParams(`/projects/api/v1/private/projects/${projectId}/milestones/`),
+      PROJECT_APPOINTMENT:(projectId:string)=> addQueryParams(`/projects/api/v1/private/projects/${projectId}/appointments/`),
     }
   },
   PROTECTED:{

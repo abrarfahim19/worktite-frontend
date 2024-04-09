@@ -8,43 +8,36 @@ import download from '../../../public/Images/svg/icon/download.svg';
 import { Button } from '@/ui/Button';
 import SvgIcon from '@/components/common/SvgIcon';
 
-interface IProps {}
+function formatDate(dateString:string) {
+  const date = new Date(dateString);
+  const months = [
+      "January", "February", "March",
+      "April", "May", "June", "July",
+      "August", "September", "October",
+      "November", "December"
+  ];
+  const day = date.getDate();
+  const monthIndex = date.getMonth();
+  const year = date.getFullYear();
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  const formattedDate = `${day}th ${months[monthIndex]}, at ${hours}:${minutes < 10 ? '0' : ''}${minutes} ${hours >= 12 ? 'pm' : 'am'}`;
+
+  return formattedDate;
+}
 
 type Appointment = {
-  date_and_time: string;
+  appointment_at: string;
   message: string;
-  meeting_note: string;
-  appointment_type: string;
-  status: string;
+  note: string;
+  appointment_type: number;
+  status: number;
   meeting_link: string;
 };
 
-const appointmentData: Appointment[] = [
-  {
-    date_and_time: '01/02/2022',
-    message: 'hello world',
-    meeting_note: 'this is a principal',
-    appointment_type: 'online',
-    status: 'online',
-    meeting_link: ':hh',
-  },
-  {
-    date_and_time: '01/02/2022',
-    message: 'hello world',
-    meeting_note: 'this is a principal',
-    appointment_type: 'online',
-    status: 'online',
-    meeting_link: ':hh',
-  },
-  {
-    date_and_time: '01/02/2022',
-    message: 'hello world',
-    meeting_note: 'this is a principal',
-    appointment_type: 'online',
-    status: 'online',
-    meeting_link: ':hh',
-  },
-];
+interface IProps {
+  appointments: Appointment[]
+}
 
 const IconComponent = ({
   info,
@@ -64,9 +57,9 @@ const IconComponent = ({
 const columnAppointment = createColumnHelper<Appointment>();
 
 const columnsAppointment = [
-  columnAppointment.accessor('date_and_time', {
-    header: () => <span>Last Name</span>,
-    cell: (info) => info.getValue(),
+  columnAppointment.accessor('appointment_at', {
+    header: () => <span>Date and Time</span>,
+    cell: (info) => formatDate(info.getValue()),
     footer: (info) => info.column.id,
   }),
   columnAppointment.accessor((row) => row.message, {
@@ -80,7 +73,7 @@ const columnsAppointment = [
     header: () => <span>Message</span>,
     footer: (info) => info.column.id,
   }),
-  columnAppointment.accessor('meeting_note', {
+  columnAppointment.accessor('note', {
     header: () => 'Meeting Note',
     cell: (info) => (
       <IconComponent
@@ -111,7 +104,7 @@ const columnsAppointment = [
   }),
 ];
 
-const AppointmentTable: React.FC<IProps> = () => {
+const AppointmentTable: React.FC<IProps> = (props) => {
   return (
     <>
       <Text tag='p' decoration='p' className='font-semibold'>
@@ -123,7 +116,7 @@ const AppointmentTable: React.FC<IProps> = () => {
           tRowClassName='border-b'
           className='w-full justify-self-center whitespace-nowrap text-center text-sm text-gray-500'
           columns={columnsAppointment}
-          data={appointmentData}
+          data={props?.appointments}
         />
       </div>
     </>

@@ -36,39 +36,6 @@ const projectInfos: ProjectInfo[] = [
     order_date: '12-02-2022',
     message_link: ':hh',
   },
-  {
-    product: {
-      image: 'https://picsum.photos/80/80',
-      categories: 'table',
-    },
-    acc_no: '#433',
-    client: 'jane cooper',
-    pricing: { amount: 15, type: 'hour' },
-    order_date: '12-02-2022',
-    message_link: ':hh',
-  },
-  {
-    product: {
-      image: 'https://picsum.photos/80/80',
-      categories: 'table',
-    },
-    acc_no: '#433',
-    client: 'jane cooper',
-    pricing: { amount: 15, type: 'hour' },
-    order_date: '12-02-2022',
-    message_link: ':hh',
-  },
-  {
-    product: {
-      image: 'https://picsum.photos/80/80',
-      categories: 'table',
-    },
-    acc_no: '#433',
-    client: 'jane cooper',
-    pricing: { amount: 15, type: 'hour' },
-    order_date: '12-02-2022',
-    message_link: ':hh',
-  },
 ];
 
 const ImageInfoComponent = ({
