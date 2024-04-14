@@ -1,21 +1,21 @@
-import React from 'react';
-import { Text } from '@/ui/Text';
+import { ClientDocument } from '@/app/projectpage/interfaces';
+import Loading from '@/components/Loading';
 import SvgIcon from '@/components/common/SvgIcon';
-import pdf from '../../../public/Images/svg/icon/pdf.svg';
-import { SiSketchup } from 'react-icons/si';
+import { Text } from '@/ui/Text';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import React from 'react';
 import { HiDownload } from 'react-icons/hi';
-
-type Data = {
-  file: string;
-  name: string;
-};
+import { SiSketchup } from 'react-icons/si';
+import pdf from '../../../public/Images/svg/icon/pdf.svg';
 
 interface IProps {
   title: string;
-  data: Data[];
+  data: ClientDocument[];
+  [key: string]: any;
 }
 
-const Documents: React.FC<IProps> = ({ title, data }) => {
+const Documents: React.FC<IProps> = ({ title, data, ...props }) => {
   return (
     <>
       <Text tag='p' decoration='p' className='font-semibold'>
@@ -25,6 +25,7 @@ const Documents: React.FC<IProps> = ({ title, data }) => {
         {data?.map((el, index) => (
           <DocumentCard data={el} key={index} index={index} />
         ))}
+        {props?.isLoading && <Loading />}
       </div>
     </>
   );
@@ -41,10 +42,11 @@ const DocumentCard = ({
   data,
   index,
 }: {
-  data: Data;
+  data: ClientDocument;
   index: string | number;
 }) => {
-  const fileExt = data?.file?.split('.')?.slice(-1)[0];
+  const router = useRouter();
+  const fileExt = data?.file?.file_name?.split('.')?.slice(-1)[0];
 
   const generatePdfIcon = React.useMemo(() => {
     switch (fileExt) {
@@ -65,10 +67,20 @@ const DocumentCard = ({
       <div className='flex items-center justify-between gap-x-1'>
         {generatePdfIcon}
         <Text tag='p' decoration='p'>
-          {data?.name}
+          {data?.file?.file_name}
         </Text>
       </div>
-      <HiDownload className='inline-block' />
+      <Link
+        href={data?.file?.file}
+        target='_blank'
+        rel='noopener noreferrer'
+        locale={false}
+        download
+      >
+        {/* <a download={data?.file?.file_name}> */}
+        <HiDownload className='inline-block cursor-pointer' />
+        {/* </a> */}
+      </Link>
     </div>
   );
 };

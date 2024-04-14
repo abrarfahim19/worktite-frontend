@@ -26,7 +26,9 @@ export const DatePicker = () => {
   const [availableTime, setAvailableTime] = useState<IAvailableDate[]>(dates);
   const [scheduleSelected, setScheduleSelected] = useState<number>();
 
-  const scheduleSelectionHandler = (index: number) => {
+  const scheduleSelectionHandler = (index: number, item: IAvailableDate) => {
+    console.log(item, selected?.toDateString());
+
     if (scheduleSelected === index) {
       console.log('This is in list');
       // setScheduleSelected((prev) => prev.filter((item) => item !== index));
@@ -65,11 +67,11 @@ export const DatePicker = () => {
                 item.disabled
                   ? 'disabled'
                   : scheduleSelected === index
-                  ? 'primary'
-                  : 'enabled'
+                    ? 'primary'
+                    : 'enabled'
               }
               key={item.id}
-              onClick={() => scheduleSelectionHandler(index)}
+              onClick={() => scheduleSelectionHandler(index, item)}
             >
               {item.time}
             </Button>

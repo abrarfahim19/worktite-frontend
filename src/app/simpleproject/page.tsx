@@ -11,6 +11,7 @@ import {
   TechnicalExpert,
   WhyChooseUs,
 } from '@/components/common/SimpleAndComplexProject';
+import { APPOINTMENT_TYPE } from '@/config/common/AppEnums';
 import { Modal } from '@/ui/Modal';
 import { useState } from 'react';
 
@@ -29,7 +30,12 @@ export default function SimpleProject() {
     <div className='container mx-auto px-4 pt-20'>
       <Modal
         closeModal={closeModal}
-        content={<AppointmentModalBody closeModal={closeModal} />}
+        content={
+          <AppointmentModalBody
+            closeModal={closeModal}
+            appointmentType={APPOINTMENT_TYPE.COMPLEX}
+          />
+        }
         isOpen={isOpen}
         defaultCancel={true}
       />

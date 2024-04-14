@@ -1,4 +1,5 @@
 'use client';
+
 import AppointmentTable from '@/components/ProjectPage/AppointmentTable';
 import FinalDocumentation from '@/components/ProjectPage/FinalDocumentation';
 import Invoice from '@/components/ProjectPage/Invoice';
@@ -9,8 +10,20 @@ import { apiRoutes } from '@/config/common/apiRoutes';
 import { useAxiosSWR } from '@/hooks/useAxiosSwr';
 
 export default function Home() {
-  const {data: milestones, isLoading, count} = useAxiosSWR(apiRoutes.PRIVATE.PROJECTS.PROJECT_MILESTONE("1")({limit:10}))
-  const {data: appointments, isLoading:appointmentLoading, count:appointmentCount} = useAxiosSWR(apiRoutes.PRIVATE.PROJECTS.PROJECT_APPOINTMENT("1")({limit:10}))
+  const {
+    data: milestones,
+    isLoading,
+    count,
+  } = useAxiosSWR(
+    apiRoutes.PRIVATE.PROJECTS.MILESTONE_LIST('1')({ limit: 10 })
+  );
+  const {
+    data: appointments,
+    isLoading: appointmentLoading,
+    count: appointmentCount,
+  } = useAxiosSWR(
+    apiRoutes.PRIVATE.PROJECTS.APPOINTMENT_LIST('1')({ limit: 10 })
+  );
 
   return (
     <div className='container mx-auto flex flex-col gap-y-10 px-4'>
@@ -21,7 +34,9 @@ export default function Home() {
         {!isLoading && <ProjectTimelineTable milestones={milestones} />}
       </div>
       <div className='rounded-lg bg-secondary px-8 py-6'>
-        {!appointmentLoading && <AppointmentTable appointments={appointments} />}
+        {!appointmentLoading && (
+          <AppointmentTable appointments={appointments} />
+        )}
       </div>
       <div className='rounded-lg bg-secondary px-8 py-6'>
         <ProjectDetailsTable />

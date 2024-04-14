@@ -1,5 +1,3 @@
-import React from 'react';
-import { cva, VariantProps } from 'class-variance-authority';
 import {
   ColumnDef,
   flexRender,
@@ -8,8 +6,10 @@ import {
   SortingState,
   useReactTable,
 } from '@tanstack/react-table';
-import { THead } from './THead';
+import { cva, VariantProps } from 'class-variance-authority';
+import React from 'react';
 import { TBody } from './TBody';
+import { THead } from './THead';
 
 interface ITable<T> {
   columns: ColumnDef<T>[] | any;
@@ -60,7 +60,9 @@ export const Table = <T extends DataType>({
   const [tableData, setTableData] = React.useState<T[]>(() => [...data]);
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
-  const [tableColumns] = React.useState<ColumnDef<T>[]>(() => [...columns]);
+  const [tableColumns, setTableColumns] = React.useState<ColumnDef<T>[]>(() => [
+    ...columns,
+  ]);
   const [columnVisibility, setColumnVisibility] = React.useState<{
     [key: string]: boolean;
   }>({});
@@ -80,6 +82,11 @@ export const Table = <T extends DataType>({
     debugHeaders: true,
     debugColumns: true,
   });
+
+  React.useEffect(() => {
+    setTableData(data);
+    setTableColumns(columns);
+  }, [data, columns]);
 
   return (
     <>

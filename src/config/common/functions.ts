@@ -1,14 +1,10 @@
-import Cookies from 'universal-cookie';
-
 import { PRICINGTYPE, UserType } from '@/config/common/AppEnums';
 import { default as jwtDecode, default as jwt_decode } from 'jwt-decode';
-
+import Cookies from 'universal-cookie';
 
 // A debounced input react component
 
 const cookies = new Cookies();
-
-
 
 interface User {
   name: string;
@@ -27,82 +23,80 @@ export const parseToken = (token: string): User | null => {
   return null;
 };
 
-
 export function setCookie(name: string, value: string, options?: any) {
-    const others = options
-        ? { ...options }
-        : { expires: new Date(Date.now() + 25892000000) };
+  const others = options
+    ? { ...options }
+    : { expires: new Date(Date.now() + 25892000000) };
 
-    cookies.set(name, value, others);
+  cookies.set(name, value, others);
 }
 
 export function getCookie(name: string) {
-    return cookies.get(name);
+  return cookies.get(name);
 }
 
 export const removeCookie = (name: string) => {
-    cookies.remove(name);
+  cookies.remove(name);
 };
 
 // Getting JWT tokens while running middleware
 export const serverCookie = (cookieReq: any) => {
-    const tokenArr: string[] = cookieReq.toString().split(/[=;]/);
+  const tokenArr: string[] = cookieReq.toString().split(/[=;]/);
 
-    return {
-        refToken: tokenArr[1],
-        accToken: tokenArr[3],
-    };
+  return {
+    refToken: tokenArr[1],
+    accToken: tokenArr[3],
+  };
 };
 
 export const jsonParse = <T>(str: string) => {
-    try {
-        const jsonValue: T = JSON.parse(str);
-        return jsonValue;
-    } catch {
-        return undefined;
-    }
+  try {
+    const jsonValue: T = JSON.parse(str);
+    return jsonValue;
+  } catch {
+    return undefined;
+  }
 };
 
 export const parseJWTToken = (token: string) => {
-    if (token) {
-        try {
-            return jwtDecode(token);
-        } catch (error) {
-            return null;
-        }
+  if (token) {
+    try {
+      return jwtDecode(token);
+    } catch (error) {
+      return null;
     }
-    return null;
+  }
+  return null;
 };
 
 // Retrieve JWT token from cookies
 export const getJWTToken = (cookie_name: string): string => {
-    if (getCookie(cookie_name)) {
-        return cookies.get(cookie_name);
-    }
+  if (getCookie(cookie_name)) {
+    return cookies.get(cookie_name);
+  }
 
-    return "";
+  return '';
 };
 
+export const debounce = (callback: (...args: any) => void, wait = 500) => {
+  let timeoutId: any;
+  return (...args: any) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      callback(args);
+    }, wait);
+  };
+};
 
-export const debounce = (callback: (...args:any)=>void, wait=500) => {
-    let timeoutId:any;
-    return (...args: any) => {
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => {
-            callback(args);
-        }, wait);
-    };
-}
-
-export const priceTypeConv = (type:PRICINGTYPE)=>{
-    if (type === PRICINGTYPE.HOURLY_BASIS){
-        return "Hourly"
-    }
-    if (type === PRICINGTYPE.MILESTONE_BASIS){
-        return "Milestone"
-    }
-    if (type === PRICINGTYPE.ONE_TIME_BASIS){
-        return "One Time Pay"
-    }
-    return ''
-}
+export const priceTypeConv = (type: PRICINGTYPE) => {
+  if (type === PRICINGTYPE.HOURLY_BASIS) {
+    return 'Hourly';
+  }
+  if (type === PRICINGTYPE.MILESTONE_BASIS) {
+    return 'Milestone';
+  }
+  if (type === PRICINGTYPE.ONE_TIME_BASIS) {
+    return 'One Time Pay';
+  }
+  return '';
+};

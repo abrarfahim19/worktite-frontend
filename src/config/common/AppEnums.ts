@@ -3,6 +3,11 @@ export enum UserType {
   admin,
 }
 
+export enum APPOINTMENT_TYPE {
+  SIMPLE=1,
+  COMPLEX=2
+}
+
 export enum STATUS {
   PENDING = 0,
   APPROVED,
@@ -15,6 +20,12 @@ export enum PRICINGTYPE{
   HOURLY_BASIS = 1,
   ONE_TIME_BASIS,
   MILESTONE_BASIS,
+}
+
+export enum DOCTYPE{
+  DESIGN = 1,
+  TECHNICAL = 2,
+  ARCHIVE = 3
 }
 
 export const jwtTokens = Object.freeze({

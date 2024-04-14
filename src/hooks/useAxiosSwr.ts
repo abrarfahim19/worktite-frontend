@@ -1,7 +1,6 @@
+import { apiGet } from "@/config/common/api";
 import useSWR from "swr";
 import useSWRInfinite from "swr/infinite";
-import {useState} from "react";
-import { apiGet } from "@/config/common/api";
 
 interface APIResponse<T> {
     results: T[];

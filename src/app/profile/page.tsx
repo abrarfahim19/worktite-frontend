@@ -1,9 +1,9 @@
 'use client';
+import Loading from '@/components/Loading';
 import Tabs from '@/components/ProjectTab/Tabs';
 import Timer from '@/components/common/Timer';
 import { priceTypeConv } from '@/config/common';
 import { PRICINGTYPE, STATUS } from '@/config/common/AppEnums';
-import { apiGet } from '@/config/common/api';
 import { apiRoutes } from '@/config/common/apiRoutes';
 import { useAxiosSWR } from '@/hooks/useAxiosSwr';
 import useDataFetch from '@/hooks/useDataFetch';
@@ -38,7 +38,7 @@ export default function Profile() {
   );
 }
 
-interface Profile{
+interface Profile {
   id: number;
   username: string;
   email: string;
@@ -46,10 +46,11 @@ interface Profile{
 }
 
 const ProfileSection = () => {
-  const {data: profile, isLoading} = useDataFetch<Profile>(apiRoutes.AUTH.USER_PROFILE)
+  const { data: profile, isLoading } = useDataFetch<Profile>(
+    apiRoutes.AUTH.USER_PROFILE
+  );
   console.log('profile', profile);
 
-  
   return (
     <div className='col-span-1  flex-col items-center bg-secondary p-6'>
       <div className='mx-auto flex w-full flex-col items-center gap-y-2'>
@@ -62,7 +63,7 @@ const ProfileSection = () => {
           {profile?.username}
         </Text>
         <Text tag='span' decoration='span'>
-        {profile?.email}
+          {profile?.email}
         </Text>
         <div className='pt-5'>
           <Link href={'/editprofile'}>
@@ -117,7 +118,13 @@ const ProfileSection = () => {
 };
 
 const RunningProject = () => {
-  const {data: runningProject, isLoading} = useAxiosSWR(apiRoutes.PRIVATE.PROJECTS.ALL_PROJECT({limit:10, offset:0, status:STATUS.RUNNING}))
+  const { data: runningProject, isLoading } = useAxiosSWR(
+    apiRoutes.PRIVATE.PROJECTS.LIST({
+      limit: 10,
+      offset: 0,
+      status: STATUS.RUNNING,
+    })
+  );
   const [isShowing, setIsShowing] = useState(false);
   useEffect(() => setIsShowing(true), []);
   return (
@@ -133,16 +140,23 @@ const RunningProject = () => {
       leaveTo='transform opacity-0'
     >
       <div className='flex w-full flex-col gap-y-4'>
-        {runningProject?.map((project:any) => (
-            <ProjectCard data={project} timer={true} key={project?.id} />
-          ))}
+        {runningProject?.map((project: any) => (
+          <ProjectCard data={project} timer={true} key={project?.id} />
+        ))}
+        {isLoading && <Loading />}
       </div>
     </Transition>
   );
 };
 
 const ProjectRequest = () => {
-  const {data: requestProject, isLoading} = useAxiosSWR(apiRoutes.PRIVATE.PROJECTS.ALL_PROJECT({limit:10, offset:0, status:STATUS.PENDING}))
+  const { data: requestProject, isLoading } = useAxiosSWR(
+    apiRoutes.PRIVATE.PROJECTS.LIST({
+      limit: 10,
+      offset: 0,
+      status: STATUS.PENDING,
+    })
+  );
   const [isShowing, setIsShowing] = useState(false);
   useEffect(() => setIsShowing(true), []);
   return (
@@ -158,18 +172,30 @@ const ProjectRequest = () => {
       leaveTo='transform opacity-0'
     >
       <div className='flex w-full flex-col gap-y-4'>
-        {requestProject
-          ?.map((project) => (
-            <ProjectCard data={project} timer={false} key={project?.id} />
-          ))}
+        {requestProject?.map((project) => (
+          <ProjectCard data={project} timer={false} key={project?.id} />
+        ))}
+        {isLoading && <Loading />}
       </div>
     </Transition>
   );
 };
 
 const ProjectHistory = () => {
-  const {data: completeProject} = useAxiosSWR(apiRoutes.PRIVATE.PROJECTS.ALL_PROJECT({limit:10, offset:0, status:STATUS.COMPLETE}))
-  const {data: cancelledProject} = useAxiosSWR(apiRoutes.PRIVATE.PROJECTS.ALL_PROJECT({limit:10, offset:0, status:STATUS.CANCELLED}))
+  const { data: completeProject, isLoading: completeIsLoading } = useAxiosSWR(
+    apiRoutes.PRIVATE.PROJECTS.LIST({
+      limit: 10,
+      offset: 0,
+      status: STATUS.COMPLETE,
+    })
+  );
+  const { data: cancelledProject, isLoading: cancellIsLoading } = useAxiosSWR(
+    apiRoutes.PRIVATE.PROJECTS.LIST({
+      limit: 10,
+      offset: 0,
+      status: STATUS.CANCELLED,
+    })
+  );
   const [isShowing, setIsShowing] = useState(false);
   useEffect(() => setIsShowing(true), []);
   return (
@@ -185,20 +211,25 @@ const ProjectHistory = () => {
       leaveTo='transform opacity-0'
     >
       <div className='flex w-full flex-col gap-y-4'>
-        {completeProject
-          ?.map((project) => (
-            <ProjectCard data={project} timer={false} key={project?.id} />
-          ))}
-        {cancelledProject
-          ?.map((project) => (
-            <ProjectCard data={project} timer={false} key={project?.id} />
-          ))}
+        {completeProject?.map((project) => (
+          <ProjectCard data={project} timer={false} key={project?.id} />
+        ))}
+        {cancelledProject?.map((project) => (
+          <ProjectCard data={project} timer={false} key={project?.id} />
+        ))}
+        {completeIsLoading && cancellIsLoading && <Loading />}
       </div>
     </Transition>
   );
 };
 
-const ProjectCard = ({ timer = true, data }: { timer?: boolean, data:any }) => {
+const ProjectCard = ({
+  timer = true,
+  data,
+}: {
+  timer?: boolean;
+  data: any;
+}) => {
   return (
     <div className='grid grid-cols-1 gap-y-4 rounded-lg bg-secondary p-3 md:grid-cols-2'>
       <Text tag='p' decoration='p' className='col-span-full'>
@@ -226,7 +257,8 @@ const ProjectCard = ({ timer = true, data }: { timer?: boolean, data:any }) => {
             Category: {data?.category?.name}
           </Text>
           <Text tag='p' decoration='span'>
-            Pricing Type: {priceTypeConv(data?.pricing?.pricing_type as PRICINGTYPE)}
+            Pricing Type:{' '}
+            {priceTypeConv(data?.pricing?.pricing_type as PRICINGTYPE)}
           </Text>
           <Text tag='p' decoration='span'>
             Per Hour: {data?.price?.concat(` ${data?.pricing?.currency}`)}
@@ -238,7 +270,9 @@ const ProjectCard = ({ timer = true, data }: { timer?: boolean, data:any }) => {
           timer ? 'justify-between' : 'justify-center'
         } gap-y-4 justify-self-center md:items-end md:justify-self-end`}
       >
-        {timer && <Timer />}
+        {timer && (
+          <Timer startTime={data?.started_at} endTime={data?.ended_at} />
+        )}
         <Button as='link' href={`projectpage/${data?.id}`}>
           Project Page
         </Button>
