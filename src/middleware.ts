@@ -1,53 +1,38 @@
+import { cookies } from 'next/headers';
 import { NextRequest, NextResponse } from 'next/server';
-import { frontendLinks } from '@/config/common/appLink';
-import { getCookie, parseToken } from '@/config/common';
-import { UserType } from '@/config/common/AppEnums';
+import { decrypt } from './lib/authLib';
 
+// 1. Specify protected and public routes
+// const protectedRoutes = ["/dashboard"];
+const publicRoutes = ['/login', '/signup', '/'];
+
+export default async function middleware(req: NextRequest) {
+  // 2. Check if the current route is protected or public
+  const path = req.nextUrl.pathname;
+  const isProtectedRoute = path.startsWith('/profile');
+  const isPublicRoute = publicRoutes.includes(path);
+
+  // 3. Decrypt the session from the cookie
+  const sessionCookie = cookies().get('user')?.value;
+  if (!sessionCookie) {
+    return NextResponse.next();
+  }
+  const session = await decrypt(sessionCookie);
+
+  // 5. Redirect to /login if the user is not authenticated
+  if (isProtectedRoute && !session?.id) {
+    return NextResponse.redirect(new URL('/login', req.nextUrl));
+  }
+
+  // 6. Redirect to / if the user is authenticated
+  if (isPublicRoute && session?.id && !req.nextUrl.pathname.startsWith('/')) {
+    return NextResponse.redirect(new URL('/', req.nextUrl));
+  }
+
+  return NextResponse.next();
+}
+
+// Routes Middleware should not run on
 export const config = {
-  matcher: ['/:path*'],
+  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
 };
-
-const protectedRoute = Object.values(frontendLinks.PROTECTED);
-const privateRoute = Object.values(frontendLinks.PRIVATE);
-
-function checkProtectedRoute(
-  pathname: string,
-  user: any,
-  token: any,
-  request: NextRequest
-) {
-  if (protectedRoute.includes(pathname)) {
-    if (!token || !user || user?.type == UserType.client) {
-      return NextResponse.redirect(
-        new URL(frontendLinks.LINK_SIGNUP, request.url)
-      );
-    }
-  }
-}
-function checkPrivateRoute(
-  pathname: string,
-  user: any,
-  token: any,
-  request: NextRequest
-) {
-  if (privateRoute.includes(pathname)) {
-    if (!token || !user || user?.type == UserType.admin) {
-      return NextResponse.redirect(
-        new URL(frontendLinks.LINK_SIGNUP, request.url)
-      );
-    }
-  }
-}
-export default async function middleware(request: NextRequest) {
-  const token = getCookie('jwt_token');
-  const user = parseToken(
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1VHlwZSI6MSwic3ViIjoiMTIzNDU2Nzg5MCIsIm5hbWUiOiJKb2huIERvZSIsImlhdCI6MTUxNjIzOTAyMn0.uCmK5s_7yMWI_pBJS92edGsU7SSX882cbztqJRMXxtY'
-  );
-  const { pathname } = request.nextUrl;
-  console.log('user', user);
-  // TODO: implement the user role based redirection
-  // checkProtectedRoute(pathname, user, token, request)
-
-  // TODO: implement the user role based redirection
-  checkPrivateRoute(pathname, user, token, request);
-}
