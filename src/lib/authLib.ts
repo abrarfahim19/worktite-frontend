@@ -53,7 +53,17 @@ export const login = async (loginInput: LoginInput) => {
   // }
   try {
     console.log('Trying to login', user, apiRoutes.AUTH.LOGIN);
+    console.log('PEXELS_API_KEY:', process.env.PEXELS_API_KEY);
+    console.log(
+      'NEXT_PUBLIC_API_BASE_URL:',
+      process.env.NEXT_PUBLIC_API_BASE_URL
+    );
     const response = await apiPost(apiRoutes.AUTH.LOGIN, user);
+    // const response = await apiPost(
+    //   'http://147.182.242.250/auth/api/signin/',
+    //   user
+    // );
+
     console.log(loginInput, response.status, response.data);
     if (response.status === 200) {
       cookies().set('accessToken', response.data.accessToken);
