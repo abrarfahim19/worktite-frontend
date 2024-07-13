@@ -47,7 +47,10 @@ interface Profile {
 
 const ProfileSection = () => {
   const { data: profile, isLoading } = useDataFetch<Profile>(
-    apiRoutes.AUTH.USER_PROFILE
+    apiRoutes.AUTH.USER_PROFILE({
+      expand:
+        'user_details,user_details.profile_picture,user_details.cover_picture',
+    })
   );
   console.log('profile', profile);
 

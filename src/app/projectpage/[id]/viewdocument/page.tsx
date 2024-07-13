@@ -4,13 +4,13 @@ import Documents from '@/components/ViewDocument/Documents';
 import GeneralProjectInfo from '@/components/ViewDocument/GeneralProjectInfo';
 import ProjectInfo from '@/components/ViewDocument/ProjectInfo';
 import { apiRoutes } from '@/config/common/apiRoutes';
+import { DOCTYPE } from '@/config/common/AppEnums';
+import { useAxiosSWR } from '@/hooks/useAxiosSwr';
 import useDataFetch from '@/hooks/useDataFetch';
 import { Button } from '@/ui/Button';
 import { useParams, useRouter } from 'next/navigation';
 import React from 'react';
 import { ClientDocument, ClientProject } from '../../interfaces';
-import { useAxiosSWR } from '@/hooks/useAxiosSwr';
-import { DOCTYPE } from '@/config/common/AppEnums';
 
 const sections = {
   VIEW_DOCUMENTS: {
@@ -53,7 +53,7 @@ export default function Home() {
   const documents = React.useMemo(() => {
     if (all_documents?.length > 0) {
       const separatedDocuments: { [docType: number]: ClientDocument[] } =
-        all_documents.reduce((acc, document) => {
+        all_documents.reduce((acc: any, document) => {
           const { doc_type } = document;
           if (!acc[doc_type]) {
             acc[doc_type] = [];
@@ -73,7 +73,7 @@ export default function Home() {
         description={project?.description as string}
       />
       <div className='rounded-lg bg-secondary px-8'>
-        <ProjectInfo data={project} />
+        {project && <ProjectInfo data={project} />}
       </div>
       <div className='rounded-lg bg-secondary px-8 py-6'>
         <GeneralProjectInfo />

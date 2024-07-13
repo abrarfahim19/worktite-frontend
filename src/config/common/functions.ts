@@ -100,3 +100,7 @@ export const priceTypeConv = (type: PRICINGTYPE) => {
   }
   return '';
 };
+
+export const getFirstCharCapitalized = (str: string) => {
+  return str.charAt(0).toUpperCase();
+};

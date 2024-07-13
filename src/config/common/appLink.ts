@@ -21,6 +21,7 @@ export const frontendLinks = Object.freeze({
   LOGOUT: '/logout',
   PROTECTED: {
     PROFILE: '/profile',
+    SETTINGS: '/editprofile',
   },
   PRIVATE: {
     DASHBOARD: '/dashboard',

@@ -108,7 +108,7 @@ const Timer: React.FC<ITimer> = (props) => {
       const interval = setInterval(() => {
         const now = new Date();
         const startTimeObj = props.startTime
-          ? new Date(props?.startTime)
+          ? new Date(props.startTime.toString())
           : new Date();
         const difference = now.getTime() - startTimeObj.getTime();
 

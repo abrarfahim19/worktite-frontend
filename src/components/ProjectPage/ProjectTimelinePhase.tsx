@@ -1,25 +1,21 @@
-import React from 'react';
 import { Text } from '@/ui/Text';
 import { GoCheckCircle, GoCheckCircleFill } from 'react-icons/go';
-import { useAxiosSWR } from '@/hooks/useAxiosSwr';
-import { apiRoutes } from '@/config/common/apiRoutes';
 
 interface IProps {
   milestones: any;
   count: number;
 }
 
-const ProjectTimelinePhase = ({milestones, count}:IProps) => {
-  
+const ProjectTimelinePhase = ({ milestones, count }: IProps) => {
   return (
     <div className='mt-5 flex w-8 flex-col rounded-3xl bg-special md:h-[44px] md:w-full md:flex-row md:items-center md:justify-between'>
-      {milestones?.map((item, index: number) => {
+      {milestones?.map((item: any, index: number) => {
         return (
           <>
             <div
               key={item?.id}
               className={`flex flex-col md:flex-row md:bg-special ${
-                index === count - 1 && 'md:rounded-r-3xl md:rounded-rt-3xl'
+                index === count - 1 && 'md:rounded-rt-3xl md:rounded-r-3xl'
               } ${index === 0 && 'md:rounded-l-3xl md:rounded-t-3xl '}`}
             >
               <div

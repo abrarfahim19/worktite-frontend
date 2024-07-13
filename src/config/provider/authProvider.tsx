@@ -1,8 +1,8 @@
 'use client';
 
-import { createContext, ReactNode, useContext, useState } from 'react';
-import { apiRoutes } from '@/config/common/apiRoutes';
 import { apiPost } from '@/config/common/api';
+import { apiRoutes } from '@/config/common/apiRoutes';
+import { createContext, ReactNode, useContext, useState } from 'react';
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -27,23 +27,26 @@ function useProvideAuth() {
 
   function signIn(username: string, password: string) {
     setLoading(true);
-    fetch(apiRoutes.LOGIN);
+    fetch(apiRoutes.AUTH.LOGIN);
   }
 
   function signUp(username: string, password: string) {
     setLoading(true);
-    return apiPost(apiRoutes.LOGIN, { username: username, password: password });
+    return apiPost(apiRoutes.AUTH.LOGIN, {
+      username: username,
+      password: password,
+    });
   }
 
   function signOut(username: string, password: string) {
     setLoading(true);
-    fetch(apiRoutes.LOGIN);
+    fetch(apiRoutes.AUTH.LOGIN);
     setUser(null);
   }
 
   function autoSignIn(username: string, password: string) {
     setLoading(true);
-    fetch(apiRoutes.LOGIN);
+    fetch(apiRoutes.AUTH.LOGIN);
   }
 
   return {

@@ -1,5 +1,5 @@
-import env from '@/lib/env';
+// import env from '@/lib/env';
 
 //TODO: NEXT_ prefix will be removed after merged.
 export const PUBLIC_API_BASE_URL =
-  env.NEXT_PUBLIC_API_BASE_URL || 'https://api.com';
+  process.env.NEXT_PUBLIC_API_BASE_URL || 'https://api.com';

@@ -3,7 +3,7 @@ import { apiRoutes } from '@/config/common/apiRoutes';
 
 export const downloadDemoCandidates = async () => {
   try {
-    let response: any = await apiGet(apiRoutes.REFRESH_TOKEN, {
+    let response: any = await apiGet(apiRoutes.AUTH.REFRESH_TOKEN, {
       responseType: 'blob',
     });
     return response;

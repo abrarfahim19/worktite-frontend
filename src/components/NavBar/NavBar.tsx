@@ -1,21 +1,37 @@
 'use client';
-import { notificationData } from '@/config/common'; // Import your notification data
+import {
+  apiRoutes,
+  getFirstCharCapitalized,
+  notificationData,
+} from '@/config/common'; // Import your notification data
 import { frontendLinks } from '@/config/common/appLink';
+import { IUser } from '@/config/common/interfaces';
 import { processNotifications } from '@/config/libs/notification';
-import { Avatar } from '@/ui/Avatar';
+import useDataFetch from '@/hooks/useDataFetch';
+import { logout } from '@/lib/authLib';
+import { Icons } from '@/lib/utils';
 import { Button } from '@/ui/Button';
-import { Text } from '@/ui/Text';
 import { ClassPropertiess } from '@/ui/common/interface';
-import { Menu, Tab, Transition } from '@headlessui/react';
+import { Text } from '@/ui/Text';
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Fragment, ReactElement } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
+import { ReactElement } from 'react';
 import { BsChevronCompactDown } from 'react-icons/bs';
 import { GoBell } from 'react-icons/go';
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
 import { TbMessageDots } from 'react-icons/tb';
 import { NotificationCard } from '../NotificationCard';
+import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs';
 import DropDownBtn from './DropDownBtn';
 
 const DropDownCss: ClassPropertiess = {
@@ -56,7 +72,7 @@ const items = [
   { tag: 'Simple', link: '/simpleproject', child: false },
   { tag: 'Complex', link: '/complexproject', child: false },
   { tag: 'Gallery', link: '/gallery', child: false },
-  { tag: 'About', link: '/about', child: false },
+  { tag: 'About Us', link: '/about', child: false },
   { tag: 'services', link: '/services', child: false },
 ];
 
@@ -90,7 +106,9 @@ export const NavBar = ({}: Props) => {
       <div className={NavBarCss.otherNavItemClass}>
         <div className={NavBarCss.otherNavItemClass + ' text-xl'}>
           {/* <GoBell /> */}
-          <NotificationDropDown />
+          <div className='flex'>
+            <NotificationDropDown />
+          </div>
           <Link href={'/message'}>
             <TbMessageDots />
           </Link>
@@ -110,23 +128,62 @@ const CommonBtn = ({ text, href }: { text: string; href: string }) => {
 };
 
 const NavProfileDropDown = () => {
-  const menuBtn = (
-    <Avatar
-      decoration={'ring'}
-      imageUrl='https://randomuser.me/api/portraits/men/9.jpg'
-    />
+  // const menuBtn = (
+  //   <Avatar
+  //     decoration={'ring'}
+  //     imageUrl='https://randomuser.me/api/portraits/men/9.jpg'
+  //   />
+  // );
+  const router = useRouter();
+  const { data: completeUserData } = useDataFetch<IUser>(
+    apiRoutes.AUTH.USER_PROFILE({
+      expand: 'user_details,user_details.profile_picture',
+    })
   );
-
+  console.log('Data is: ', completeUserData);
   return (
-    <DropDownBtn menuButton={menuBtn}>
-      <CommonBtn text='profile' href={frontendLinks.PROTECTED.PROFILE} />
-      <hr className={NavBarCss.listItemHrLineClass} />
-      <CommonBtn text='Dashboard' href={frontendLinks.PRIVATE.DASHBOARD} />
-      <hr className={NavBarCss.listItemHrLineClass} />
-      <CommonBtn text='Orders' href={frontendLinks.PRIVATE.DASHBOARD} />
-      <hr className={NavBarCss.listItemHrLineClass} />
-      <CommonBtn text='Logout' href={frontendLinks.LOGOUT} />
-    </DropDownBtn>
+    <div>
+      {completeUserData ? (
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Avatar className='border-2 border-ring'>
+              <AvatarImage
+                src={completeUserData?.user_details?.profile_picture?.image}
+              />
+              <AvatarFallback>
+                {getFirstCharCapitalized(
+                  completeUserData?.user_details?.name || 'User'
+                )}
+              </AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem>
+              <a href={frontendLinks.PROTECTED.PROFILE}>Profile </a>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <a href={frontendLinks.PROTECTED.SETTINGS}>Settings</a>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Button
+                onClick={async () => {
+                  await logout();
+                  router.push('/login');
+                }}
+              >
+                Logout
+              </Button>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      ) : (
+        <Link href={frontendLinks.LOGIN}>
+          <Button>Login</Button>
+        </Link>
+      )}
+    </div>
   );
 };
 
@@ -142,6 +199,7 @@ const NavHiddenDropDown = () => {
     </DropDownBtn>
   );
 };
+
 const NotificationDropDown = () => {
   const menuBtn = <GoBell />;
   // Function to get unread notifications
@@ -153,98 +211,62 @@ const NotificationDropDown = () => {
   const unreadNotifications = getUnreadNotifications();
 
   return (
-    <Menu as='div' className={DropDownCss.menuDivClass}>
-      <div>
-        <Menu.Button as='div'>
-          <GoBell />
-        </Menu.Button>
-      </div>
-      <Transition as={Fragment}>
-        <Menu.Items className={DropDownCss.menuItemsClass}>
-          <div className={`px-1 py-1 `}>
-            <div className='mx-auto max-w-xl rounded-md bg-white p-2 md:p-5'>
-              <div className='flex items-center justify-between'>
-                <Text decoration={'h4'} tag={'h4'}>
-                  Notification
-                </Text>
-                <Link href={'/notification'}>
-                  <Button intent={'secondary'}>see all</Button>
-                </Link>
-              </div>
-              <Tab.Group>
-                <Tab.List className={'my-4'}>
-                  <Tab as={Fragment}>
-                    {({ selected }) => (
-                      <Button
-                        className='mr-4'
-                        intent={selected ? 'primary' : 'secondary'}
-                      >
-                        All
-                      </Button>
-                    )}
-                  </Tab>
-                  <Tab as={Fragment}>
-                    {({ selected }) => (
-                      <Button intent={selected ? 'primary' : 'secondary'}>
-                        Unread
-                      </Button>
-                    )}
-                  </Tab>
-                </Tab.List>
-                <Tab.Panels>
-                  <Tab.Panel>
-                    <div className='mx-auto max-w-md'>
-                      {processedNotification.map((item, index) => {
-                        if (item.notifications.length > 0)
+    <DropdownMenu>
+      <DropdownMenuTrigger>
+        <div className='self-center'>
+          <Icons.bell className='h-5 w-5' />
+        </div>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent className='p-4'>
+        <Tabs defaultValue='unread'>
+          <TabsList className='grid w-full grid-cols-2'>
+            <TabsTrigger value='unread'>Unread</TabsTrigger>
+            <TabsTrigger value='all'>All</TabsTrigger>
+          </TabsList>
+          <TabsContent value='unread'>
+            <div className='mx-auto max-w-md'>
+              {processedNotification.map((item, index) => {
+                if (item.notifications.length > 0)
+                  return (
+                    <div key={index}>
+                      <Text className='font-semibold'>{item.tag}</Text>
+                      {item.notifications.map((itemNotification, index) => {
+                        if (!itemNotification.read)
                           return (
-                            <div key={index}>
-                              <Text className='font-semibold'>{item.tag}</Text>
-                              {item.notifications.map(
-                                (itemNotification, index) => {
-                                  return (
-                                    <div key={itemNotification.id}>
-                                      <NotificationCard
-                                        notification={itemNotification}
-                                      />
-                                    </div>
-                                  );
-                                }
-                              )}
+                            <div key={itemNotification.id}>
+                              <NotificationCard
+                                notification={itemNotification}
+                              />
                             </div>
                           );
                       })}
                     </div>
-                  </Tab.Panel>
-                  <Tab.Panel>
-                    <div className='mx-auto max-w-md'>
-                      {processedNotification.map((item, index) => {
-                        if (item.notifications.length > 0)
-                          return (
-                            <div key={index}>
-                              <Text className='font-semibold'>{item.tag}</Text>
-                              {item.notifications.map(
-                                (itemNotification, index) => {
-                                  if (!itemNotification.read)
-                                    return (
-                                      <div key={itemNotification.id}>
-                                        <NotificationCard
-                                          notification={itemNotification}
-                                        />
-                                      </div>
-                                    );
-                                }
-                              )}
-                            </div>
-                          );
-                      })}
-                    </div>
-                  </Tab.Panel>
-                </Tab.Panels>
-              </Tab.Group>
+                  );
+              })}
             </div>
-          </div>
-        </Menu.Items>
-      </Transition>
-    </Menu>
+          </TabsContent>
+
+          <TabsContent value='all'>
+            <div className='mx-auto max-w-md'>
+              {processedNotification.map((item, index) => {
+                if (item.notifications.length > 0)
+                  return (
+                    <div key={index}>
+                      <Text className='font-semibold'>{item.tag}</Text>
+                      {item.notifications.map((itemNotification, index) => {
+                        return (
+                          <div key={itemNotification.id}>
+                            <NotificationCard notification={itemNotification} />
+                          </div>
+                        );
+                      })}
+                    </div>
+                  );
+              })}
+            </div>
+          </TabsContent>
+        </Tabs>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
